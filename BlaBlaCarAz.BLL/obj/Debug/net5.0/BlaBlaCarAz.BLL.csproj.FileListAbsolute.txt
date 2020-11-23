@@ -1,0 +1,12 @@
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\bin\Debug\net5.0\BlaBlaCarAz.BLL.deps.json
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\bin\Debug\net5.0\BlaBlaCarAz.BLL.dll
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\bin\Debug\net5.0\ref\BlaBlaCarAz.BLL.dll
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\bin\Debug\net5.0\BlaBlaCarAz.BLL.pdb
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\net5.0\BlaBlaCarAz.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\net5.0\BlaBlaCarAz.BLL.AssemblyInfoInputs.cache
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\net5.0\BlaBlaCarAz.BLL.AssemblyInfo.cs
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\net5.0\BlaBlaCarAz.BLL.csproj.CoreCompileInputs.cache
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\net5.0\BlaBlaCarAz.BLL.dll
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\net5.0\ref\BlaBlaCarAz.BLL.dll
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\net5.0\BlaBlaCarAz.BLL.pdb
+C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\net5.0\BlaBlaCarAz.BLL.csprojAssemblyReference.cache
