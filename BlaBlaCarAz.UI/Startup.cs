@@ -1,5 +1,9 @@
 using BlaBlaCarAz.BLL.DomainModel.Entities;
+using BlaBlaCarAz.BLL.DomainModel.IRepositories;
+using BlaBlaCarAz.BLL.ServiceLayer.Services;
+using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
 using BlaBlaCarAz.DAL.DataContext;
+using BlaBlaCarAz.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +34,9 @@ namespace BlaBlaCarAz.UI
                 .AddEntityFrameworkStores<BlaBlaCarAzContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped(typeof(IRepo<>), typeof(RepoBase<>));
+            services.AddScoped(typeof(IService<>), typeof(ServiceBase<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,5 +7,6 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
 {
    public class AppUser : IdentityUser
     {
+        public IList<Ride> Rides { get; set; }
     }
 }

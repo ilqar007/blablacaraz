@@ -6,3 +6,5 @@
 /BlaBlaCarAz.BLL/obj/project.nuget.cache
 /.vs/BlaBlaCarAz/DesignTimeBuild/.dtbcache.v2
 /BlaBlaCarAz.UI/obj/project.nuget.cache
+bin
+obj
