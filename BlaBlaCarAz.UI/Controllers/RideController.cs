@@ -11,16 +11,12 @@ using System.Threading.Tasks;
 
 namespace BlaBlaCarAz.UI.Controllers
 {
-    [Authorize]
-    public class RideController : Controller
+    public class RideController : BaseController
     {
         private readonly IService<Ride> _rideService;
-        private readonly UserManager<AppUser> _userManagerService;
-        public RideController(IService<Ride> rideService, UserManager<AppUser> userManagerService)
+        public RideController(IService<Ride> rideService)
         {
             _rideService = rideService;
-            _userManagerService = userManagerService;
-
         }
 
         [HttpGet]
@@ -32,14 +28,14 @@ namespace BlaBlaCarAz.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Ride model)
         {
-            model.AppUser = await _userManagerService.GetUserAsync(User);
+            model.AppUser = await GetAppUser();
             await _rideService.AddAsync(model);
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var appUser = await _userManagerService.GetUserAsync(User);
+            var appUser = await GetAppUser();
             var rides = await _rideService.GetAllAsync(x => x.AppUserId == appUser.Id);
             return View(rides);
         }
