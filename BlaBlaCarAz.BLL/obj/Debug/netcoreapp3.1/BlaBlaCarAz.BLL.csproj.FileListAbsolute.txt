@@ -1,8 +1,0 @@
-C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\bin\Debug\netcoreapp3.1\BlaBlaCarAz.BLL.deps.json
-C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\bin\Debug\netcoreapp3.1\BlaBlaCarAz.BLL.dll
-C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\bin\Debug\netcoreapp3.1\BlaBlaCarAz.BLL.pdb
-C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\netcoreapp3.1\BlaBlaCarAz.BLL.AssemblyInfoInputs.cache
-C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\netcoreapp3.1\BlaBlaCarAz.BLL.AssemblyInfo.cs
-C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\netcoreapp3.1\BlaBlaCarAz.BLL.csproj.CoreCompileInputs.cache
-C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\netcoreapp3.1\BlaBlaCarAz.BLL.dll
-C:\Users\ilgar.m\source\repos\BlaBlaCarAz\BlaBlaCarAz.BLL\obj\Debug\netcoreapp3.1\BlaBlaCarAz.BLL.pdb
