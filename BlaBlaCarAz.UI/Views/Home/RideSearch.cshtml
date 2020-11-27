@@ -22,7 +22,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.PassengerCount)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.AppUser)
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -41,9 +44,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PassengerCount)
             </td>
-           
             <td>
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.DisplayFor(modelItem => item.AppUser.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Book", "Create", "Book", new { rideId = item.Id })
             </td>
         </tr>
 }

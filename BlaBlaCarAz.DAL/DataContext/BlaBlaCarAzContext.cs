@@ -18,7 +18,12 @@ namespace BlaBlaCarAz.DAL.DataContext
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
         public virtual DbSet<Ride> Rides { get; set; }
+        public virtual DbSet<Book> Books { get; set; }
 
 
     }

@@ -39,5 +39,6 @@ namespace BlaBlaCarAz.UI.Controllers
             var rides = await _rideService.GetAllAsync(x => x.AppUserId == appUser.Id);
             return View(rides);
         }
+      
     }
 }

@@ -10,17 +10,22 @@
         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><span><i class="fa fa-search"></i></span>Find a ride</a>
     </li>
     <li class="nav-item">
-         <a class="nav-link text-dark" asp-area="" asp-controller="Ride" asp-action="Create"> <span><i class="fa fa-plus-circle"></i></span>Offer a ride</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Ride" asp-action="Create"> <span><i class="fa fa-plus-circle"></i></span>Offer a ride</a>
     </li>
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-        </li>
-        <li class="nav-item">
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Hello @UserManager.GetUserName(User)
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a>
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                </form>
+                <a class="nav-link text-dark" asp-controller="Ride" asp-action="Index" title="Books">Your rides</a>
+                <a class="nav-link text-dark" asp-controller="Book" asp-action="Index" title="Books">Payments</a>
+            </div>
         </li>
     }
     else

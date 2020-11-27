@@ -15,5 +15,9 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
         public string AppUserId { get; set; }
         
         public virtual AppUser AppUser { get; set; }
+
+        public decimal Price { get; set; }
+
+        public virtual IList<Book> Books { get; set; }
     }
 }
