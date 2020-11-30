@@ -23,13 +23,13 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;

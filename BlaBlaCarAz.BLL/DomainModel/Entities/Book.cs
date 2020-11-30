@@ -8,7 +8,7 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
 {
    public class Book:EntityBase
     {
-        public string AppUserId { get; set; }
+        public long AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
         public DateTime Date { get; set; }
         public virtual Ride Ride { get; set; }

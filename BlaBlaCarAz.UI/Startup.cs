@@ -1,11 +1,13 @@
 using BlaBlaCarAz.BLL.DomainModel.Entities;
 using BlaBlaCarAz.BLL.DomainModel.IRepositories;
+using BlaBlaCarAz.BLL.HelperClasses;
 using BlaBlaCarAz.BLL.ServiceLayer.Services;
 using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
 using BlaBlaCarAz.DAL.DataContext;
 using BlaBlaCarAz.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,13 +32,19 @@ namespace BlaBlaCarAz.UI
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<BlaBlaCarAzContext>();
+            //services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<BlaBlaCarAzContext>();
+
+            services.AddIdentity<AppUser, IdentityRole<long>>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<BlaBlaCarAzContext>().AddDefaultUI().AddDefaultTokenProviders();
+
+            services.Configure<EmailSettings>(Configuration.GetSection(EmailSettings.EmailSetting));
             services.AddControllersWithViews();
             services.AddRazorPages();
 
             services.AddScoped(typeof(IRepo<>), typeof(RepoBase<>));
             services.AddScoped(typeof(IService<>), typeof(ServiceBase<>));
+            services.AddTransient<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

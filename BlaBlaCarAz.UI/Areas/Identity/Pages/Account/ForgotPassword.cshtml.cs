@@ -18,9 +18,9 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<AppUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<AppUser> userManager, BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

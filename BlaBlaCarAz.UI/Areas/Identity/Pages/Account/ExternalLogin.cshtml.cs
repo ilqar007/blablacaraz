@@ -22,14 +22,14 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
             SignInManager<AppUser> signInManager,
             UserManager<AppUser> userManager,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender emailSender)
         {
             _signInManager = signInManager;
             _userManager = userManager;

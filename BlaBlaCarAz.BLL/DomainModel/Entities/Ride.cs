@@ -12,7 +12,7 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
         public string From { get; set; }
         public string To { get; set; }
         public int PassengerCount { get; set; }
-        public string AppUserId { get; set; }
+        public long AppUserId { get; set; }
         
         public virtual AppUser AppUser { get; set; }
 

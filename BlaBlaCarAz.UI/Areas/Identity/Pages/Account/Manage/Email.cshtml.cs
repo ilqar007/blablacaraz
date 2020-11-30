@@ -18,12 +18,12 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly IEmailSender _emailSender;
+        private readonly BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender _emailSender;
 
         public EmailModel(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
-            IEmailSender emailSender)
+            BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
