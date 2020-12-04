@@ -7,6 +7,7 @@ using BlaBlaCarAz.DAL.DataContext;
 using BlaBlaCarAz.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,6 +39,18 @@ namespace BlaBlaCarAz.UI
             services.AddIdentity<AppUser, IdentityRole<long>>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<BlaBlaCarAzContext>().AddDefaultUI().AddDefaultTokenProviders();
 
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            });
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.Lax;
+            });
             services.Configure<EmailSettings>(Configuration.GetSection(EmailSettings.EmailSetting));
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -62,7 +75,7 @@ namespace BlaBlaCarAz.UI
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
             app.UseRouting();
 
             app.UseAuthentication();
