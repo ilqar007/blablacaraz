@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using static BlaBlaCarAz.BLL.DomainModel.Entities.IdentityModels;
 
 namespace BlaBlaCarAz.UI
 {
@@ -36,7 +37,7 @@ namespace BlaBlaCarAz.UI
             //services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<BlaBlaCarAzContext>();
 
-            services.AddIdentity<AppUser, IdentityRole<long>>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<AppUser, Role>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<BlaBlaCarAzContext>().AddDefaultUI().AddDefaultTokenProviders();
 
 

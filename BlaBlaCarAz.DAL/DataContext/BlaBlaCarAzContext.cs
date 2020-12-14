@@ -9,7 +9,7 @@ using static BlaBlaCarAz.BLL.DomainModel.Entities.IdentityModels;
 
 namespace BlaBlaCarAz.DAL.DataContext
 {
-    public class BlaBlaCarAzContext : IdentityDbContext<AppUser, IdentityRole<long>, long, IdentityUserClaim<long>, IdentityUserRole<long>, IdentityUserLogin<long>, IdentityRoleClaim<long>, IdentityUserToken<long>>
+    public class BlaBlaCarAzContext : IdentityDbContext<AppUser, Role, long, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         public BlaBlaCarAzContext()
         {
