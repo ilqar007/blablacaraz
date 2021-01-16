@@ -30,6 +30,7 @@ namespace BlaBlaCarAz.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(int rideId)
         {
+            //github test
             var appUser = await GetAppUser();
             var ride = await _rideService.FindAsync(rideId);
             if (ride == null)
