@@ -1,9 +1,13 @@
 ﻿using BlaBlaCarAz.BLL.DomainModel.Entities;
+using BlaBlaCarAz.BLL.HelperClasses;
+using BlaBlaCarAz.BLL.ServiceLayer.DtoAndMessages.GooglePlacesApi;
 using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
 using BlaBlaCarAz.UI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +18,11 @@ namespace BlaBlaCarAz.UI.Controllers
     public class RideController : BaseController
     {
         private readonly IService<Ride> _rideService;
-        public RideController(IService<Ride> rideService)
+        private readonly GooglePlacesSettings _googlePlacesSettings;
+        public RideController(IService<Ride> rideService, IOptions<GooglePlacesSettings> googlePlacesSettings)
         {
             _rideService = rideService;
+            _googlePlacesSettings = googlePlacesSettings.Value;
         }
 
         [HttpGet]
@@ -39,6 +45,27 @@ namespace BlaBlaCarAz.UI.Controllers
             var rides = await _rideService.GetAllAsync(x => x.AppUserId == appUser.Id);
             return View(rides);
         }
-      
+
+        [HttpGet]
+        public async Task<JsonResult> GetEventVenuesList(string SearchText)
+        {
+            string placeApiUrl = _googlePlacesSettings.GooglePlaceAPIUrl;
+
+            try
+            {
+                placeApiUrl = placeApiUrl.Replace("{0}", SearchText);
+                var result = await new System.Net.WebClient().DownloadStringTaskAsync(placeApiUrl);
+                var Jsonobject = JsonConvert.DeserializeObject<RootObject>(result);
+
+                List<Prediction> list = Jsonobject.predictions;
+
+                return Json(list);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+        }
+
     }
 }

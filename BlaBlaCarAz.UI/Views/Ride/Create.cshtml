@@ -33,7 +33,7 @@
                 <input asp-for="PassengerCount" class="form-control" />
                 <span asp-validation-for="PassengerCount" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -47,4 +47,49 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script type="text/javascript">
+
+    $(function () {
+        $("#From").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "@Url.Action("GetEventVenuesList", "Ride")",
+                    data: { SearchText: request.term },
+                    dataType: "json",
+                    type: "GET",
+                    success: function (data) {
+                        if (data.length == 0) {
+                           // $('#EventVenueId').val("");
+                         //   $('#VenueLocationMesssage').show();
+                            return false;
+                        }
+                        else {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.description,
+                                    value: item.place_id
+                                }
+                            }));
+                        }
+                    },
+                    error: function (x, y, z) {
+                        alert('error');
+                    }
+                });
+            },
+            messages: {
+                noResults: "", results: ""
+            },
+            select: function (event, ui) {
+                $('#From').val(ui.item.label);
+               // $('#EventVenueId').val(ui.item.value);
+                return false;
+            }
+        }).autocomplete("widget").addClass("CitiesAutocomplete");
+    });
+    </script>
+
+
 }

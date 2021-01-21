@@ -53,6 +53,7 @@ namespace BlaBlaCarAz.UI
                 options.MinimumSameSitePolicy = SameSiteMode.Lax;
             });
             services.Configure<EmailSettings>(Configuration.GetSection(EmailSettings.EmailSetting));
+            services.Configure<GooglePlacesSettings>(Configuration.GetSection(GooglePlacesSettings.GooglePlacesSetting));
             services.AddControllersWithViews();
             services.AddRazorPages();
 
