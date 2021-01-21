@@ -48,7 +48,9 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-<script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <link href="~/lib/jqueryui/jquery-ui.css" rel="stylesheet" />
     <script type="text/javascript">
 
     $(function () {
@@ -68,8 +70,8 @@
                         else {
                             response($.map(data, function (item) {
                                 return {
-                                    label: item.description,
-                                    value: item.place_id
+                                    label: item.addressCombined,
+                                    value: item.locationId
                                 }
                             }));
                         }
@@ -79,11 +81,44 @@
                     }
                 });
             },
-            messages: {
-                noResults: "", results: ""
-            },
+
             select: function (event, ui) {
                 $('#From').val(ui.item.label);
+               // $('#EventVenueId').val(ui.item.value);
+                return false;
+            }
+        }).autocomplete("widget").addClass("CitiesAutocomplete");
+
+                $("#To").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "@Url.Action("GetEventVenuesList", "Ride")",
+                    data: { SearchText: request.term },
+                    dataType: "json",
+                    type: "GET",
+                    success: function (data) {
+                        if (data.length == 0) {
+                           // $('#EventVenueId').val("");
+                         //   $('#VenueLocationMesssage').show();
+                            return false;
+                        }
+                        else {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.addressCombined,
+                                    value: item.locationId
+                                }
+                            }));
+                        }
+                    },
+                    error: function (x, y, z) {
+                        alert('error');
+                    }
+                });
+            },
+
+            select: function (event, ui) {
+                $('#To').val(ui.item.label);
                // $('#EventVenueId').val(ui.item.value);
                 return false;
             }

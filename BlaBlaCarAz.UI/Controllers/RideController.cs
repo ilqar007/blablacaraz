@@ -57,7 +57,7 @@ namespace BlaBlaCarAz.UI.Controllers
                 var result = await new System.Net.WebClient().DownloadStringTaskAsync(placeApiUrl);
                 var Jsonobject = JsonConvert.DeserializeObject<RootObject>(result);
 
-                List<Prediction> list = Jsonobject.predictions;
+                List<Suggestion> list = Jsonobject.suggestions;
 
                 return Json(list);
             }

@@ -8,7 +8,7 @@ namespace BlaBlaCarAz.BLL.ServiceLayer.DtoAndMessages.GooglePlacesApi
 {
     public class RootObject
     {
-        public List<Prediction> predictions { get; set; }
-        public string status { get; set; }
+        public List<Suggestion> suggestions { get; set; }
+
     }
 }
