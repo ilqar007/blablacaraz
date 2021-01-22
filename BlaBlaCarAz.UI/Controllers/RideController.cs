@@ -58,7 +58,8 @@ namespace BlaBlaCarAz.UI.Controllers
                 var Jsonobject = JsonConvert.DeserializeObject<RootObject>(result);
 
                 List<Suggestion> list = Jsonobject.suggestions;
-
+                if (list.Any(s => s.matchLevel == "city"))
+                    list = list.Where(s => s.matchLevel == "city").ToList();
                 return Json(list);
             }
             catch (Exception ex)
