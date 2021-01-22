@@ -28,11 +28,6 @@
                 <input asp-for="To" class="form-control" />
                 <span asp-validation-for="To" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PassengerCount" class="control-label"></label>
-                <input asp-for="PassengerCount" class="form-control" />
-                <span asp-validation-for="PassengerCount" class="text-danger"></span>
-            </div>
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -54,75 +49,8 @@
     <script type="text/javascript">
 
     $(function () {
-        $("#From").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: "@Url.Action("GetEventVenuesList", "Ride")",
-                    data: { SearchText: request.term },
-                    dataType: "json",
-                    type: "GET",
-                    success: function (data) {
-                        if (data.length == 0) {
-                           // $('#EventVenueId').val("");
-                         //   $('#VenueLocationMesssage').show();
-                            return false;
-                        }
-                        else {
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.addressCombined,
-                                    value: item.locationId
-                                }
-                            }));
-                        }
-                    },
-                    error: function (x, y, z) {
-                        alert('error');
-                    }
-                });
-            },
-
-            select: function (event, ui) {
-                $('#From').val(ui.item.label);
-               // $('#EventVenueId').val(ui.item.value);
-                return false;
-            }
-        }).autocomplete("widget").addClass("CitiesAutocomplete");
-
-                $("#To").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: "@Url.Action("GetEventVenuesList", "Ride")",
-                    data: { SearchText: request.term },
-                    dataType: "json",
-                    type: "GET",
-                    success: function (data) {
-                        if (data.length == 0) {
-                           // $('#EventVenueId').val("");
-                         //   $('#VenueLocationMesssage').show();
-                            return false;
-                        }
-                        else {
-                            response($.map(data, function (item) {
-                                return {
-                                    label: item.addressCombined,
-                                    value: item.locationId
-                                }
-                            }));
-                        }
-                    },
-                    error: function (x, y, z) {
-                        alert('error');
-                    }
-                });
-            },
-
-            select: function (event, ui) {
-                $('#To').val(ui.item.label);
-               // $('#EventVenueId').val(ui.item.value);
-                return false;
-            }
-        }).autocomplete("widget").addClass("CitiesAutocomplete");
+        SetFieldAutocompletePlacesApi($('#From'));
+        SetFieldAutocompletePlacesApi($('#To'));
     });
     </script>
 

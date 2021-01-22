@@ -17,7 +17,8 @@ namespace BlaBlaCarAz.BLL.ServiceLayer.DtoAndMessages.GooglePlacesApi
         public string postalCode { get; set; }
         public override string ToString()
         {
-            return string.Format("{0},{1},{2},{3},{4},{5},{6}",country,state,country,city,district,street,postalCode);
+            //return string.Format("{0},{1},{2},{3},{4},{5},{6}",);
+            return (!string.IsNullOrWhiteSpace(country) ? country + ", " : "") + (!string.IsNullOrWhiteSpace(state) ? state + ", " : "") + (!string.IsNullOrWhiteSpace(county) ? county + ", " : "")  + (!string.IsNullOrWhiteSpace(city) ? city + ", " : "") + (!string.IsNullOrWhiteSpace(district) ? district + ", " : "") + (!string.IsNullOrWhiteSpace(street) ? street + ", " : "") + (!string.IsNullOrWhiteSpace(postalCode) ? postalCode + ", " : "");
         }
     }
 }

@@ -2,34 +2,46 @@
     ViewData["Title"] = "Home Page";
 }
 @model RideSearchViewModel
-    <div class="row" style="background-image: url(/images/carpool_blablabus_large.svg)">
-        <div></div>
-        <div class="text-center">
-            <h1 class="display-4">Your ride. Your choice.</h1>
+<div class="row" style="background-image: url(/images/carpool_blablabus_large.svg)">
+    <div></div>
+    <div class="text-center">
+        <h1 class="display-4">Your ride. Your choice.</h1>
 
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <section>
-                    <form id="rideSearch" method="post" asp-controller="Home" asp-action="RideSearch">
-                        <hr />
-
-                        <div class="input-group">
-                            <span><i class="fa fa-search-location"></i></span><input asp-for="From" class="form-control" placeholder="Hardan" />
-                            <input asp-for="To" class="form-control" placeholder="Hara" />
-                            <input asp-for="Date" class="form-control" />
-                            <input asp-for="PassengerCount" class="form-control" />
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
-                            </div>
-                        </div>
-
-
-
-
-                    </form>
-                </section>
-            </div>
-
-        </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <section>
+                <form id="rideSearch" method="post" asp-controller="Home" asp-action="RideSearch">
+                    <hr />
+
+                    <div class="input-group">
+                        <span><i class="fa fa-search-location"></i></span><input asp-for="From" class="form-control" placeholder="Hardan" />
+                        <input asp-for="To" class="form-control" placeholder="Hara" />
+                        <input asp-for="Date" class="form-control" />
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+
+
+
+
+                </form>
+            </section>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <link href="~/lib/jqueryui/jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript">
+
+        $(function () {
+            SetFieldAutocompletePlacesApi($('#From'));
+            SetFieldAutocompletePlacesApi($('#To'));
+        });
+    </script>
+}
