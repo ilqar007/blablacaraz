@@ -11,11 +11,11 @@
 
 
     <div class="row mb-4"></div>
-    <div class="input-group mb-3 col-6 offset-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fa fa-search"></i></span>
+    <div class="input-group date mb-3 col-6 offset-3" data-provide="datepicker">
+        <input type="text" id="Date" name="Date" class="form-control">
+        <div class="input-group-addon">
+            <span class="glyphicon glyphicon-th"></span>
         </div>
-        <input asp-for="Date" class="form-control" />
     </div>
 
     @Html.HiddenFor(x => x.To)
@@ -27,6 +27,9 @@
     @Html.HiddenFor(x => x.CanSeeProfilePicture)
     @Html.HiddenFor(x => x.Comment)
     @Html.HiddenFor(x => x.LoadLimits)
+    @Html.HiddenFor(x => x.PickupTime)
+
+    
 
 </form>
 
@@ -42,15 +45,18 @@
     <script type="text/javascript">
 
         $(function () {
+            $('.datepicker').datepicker({
+                format: 'dd-MM-yyyy',
+                startDate: '-3d'
+            });
 
-
-            //$('.datepicker').datepicker({
-            //    format: 'mm/dd/yyyy',
-            //    startDate: '-3d'
-            //});
-
-
-            //$input = $("#select_date");
+            $("#Date").trigger("click");
+            $('.datepicker').datepicker()
+                .on('changeDate', function (e) {
+                    // `e` here contains the extra attributes
+                    $('#Date').closest("form").submit();
+                });
+            //$input = $("#Date");
             //$input.datepicker({
             //    format: 'yyyy-MM-dd'
             //});
@@ -62,6 +68,8 @@
             //        $('#Date').val(e.date);
             //        $('#Date').closest("form").submit();
             //    });
+
+
 
         });
     </script>

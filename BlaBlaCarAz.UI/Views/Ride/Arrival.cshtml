@@ -8,27 +8,28 @@
 
 
 
-        <form asp-action="DepartureDate">
-            <div class="row mb-4"></div>
-            <div class="input-group mb-3 col-6 offset-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fa fa-search"></i></span>
-                </div>
-                <input asp-for="To" class="form-control" />
-            </div>
+<form asp-action="DepartureDate">
+    <div class="row mb-4"></div>
+    <div class="input-group mb-3 col-6 offset-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-search"></i></span>
+        </div>
+        <input asp-for="To" class="form-control" />
+    </div>
 
 
-            @Html.HiddenFor(x => x.Date)
-            @Html.HiddenFor(x => x.From)
-            @Html.HiddenFor(x => x.Price)
-            @Html.HiddenFor(x => x.FlightNumber)
-            @Html.HiddenFor(x => x.LoadType)
-            @Html.HiddenFor(x => x.CanBookInstantly)
-            @Html.HiddenFor(x => x.CanSeeProfilePicture)
-            @Html.HiddenFor(x => x.Comment)
-            @Html.HiddenFor(x => x.LoadLimits)
+    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.From)
+    @Html.HiddenFor(x => x.Price)
+    @Html.HiddenFor(x => x.FlightNumber)
+    @Html.HiddenFor(x => x.LoadType)
+    @Html.HiddenFor(x => x.CanBookInstantly)
+    @Html.HiddenFor(x => x.CanSeeProfilePicture)
+    @Html.HiddenFor(x => x.Comment)
+    @Html.HiddenFor(x => x.LoadLimits)
+    @Html.HiddenFor(x => x.PickupTime)
 
-        </form>
+</form>
 
 
 

@@ -10,8 +10,6 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
 {
     public class Ride : EntityBase
     {
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; } 
         public string From { get; set; }
         public string To { get; set; }
@@ -33,5 +31,6 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
         public bool CanSeeProfilePicture { get; set; }
         public string Comment { get; set; }
         public bool IsRecommendedPriceOk { get; set; }
+        public string PickupTime { get; set; }
     }
 }

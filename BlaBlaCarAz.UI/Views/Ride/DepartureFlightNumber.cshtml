@@ -4,20 +4,19 @@
     ViewData["Title"] = "DepartureFlightNumber";
 }
 
-<h1>DepartureFlightNumber</h1>
+<h1 class="text-center mt-4">DepartureFlightNumber</h1>
 
-<h4>Ride</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
         <form asp-action="LoadType">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="FlightNumber" class="control-label"></label>
+
+            <div class="row mb-4"></div>
+            <div class="input-group mb-3 col-6 offset-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                </div>
                 <input asp-for="FlightNumber" class="form-control" />
-                <span asp-validation-for="FlightNumber" class="text-danger"></span>
             </div>
+
 
             @Html.HiddenFor(x => x.To)
             @Html.HiddenFor(x => x.From)
@@ -28,15 +27,15 @@
             @Html.HiddenFor(x => x.CanSeeProfilePicture)
             @Html.HiddenFor(x => x.Comment)
             @Html.HiddenFor(x => x.LoadLimits)
+            @Html.HiddenFor(x => x.PickupTime)
 
 
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Continue" class="btn btn-primary" />
             </div>
         </form>
-    </div>
-</div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>
