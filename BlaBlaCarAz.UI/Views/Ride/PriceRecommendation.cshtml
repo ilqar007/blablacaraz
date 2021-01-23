@@ -1,0 +1,46 @@
+﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
+
+@{
+    ViewData["Title"] = "PriceRecommendation";
+}
+
+<h1>PriceRecommendation</h1>
+
+<h4>Ride</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PriceSetting">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsRecommendedPriceOk" /> @Html.DisplayNameFor(model => model.IsRecommendedPriceOk)
+                </label>
+            </div>
+
+            @Html.HiddenFor(x => x.To)
+            @Html.HiddenFor(x => x.From)
+            @Html.HiddenFor(x => x.CanBookInstantly)
+            @Html.HiddenFor(x => x.Date)
+            @Html.HiddenFor(x => x.FlightNumber)
+            @Html.HiddenFor(x => x.LoadLimits)
+            @Html.HiddenFor(x => x.CanSeeProfilePicture)
+            @Html.HiddenFor(x => x.LoadType)
+            @Html.HiddenFor(x => x.Comment)
+            @Html.HiddenFor(x => x.Price)
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

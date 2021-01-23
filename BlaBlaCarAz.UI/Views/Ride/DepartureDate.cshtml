@@ -1,0 +1,68 @@
+﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
+
+@{
+    ViewData["Title"] = "DepartureDate";
+}
+
+<h1 class="text-center mt-4">When are you going?</h1>
+
+
+<form asp-action="DepartureTime">
+
+
+    <div class="row mb-4"></div>
+    <div class="input-group mb-3 col-6 offset-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-search"></i></span>
+        </div>
+        <input asp-for="Date" class="form-control" />
+    </div>
+
+    @Html.HiddenFor(x => x.To)
+    @Html.HiddenFor(x => x.From)
+    @Html.HiddenFor(x => x.Price)
+    @Html.HiddenFor(x => x.FlightNumber)
+    @Html.HiddenFor(x => x.LoadType)
+    @Html.HiddenFor(x => x.CanBookInstantly)
+    @Html.HiddenFor(x => x.CanSeeProfilePicture)
+    @Html.HiddenFor(x => x.Comment)
+    @Html.HiddenFor(x => x.LoadLimits)
+
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+
+
+    <script type="text/javascript">
+
+        $(function () {
+
+
+            //$('.datepicker').datepicker({
+            //    format: 'mm/dd/yyyy',
+            //    startDate: '-3d'
+            //});
+
+
+            //$input = $("#select_date");
+            //$input.datepicker({
+            //    format: 'yyyy-MM-dd'
+            //});
+            //$input.data('datepicker').hide = function () { };
+            //$input.datepicker('show');
+            //$input.datepicker()
+            //    .on('changeDate', function (e) {
+            //        // `e` here contains the extra attributes
+            //        $('#Date').val(e.date);
+            //        $('#Date').closest("form").submit();
+            //    });
+
+        });
+    </script>
+}

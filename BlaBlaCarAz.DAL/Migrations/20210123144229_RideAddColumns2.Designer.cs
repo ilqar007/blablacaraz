@@ -4,14 +4,16 @@ using BlaBlaCarAz.DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlaBlaCarAz.DAL.Migrations
 {
     [DbContext(typeof(BlaBlaCarAzContext))]
-    partial class BlaBlaCarAzContextModelSnapshot : ModelSnapshot
+    [Migration("20210123144229_RideAddColumns2")]
+    partial class RideAddColumns2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

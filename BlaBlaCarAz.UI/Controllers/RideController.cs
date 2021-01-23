@@ -58,8 +58,8 @@ namespace BlaBlaCarAz.UI.Controllers
                 var Jsonobject = JsonConvert.DeserializeObject<RootObject>(result);
 
                 List<Suggestion> list = Jsonobject.suggestions;
-                if (list.Any(s => s.matchLevel == "city"))
-                    list = list.Where(s => s.matchLevel == "city").ToList();
+                //if (list.Any(s => s.matchLevel == "city"))
+                //    list = list.Where(s => s.matchLevel == "city").ToList();
                 return Json(list);
             }
             catch (Exception ex)
@@ -68,5 +68,92 @@ namespace BlaBlaCarAz.UI.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult Departure()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Departure(Ride model)
+        {
+            model.Date = DateTime.Now;
+            return View( model);
+        }
+
+        [HttpPost]
+        public IActionResult Arrival(Ride model)
+        {
+            return View( model);
+        }
+
+        [HttpPost]
+        public IActionResult DepartureDate(Ride model)
+        {
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult DepartureTime(Ride model)
+        {
+            return View( model);
+        }
+        [HttpPost]
+        public IActionResult DepartureFlightNumber(Ride model)
+        {
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult LoadType(Ride model)
+        {
+            return View( model);
+        }
+
+        [HttpPost]
+        public IActionResult LoadLimits(Ride model)
+        {
+            return View( model);
+        }
+
+        [HttpPost]
+        public IActionResult Approval(Ride model)
+        {
+            return View( model);
+        }
+
+        [HttpPost]
+        public IActionResult PriceRecommendation(Ride model)
+        {
+            return View( model);
+        }
+
+        [HttpPost]
+        public IActionResult PriceSetting(Ride model)
+        {
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult ProfilePicture(Ride model)
+        {
+            if (model.CanSeeProfilePicture)
+                return View("ProfilePictureChoice", model);
+            else
+                return View("Comment", model);
+
+        }
+
+        [HttpPost]
+        public IActionResult ProfilePictureChoice(Ride model)
+        {
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Comment(Ride model)
+        {
+            return View();
+        }
     }
 }

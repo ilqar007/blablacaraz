@@ -2,7 +2,7 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-function SetFieldAutocompletePlacesApi(element) {
+function SetFieldAutocompletePlacesApi(element, submit) {
     var url = '/Ride/GetEventVenuesList';
     element.autocomplete({
         source: function (request, response) {
@@ -20,7 +20,7 @@ function SetFieldAutocompletePlacesApi(element) {
                     else {
                         response($.map(data, function (item) {
                             return {
-                                label: item.addressCombined,
+                                label: item.label,
                                 value: item.locationId
                             }
                         }));
@@ -34,8 +34,12 @@ function SetFieldAutocompletePlacesApi(element) {
 
         select: function (event, ui) {
             element.val(ui.item.label);
+            
             // $('#EventVenueId').val(ui.item.value);
+            if (submit)
+                element.closest("form").submit();
             return false;
+                
         }
     }).autocomplete("widget").addClass("CitiesAutocomplete");
 }
