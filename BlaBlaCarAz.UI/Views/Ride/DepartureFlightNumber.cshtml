@@ -27,19 +27,10 @@
             @Html.HiddenFor(x => x.CanSeeProfilePicture)
             @Html.HiddenFor(x => x.Comment)
             @Html.HiddenFor(x => x.LoadLimits)
-            @Html.HiddenFor(x => x.PickupTime)
-
-
-
-            <div class="form-group">
+            <div class="form-group col-6 offset-3">
                 <input type="submit" value="Continue" class="btn btn-primary" />
             </div>
         </form>
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

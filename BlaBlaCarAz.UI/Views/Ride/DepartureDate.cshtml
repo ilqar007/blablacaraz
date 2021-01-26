@@ -8,14 +8,9 @@
 
 
 <form asp-action="DepartureTime">
-
-
     <div class="row mb-4"></div>
-    <div class="input-group date mb-3 col-6 offset-3" data-provide="datepicker">
-        <input type="text" id="Date" name="Date" class="form-control">
-        <div class="input-group-addon">
-            <span class="glyphicon glyphicon-th"></span>
-        </div>
+    <div class="input-group mb-3 col-6 offset-5" id="sandbox-container">
+        <div></div>
     </div>
 
     @Html.HiddenFor(x => x.To)
@@ -27,9 +22,8 @@
     @Html.HiddenFor(x => x.CanSeeProfilePicture)
     @Html.HiddenFor(x => x.Comment)
     @Html.HiddenFor(x => x.LoadLimits)
-    @Html.HiddenFor(x => x.PickupTime)
+    @Html.HiddenFor(x => x.Date)
 
-    
 
 </form>
 
@@ -45,31 +39,12 @@
     <script type="text/javascript">
 
         $(function () {
-            $('.datepicker').datepicker({
-                format: 'dd-MM-yyyy',
-                startDate: '-3d'
-            });
-
-            $("#Date").trigger("click");
-            $('.datepicker').datepicker()
+            $('#sandbox-container div').datepicker()
                 .on('changeDate', function (e) {
                     // `e` here contains the extra attributes
-                    $('#Date').closest("form").submit();
+                    $('#Date').val(e.date.toJSON());                    
+                    $('form').submit();
                 });
-            //$input = $("#Date");
-            //$input.datepicker({
-            //    format: 'yyyy-MM-dd'
-            //});
-            //$input.data('datepicker').hide = function () { };
-            //$input.datepicker('show');
-            //$input.datepicker()
-            //    .on('changeDate', function (e) {
-            //        // `e` here contains the extra attributes
-            //        $('#Date').val(e.date);
-            //        $('#Date').closest("form").submit();
-            //    });
-
-
 
         });
     </script>

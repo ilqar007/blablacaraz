@@ -4,42 +4,47 @@
     ViewData["Title"] = "Approval";
 }
 
-<h1>Approval</h1>
 
-<h4>Ride</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="PriceRecommendation">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CanBookInstantly" /> @Html.DisplayNameFor(model => model.CanBookInstantly)
-                </label>
-            </div>
-            @Html.HiddenFor(x => x.To)
-            @Html.HiddenFor(x => x.From)
-            @Html.HiddenFor(x => x.Price)
-            @Html.HiddenFor(x => x.Date)
-            @Html.HiddenFor(x => x.FlightNumber)
-            @Html.HiddenFor(x => x.LoadLimits)
-            @Html.HiddenFor(x => x.CanSeeProfilePicture)
-            @Html.HiddenFor(x => x.LoadType)
-            @Html.HiddenFor(x => x.Comment)
-            @Html.HiddenFor(x => x.PickupTime)
+<h1 class="text-center mt-4">Can passengers book instantly?</h1>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+<form asp-action="PriceRecommendation">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row mb-4"></div>
+    <div class="form-group">
+        <label onclick="SetApporavl(true)">Yes, sure!</label><span><i class="fa-arrow-right"></i></span>
     </div>
-</div>
+    <hr />
+    <div class="form-group">
+        <label onclick="SetApporavl(false)">No, I’ll reply to each request myself</label><span><i class="fa-arrow-right"></i></span>
+    </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+    @Html.HiddenFor(x => x.To)
+    @Html.HiddenFor(x => x.From)
+    @Html.HiddenFor(x => x.Price)
+    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.FlightNumber)
+    @Html.HiddenFor(x => x.LoadLimits)
+    @Html.HiddenFor(x => x.CanSeeProfilePicture)
+    @Html.HiddenFor(x => x.LoadType)
+    @Html.HiddenFor(x => x.Comment)
+    @Html.HiddenFor(x => x.CanBookInstantly)
+
+</form>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        function SetApporavl(val) {
+            $('#CanBookInstantly').val(val);
+            $('form').submit();
+
+        }
+    </script>
 }
