@@ -4,21 +4,20 @@
     ViewData["Title"] = "ProfilePictureChoice";
 }
 
-<h1>ProfilePictureChoice</h1>
+<h1 class="text-center mt-4">Add your profile picture. Passengers will want to see who you are.</h1>
 
-<h4>Ride</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
+
         <form asp-action="Comment">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CanSeeProfilePicture" /> @Html.DisplayNameFor(model => model.CanSeeProfilePicture)
-                </label>
+            <div class="row mb-4"></div>
+            <div class="form-control col-6 offset-3">
+                <a onclick="SetApporavl(true)" href="#" class="">Yes, sure!</a>
             </div>
+            <hr class="col-6 offset-3" />
+            <div class="form-control col-6 offset-3">
+                <a onclick="SetApporavl(false)" href="#">No, thanks</a>
+            </div>
+
 
             @Html.HiddenFor(x => x.To)
             @Html.HiddenFor(x => x.From)
@@ -29,17 +28,24 @@
             @Html.HiddenFor(x => x.Price)
             @Html.HiddenFor(x => x.LoadType)
             @Html.HiddenFor(x => x.Comment)
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+            @Html.HiddenFor(x => x.CanSeeProfilePicture)
+            @Html.HiddenFor(x => x.IsRecommendedPriceOk)
         </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        function SetApporavl(val) {
+            $('#CanSeeProfilePicture').val(val);
+            if (val) {
+                $('form').attr('action', 'ProfilePicture');
+            }
+            $('form').submit();
+
+        }
+    </script>
 }

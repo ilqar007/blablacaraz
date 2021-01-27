@@ -4,20 +4,20 @@
     ViewData["Title"] = "PriceRecommendation";
 }
 
-<h1>PriceRecommendation</h1>
+<h1 class="text-center mt-4">This is our recommended price per seat. OK for you?</h1>
 
-<h4>Ride</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
         <form asp-action="PriceSetting">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsRecommendedPriceOk" /> @Html.DisplayNameFor(model => model.IsRecommendedPriceOk)
-                </label>
+            <div class="row mb-4"></div>
+                        <label class="form-control-lg col-6 offset-3">15 manat</label>
+            <div class="form-control col-9 offset-3">
+                <a onclick="SetApporavl(true)" href="#" class="">Yes, perfect</a>
             </div>
+            <hr class="col-6 offset-3" />
+            <div class="form-control col-9 offset-3">
+                <a onclick="SetApporavl(false)" href="#">No, I need to edit this amount</a>
+            </div>
+
 
             @Html.HiddenFor(x => x.To)
             @Html.HiddenFor(x => x.From)
@@ -29,17 +29,24 @@
             @Html.HiddenFor(x => x.LoadType)
             @Html.HiddenFor(x => x.Comment)
             @Html.HiddenFor(x => x.Price)
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+            @Html.HiddenFor(x => x.IsRecommendedPriceOk)
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        </form>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        function SetApporavl(val) {
+            $('#IsRecommendedPriceOk').val(val);
+            $('#Price').val(15);
+            if (val) {
+                $('form').attr('action', 'ProfilePictureChoice');
+            }
+            $('form').submit();
+
+        }
+    </script>
 }

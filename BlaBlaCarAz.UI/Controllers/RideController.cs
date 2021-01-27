@@ -137,11 +137,7 @@ namespace BlaBlaCarAz.UI.Controllers
         [HttpPost]
         public IActionResult ProfilePicture(Ride model)
         {
-            if (model.CanSeeProfilePicture)
-                return View("ProfilePictureChoice", model);
-            else
-                return View("Comment", model);
-
+            return View(model);
         }
 
         [HttpPost]

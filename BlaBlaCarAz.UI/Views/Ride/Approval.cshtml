@@ -10,29 +10,27 @@
 
 
 <form asp-action="PriceRecommendation">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="row mb-4"></div>
-    <div class="form-group">
-        <label onclick="SetApporavl(true)">Yes, sure!</label><span><i class="fa-arrow-right"></i></span>
+
+    <div class="form-control col-6 offset-3">
+        <a onclick="SetApporavl(true)" href="#" class="">Yes, sure!</a>
     </div>
-    <hr />
-    <div class="form-group">
-        <label onclick="SetApporavl(false)">No, I’ll reply to each request myself</label><span><i class="fa-arrow-right"></i></span>
+    <hr class="col-6 offset-3"/>
+    <div class="form-control col-6 offset-3">
+        <a onclick="SetApporavl(false)" href="#">No, I’ll reply to each request myself</a>
     </div>
 
-
-
-    @Html.HiddenFor(x => x.To)
-    @Html.HiddenFor(x => x.From)
-    @Html.HiddenFor(x => x.Price)
-    @Html.HiddenFor(x => x.Date)
-    @Html.HiddenFor(x => x.FlightNumber)
-    @Html.HiddenFor(x => x.LoadLimits)
-    @Html.HiddenFor(x => x.CanSeeProfilePicture)
-    @Html.HiddenFor(x => x.LoadType)
-    @Html.HiddenFor(x => x.Comment)
-    @Html.HiddenFor(x => x.CanBookInstantly)
+        @Html.HiddenFor(x => x.To)
+        @Html.HiddenFor(x => x.From)
+        @Html.HiddenFor(x => x.Price)
+        @Html.HiddenFor(x => x.Date)
+        @Html.HiddenFor(x => x.FlightNumber)
+        @Html.HiddenFor(x => x.LoadLimits)
+        @Html.HiddenFor(x => x.CanSeeProfilePicture)
+        @Html.HiddenFor(x => x.LoadType)
+        @Html.HiddenFor(x => x.Comment)
+        @Html.HiddenFor(x => x.CanBookInstantly)
 
 </form>
 

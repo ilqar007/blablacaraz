@@ -11,5 +11,7 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
 
         [Timestamp]
         public byte[] TimeStamp { get; set; }
-    }
+
+        public DateTime? CreatedOn { get; set; }
+}
 }

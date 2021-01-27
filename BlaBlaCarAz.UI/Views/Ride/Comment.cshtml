@@ -4,42 +4,30 @@
     ViewData["Title"] = "Comment";
 }
 
-<h1>Comment</h1>
 
-<h4>Ride</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<h1 class="text-center mt-4">Anything to add about your ride?</h1>
 
-            <div class="form-group">
-                <label asp-for="Comment" class="control-label"></label>
-                <input asp-for="Comment" class="form-control" />
-                <span asp-validation-for="Comment" class="text-danger"></span>
-            </div>
+<form asp-action="Create">
+    <div class="row mb-4"></div>
+        <div class="form-group col-6 offset-3">
+            <textarea class="form-control" id="Comment" rows="3" name="Comment" placeholder="Hello! I'm going to visit my family. I travel with a cat and I have a lot of space in the boot!"></textarea>
+        </div>
 
+        @Html.HiddenFor(x => x.To)
+        @Html.HiddenFor(x => x.From)
+        @Html.HiddenFor(x => x.CanBookInstantly)
+        @Html.HiddenFor(x => x.Date)
+        @Html.HiddenFor(x => x.FlightNumber)
+        @Html.HiddenFor(x => x.LoadLimits)
+        @Html.HiddenFor(x => x.Price)
+        @Html.HiddenFor(x => x.LoadType)
+        @Html.HiddenFor(x => x.CanSeeProfilePicture)
+        @Html.HiddenFor(x => x.IsRecommendedPriceOk)
+        <div class="form-group col-6 offset-3">
+            <input type="submit" value="Publish ride" class="btn btn-primary" />
+        </div>
+</form>
 
-            @Html.HiddenFor(x => x.To)
-            @Html.HiddenFor(x => x.From)
-            @Html.HiddenFor(x => x.CanBookInstantly)
-            @Html.HiddenFor(x => x.Date)
-            @Html.HiddenFor(x => x.FlightNumber)
-            @Html.HiddenFor(x => x.LoadLimits)
-            @Html.HiddenFor(x => x.Price)
-            @Html.HiddenFor(x => x.LoadType)
-            @Html.HiddenFor(x => x.CanSeeProfilePicture)
-            @Html.HiddenFor(x => x.IsRecommendedPriceOk)
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
