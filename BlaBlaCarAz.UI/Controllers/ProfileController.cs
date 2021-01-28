@@ -66,7 +66,6 @@ namespace BlaBlaCarAz.UI.Controllers
             if (image != null)
             {
                 byte[] content = image.DataFiles;
-                //return "data:image/png;base64," + Convert.ToBase64String(content);
                 return File(content, "image/png", image.Name);
             }
             else
