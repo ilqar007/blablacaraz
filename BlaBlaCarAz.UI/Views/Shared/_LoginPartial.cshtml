@@ -15,8 +15,14 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Hello @UserManager.GetUserName(User)
+            <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>
+                    <span class="account-user-name">@UserManager.GetUserName(User)</span>
+                </span>
+                <span class="account-user-avatar">
+                    <img src="@Url.Action("GetImage","Profile")" alt="user-image" class="rounded-circle" width="46" height="46"/>
+                </span>
+                
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a>

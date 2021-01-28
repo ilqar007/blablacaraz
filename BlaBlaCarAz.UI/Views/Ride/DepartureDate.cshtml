@@ -42,7 +42,7 @@
             $('#sandbox-container div').datepicker()
                 .on('changeDate', function (e) {
                     // `e` here contains the extra attributes
-                    $('#Date').val(e.date.toJSON());                    
+                    $('#Date').val(new Date(e.date.getTime() - (e.date.getTimezoneOffset() * 60000)).toISOString());                    
                     $('form').submit();
                 });
 

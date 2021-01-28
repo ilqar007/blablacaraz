@@ -1,4 +1,5 @@
 ﻿using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,15 +10,19 @@ using System.Threading.Tasks;
 
 namespace BlaBlaCarAz.UI.Controllers
 {
-    public class ProfileController :  BaseController
+    public class ProfileController : BaseController
     {
         private readonly IService<BlaBlaCarAz.BLL.DomainModel.Entities.File> _service;
-        public ProfileController(IService<BlaBlaCarAz.BLL.DomainModel.Entities.File> service)
+        private readonly IHostingEnvironment _hostingEnvironment;
+
+        public ProfileController(IService<BlaBlaCarAz.BLL.DomainModel.Entities.File> service, IHostingEnvironment hostingEnvironment)
         {
             _service = service;
+            _hostingEnvironment = hostingEnvironment;
         }
         [HttpPost]
-        public async Task<ActionResult> UploadFile(IFormFile thefile) {
+        public async Task<ActionResult> UploadFile(IFormFile thefile)
+        {
 
             if (thefile != null)
             {
@@ -43,12 +48,38 @@ namespace BlaBlaCarAz.UI.Controllers
                         thefile.CopyTo(target);
                         objfiles.DataFiles = target.ToArray();
                     }
-                  await  _service.AddAsync(objfiles);
+                    await _service.AddAsync(objfiles);
                 }
             }
 
 
-            return  new OkResult{ };
+            return new OkResult { };
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetImage()
+        {
+            var user = await GetAppUser();
+            var profileImages = await _service.GetAllAsync(x => x.AppUserId == user.Id);
+            var image = profileImages.OrderByDescending(x => x.CreatedOn).FirstOrDefault();
+            if (image != null)
+            {
+                byte[] content = image.DataFiles;
+                //return "data:image/png;base64," + Convert.ToBase64String(content);
+                return File(content, "image/png", image.Name);
+            }
+            else
+            {
+                string fileName = "passenger_1.png";
+                string filePath =  Path.Combine(_hostingEnvironment.WebRootPath, "images", fileName);
+                byte[] content = System.IO.File.ReadAllBytes(filePath);
+                return File(content, "image/png", fileName);
+            }
+
+
+        }
+
+
     }
 }
