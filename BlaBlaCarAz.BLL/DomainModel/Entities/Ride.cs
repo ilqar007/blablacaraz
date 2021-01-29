@@ -31,6 +31,5 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
         public bool CanSeeProfilePicture { get; set; }
         public string Comment { get; set; }
         public bool IsRecommendedPriceOk { get; set; }
-        public string PickupTime { get; set; }
     }
 }
