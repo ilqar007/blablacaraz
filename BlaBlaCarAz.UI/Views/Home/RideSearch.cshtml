@@ -27,7 +27,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
@@ -40,6 +41,10 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AppUser.UserName)
+                @if (item.CanSeeProfilePicture)
+                {
+                <img src="@Url.Action("GetImage", "Profile", new { id = item.AppUserId })" width="46" height="46"/>
+                }
             </td>
             <td>
                 @Html.ActionLink("Book", "Create", "Book", new { rideId = item.Id })

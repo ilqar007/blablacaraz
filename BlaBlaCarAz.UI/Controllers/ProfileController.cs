@@ -58,9 +58,9 @@ namespace BlaBlaCarAz.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetImage()
+        public async Task<IActionResult> GetImage(int? userId)
         {
-            var user = await GetAppUser();
+            var user = !userId.HasValue? await GetAppUser():await GetAppUserById(userId.Value);
             var profileImages = await _service.GetAllAsync(x => x.AppUserId == user.Id);
             var image = profileImages.OrderByDescending(x => x.CreatedOn).FirstOrDefault();
             if (image != null)
