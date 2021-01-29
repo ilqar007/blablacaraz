@@ -70,10 +70,10 @@ namespace BlaBlaCarAz.UI.Controllers
             }
             else
             {
-                string fileName = "passenger_1.png";
+                string fileName = "passenger-m-02.svg";
                 string filePath =  Path.Combine(_hostingEnvironment.WebRootPath, "images", fileName);
                 byte[] content = System.IO.File.ReadAllBytes(filePath);
-                return File(content, "image/png", fileName);
+                return File(content, "image/svg+xml", fileName);
             }
 
 
