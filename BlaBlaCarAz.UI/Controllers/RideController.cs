@@ -54,12 +54,16 @@ namespace BlaBlaCarAz.UI.Controllers
             try
             {
                 placeApiUrl = placeApiUrl.Replace("{0}", SearchText);
-                var result = await new System.Net.WebClient().DownloadStringTaskAsync(placeApiUrl);
+                string result = string.Empty;
+                using (var client = new System.Net.WebClient())
+                {
+                    result = await client.DownloadStringTaskAsync(placeApiUrl);
+                }
                 var Jsonobject = JsonConvert.DeserializeObject<RootObject>(result);
 
                 List<Suggestion> list = Jsonobject.suggestions;
-                //if (list.Any(s => s.matchLevel == "city"))
-                //    list = list.Where(s => s.matchLevel == "city").ToList();
+                if (list.Any(s => s.matchLevel == "city"))
+                    list = list.Where(s => s.matchLevel == "city").ToList();
                 return Json(list);
             }
             catch (Exception ex)
