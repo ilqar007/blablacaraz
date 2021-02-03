@@ -40,8 +40,9 @@ namespace BlaBlaCarAz.UI.Controllers
 
         public async Task<IActionResult> RideSearch(RideSearchViewModel model)
         {
-            var rides = await _rideService.GetAllAsync(x => x.From == model.From && x.To == model.To && x.Date.Date == model.Date.Date);
-            return View(rides);
+            var rides = await _rideService.GetAllAsync(x => x.From == model.From && x.To == model.To && x.Date.Date >= DateTime.Now.Date && x.Date.Date == model.Date.Date && x.LoadType == model.LoadType && ((x.LoadLimits - x.Books.Where(x=>x.IsConfirmed).DefaultIfEmpty().Sum(b => b.LoadLimits)) >= model.LoadLimits));
+            var resultModel = new RideSearchResultViewModel { searchModel=model, Rides=rides};
+            return View(resultModel);
         }
     }
 }

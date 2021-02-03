@@ -31,6 +31,17 @@ namespace BlaBlaCarAz.UI.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var appUser = await GetAppUser();
+            var ride = await _rideService.GetSingleAsync(x => x.Id == id && x.AppUserId == appUser.Id);
+            if (ride != null && ride.Books.Count == 0)
+            {
+                await _rideService.DeleteAsync(ride);
+            }
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         public async Task<IActionResult> Create(Ride model)
         {
@@ -82,13 +93,13 @@ namespace BlaBlaCarAz.UI.Controllers
         public IActionResult Departure(Ride model)
         {
             model.Date = DateTime.Now;
-            return View( model);
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult Arrival(Ride model)
         {
-            return View( model);
+            return View(model);
         }
 
         [HttpPost]
@@ -100,7 +111,7 @@ namespace BlaBlaCarAz.UI.Controllers
         [HttpPost]
         public IActionResult DepartureTime(Ride model)
         {
-            return View( model);
+            return View(model);
         }
         [HttpPost]
         public IActionResult DepartureFlightNumber(Ride model)
@@ -111,25 +122,25 @@ namespace BlaBlaCarAz.UI.Controllers
         [HttpPost]
         public IActionResult LoadType(Ride model)
         {
-            return View( model);
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult LoadLimits(Ride model)
         {
-            return View( model);
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult Approval(Ride model)
         {
-            return View( model);
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult PriceRecommendation(Ride model)
         {
-            return View( model);
+            return View(model);
         }
 
         [HttpPost]
@@ -154,6 +165,29 @@ namespace BlaBlaCarAz.UI.Controllers
         public IActionResult Comment(Ride model)
         {
             return View();
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id, int loadLimits)
+        {
+            var ride = await _rideService.FindAsync(id);
+            if (ride == null)
+                return RedirectToAction("Index", "Home");
+            if (ride.LoadLimits - ride.Books.Where(x=>x.IsConfirmed).Sum(x => x.LoadLimits) < loadLimits)
+                return RedirectToAction("Index", "Home");
+
+
+            return View(ride);
+        }
+
+        
+        [HttpGet]
+        public async Task<IActionResult> BookConfirmations()
+        {
+            var appUser = await GetAppUser();
+            var rides = await _rideService.GetAllAsync(x =>x.AppUserId == appUser.Id && x.Books.Any(x=>!x.IsConfirmed));
+            return View(rides);
         }
     }
 }

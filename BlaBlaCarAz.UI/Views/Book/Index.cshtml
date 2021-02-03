@@ -35,32 +35,44 @@
             <th>
                 @Html.DisplayName("Book Date")
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsConfirmed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoadLimits)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ride.From)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ride.To)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ride.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ride.AppUser.NormalizedUserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ride.From)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ride.To)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ride.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ride.AppUser.NormalizedUserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsConfirmed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoadLimits)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
+            </td>
+        </tr>
         }
     </tbody>
 </table>

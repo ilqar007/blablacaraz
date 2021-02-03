@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BlaBlaCarAz.BLL.DomainModel.Entities.Ride>
+﻿@model RideSearchResultViewModel
 
 @{
     ViewData["Title"] = "RideSearch";
@@ -6,28 +6,41 @@
 }
 
 <h1>Where do you want to go?</h1>
+<div class="card">
+    <div class="card-body">
+        <div>
+            @Model.searchModel.From <span><i class="fa fa-arrow-right"></i></span> @Model.searchModel.To:
+        </div>
+        <div>
+            @Model.Rides.Count rides available
+        </div>
+    </div>
+</div>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                @Html.DisplayNameFor(model => model.Rides[0].Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.From)
+                @Html.DisplayNameFor(model => model.Rides[0].From)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.To)
+                @Html.DisplayNameFor(model => model.Rides[0].To)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AppUser)
+                @Html.DisplayNameFor(model => model.Rides[0].AppUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rides[0].Price)
             </th>
 
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model)
+@foreach (var item in Model.Rides)
 {
         <tr>
             <td>
@@ -43,11 +56,14 @@
                 @Html.DisplayFor(modelItem => item.AppUser.UserName)
                 @if (item.CanSeeProfilePicture)
                 {
-                <img src="@Url.Action("GetImage", "Profile", new { id = item.AppUserId })" width="46" height="46"/>
+                    <img src="@Url.Action("GetImage", "Profile", new { id = item.AppUserId })" width="46" height="46" />
                 }
             </td>
             <td>
-                @Html.ActionLink("Book", "Create", "Book", new { rideId = item.Id })
+                @(string.Format("{0:F}", item.Price * Model.searchModel.LoadLimits))
+            </td>
+            <td>
+                @Html.ActionLink("Continue", "Details", "Ride", new { id = item.Id,loadLimits = Model.searchModel.LoadLimits })
             </td>
         </tr>
 }

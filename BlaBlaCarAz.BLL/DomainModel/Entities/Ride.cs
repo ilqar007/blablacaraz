@@ -19,7 +19,7 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
 
         public decimal Price { get; set; }
 
-        public virtual IList<Book> Books { get; set; }
+        public virtual IList<Book> Books { get; set; } = new List<Book>();
 
         public string FlightNumber { get; set; }
 

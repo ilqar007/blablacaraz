@@ -48,6 +48,8 @@ namespace BlaBlaCarAz.UI.Controllers
                         thefile.CopyTo(target);
                         objfiles.DataFiles = target.ToArray();
                     }
+                    var files = await _service.GetAllAsync(x=>x.AppUserId == objfiles.AppUser.Id);
+                    await _service.DeleteRangeAsync(files,false);
                     await _service.AddAsync(objfiles);
                 }
             }

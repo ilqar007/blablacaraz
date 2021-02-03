@@ -1,0 +1,89 @@
+﻿@using Microsoft.AspNetCore.Http
+@model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
+@inject IHttpContextAccessor _httpContextAccessor
+@{
+    ViewData["Title"] = "Details";
+    int loadLimits = int.Parse(_httpContextAccessor.HttpContext.Request.Query["loadLimits"].ToString());
+}
+
+<h1 class="text-center mt-4">@Model.Date.ToString("dddd, dd MMMM yyyy HH:mm:ss")</h1>
+<div>
+    <h4 class="text-center mt-4">@Model.From</h4>
+</div>
+<div class="text-center mt-4">
+    <div><i class="fa fa-arrow-down"></i></div>
+</div>
+<div>
+    <h4 class="text-center mt-4">@Model.To</h4>
+</div>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayName($"Total price for {loadLimits} passenger")
+        </dt>
+        <dd class="col-sm-6">
+            @(string.Format("{0:F}", Model.Price* loadLimits))
+        </dd>
+    </dl>
+</div>
+<hr />
+<div class="row">
+    <a href="@Url.Action("Show","Profile",new { id=Model.AppUserId})">
+        <span class="text-left">@Model.AppUser.NormalizedUserName</span>
+        <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage","Profile",new { id=Model.AppUserId})" /></span>
+    </a>
+</div>
+
+<div class="row">
+    <p> @Model.Comment</p>
+</div>
+<div class="row">
+    <a href="@Url.Action("Init","Message",new { subject=Model.Id})">
+        <span class="text-left"><img src="~/images/chat.svg" width="24" height="24" /></span>
+        <span class="text-left">Contact @Model.AppUser.NormalizedUserName</span>
+
+    </a>
+</div>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FlightNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FlightNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CanBookInstantly)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CanBookInstantly)
+        </dd>
+    </dl>
+</div>
+<div role="presentation">
+    <div class="ui-widget-content">
+        <div class="font-weight-bold">Passengers</div>
+    </div>
+</div>
+<div role="presentation">
+    <div class="ui-widget-content">
+        <ul>
+            @foreach (var item in Model.Books.Where(x => x.IsConfirmed))
+            {
+                <li>
+                    <a href="@Url.Action("Show","Profile",new { id=item.AppUserId})">
+                        <span class="text-left">@item.AppUser.NormalizedUserName</span>
+                        <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage","Profile",new { id=item.AppUserId})" /></span>
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </div>
+</div>
+
+<div class="form-group mb-3 col-6 offset-3">
+    <a class="btn btn-primary" href="@Url.Action("Create","Book",new { rideId=Model.Id,loadLimits})" role="button">Book</a>
+</div>
