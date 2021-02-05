@@ -39,7 +39,7 @@
     <p> @Model.Comment</p>
 </div>
 <div class="row">
-    <a href="@Url.Action("Init","Message",new { subject=Model.Id})">
+    <a href="@Url.Action("Create","Message",new { rideId=Model.Id})">
         <span class="text-left"><img src="~/images/chat.svg" width="24" height="24" /></span>
         <span class="text-left">Contact @Model.AppUser.NormalizedUserName</span>
 

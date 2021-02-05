@@ -45,6 +45,9 @@ namespace BlaBlaCarAz.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Ride model)
         {
+            if (model.Id > 0)
+                return RedirectToAction("Index", "Home");
+
             model.AppUser = await GetAppUser();
             await _rideService.AddAsync(model);
             return RedirectToAction("Index");
@@ -174,19 +177,19 @@ namespace BlaBlaCarAz.UI.Controllers
             var ride = await _rideService.FindAsync(id);
             if (ride == null)
                 return RedirectToAction("Index", "Home");
-            if (ride.LoadLimits - ride.Books.Where(x=>x.IsConfirmed).Sum(x => x.LoadLimits) < loadLimits)
+            if (ride.LoadLimits - ride.Books.Where(x => x.IsConfirmed).Sum(x => x.LoadLimits) < loadLimits)
                 return RedirectToAction("Index", "Home");
 
 
             return View(ride);
         }
 
-        
+
         [HttpGet]
         public async Task<IActionResult> BookConfirmations()
         {
             var appUser = await GetAppUser();
-            var rides = await _rideService.GetAllAsync(x =>x.AppUserId == appUser.Id && x.Books.Any(x=>!x.IsConfirmed));
+            var rides = await _rideService.GetAllAsync(x => x.AppUserId == appUser.Id && x.Books.Any(x => !x.IsConfirmed));
             return View(rides);
         }
     }

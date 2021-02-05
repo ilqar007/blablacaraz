@@ -9,5 +9,7 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
     {
         public virtual IList<Ride> Rides { get; set; }
         public virtual IList<File> Files { get; set; }
+        public virtual IList<Message> Messages { get; set; }
+
     }
 }

@@ -22,7 +22,7 @@ namespace BlaBlaCarAz.UI.Controllers
           return  await userManagerService.GetUserAsync(User);
         }
 
-        protected async Task<AppUser> GetAppUserById(int id)
+        protected async Task<AppUser> GetAppUserById(long id)
         {
             var userManagerService = (UserManager<AppUser>)Request.HttpContext.RequestServices.GetService(typeof(UserManager<AppUser>));
             return await userManagerService.FindByIdAsync(id.ToString());

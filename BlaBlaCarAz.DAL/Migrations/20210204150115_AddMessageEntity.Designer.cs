@@ -4,14 +4,16 @@ using BlaBlaCarAz.DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlaBlaCarAz.DAL.Migrations
 {
     [DbContext(typeof(BlaBlaCarAzContext))]
-    partial class BlaBlaCarAzContextModelSnapshot : ModelSnapshot
+    [Migration("20210204150115_AddMessageEntity")]
+    partial class AddMessageEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -323,9 +325,6 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<bool>("IsSeen")
                         .HasColumnType("bit");
 
-                    b.Property<long?>("RideId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Subject")
                         .HasColumnType("nvarchar(max)");
 
@@ -335,8 +334,6 @@ namespace BlaBlaCarAz.DAL.Migrations
                         .HasColumnType("rowversion");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RideId");
 
                     b.ToTable("Message");
                 });
@@ -491,15 +488,6 @@ namespace BlaBlaCarAz.DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Message", b =>
-                {
-                    b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.Ride", "Ride")
-                        .WithMany()
-                        .HasForeignKey("RideId");
-
-                    b.Navigation("Ride");
                 });
 
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Ride", b =>

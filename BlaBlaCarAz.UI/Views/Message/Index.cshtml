@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BlaBlaCarAz.BLL.DomainModel.Entities.Ride>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Subject")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    <a href="@Url.Action("Show","Message",new { rideId=item.Id})">
+                        @Html.DisplayFor(modelItem => item.From)<span><i class="fa fa-arrow-right"></i></span>@Html.DisplayFor(modelItem => item.To)
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

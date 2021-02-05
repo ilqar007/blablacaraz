@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BlaBlaCarAz.BLL.DomainModel.Entities.Message>
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row text-center">
+    <a type="button" href="@Url.Action("Details","Ride",new { id=ViewBag.RideId,loadLimits=0})">
+        <span>
+            <span class="text-left"><i class="fa fa-info"></i></span>
+            <span>
+                <span class="text-left card-title">@(Model.FirstOrDefault().Ride.From)<i class="fa fa-arrow-right"></i></span><span class="text-left">@Model.FirstOrDefault().Ride.To</span><br>
+                <span class="text-right text-body">@Model.FirstOrDefault().Ride.Date.ToString("dddd, dd MMMM yyyy HH:mm:ss")</span>
+            </span>
+        </span>
+    </a>
+</div>
+<hr />
+
+@foreach (var item in Model)
+{
+<div class="form-group">
+    @Html.DisplayFor(modelItem => item.Body)<span>@("\t\t\t\t")</span> <span><i class="fa fa fa-clock"></i></span> <span>@("\t\t\t\t")</span> @(item.CreatedOn.HasValue? item.CreatedOn.Value.ToString("dddd, dd MMMM yyyy HH:mm:ss"):"")
+</div>
+}
+
+<form asp-action="Create">
+    <div class="form-group">
+        <input type="text" id="InputBody" name="InputBody" class="form-control" />
+    </div>
+    @Html.HiddenFor(x => x.FirstOrDefault().RideId)
+    @Html.HiddenFor(x => x.FirstOrDefault().Body)
+    <div class="form-group">
+        <input type="submit" value="Send" class="btn btn-primary" onclick="Send()" />
+    </div>
+</form>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        function Send() {
+            $('#Body').val($('#InputBody').val());
+        }
+    </script>
+}
+
