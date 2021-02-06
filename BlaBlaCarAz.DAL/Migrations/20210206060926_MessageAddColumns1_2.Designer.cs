@@ -4,14 +4,16 @@ using BlaBlaCarAz.DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlaBlaCarAz.DAL.Migrations
 {
     [DbContext(typeof(BlaBlaCarAzContext))]
-    partial class BlaBlaCarAzContextModelSnapshot : ModelSnapshot
+    [Migration("20210206060926_MessageAddColumns1_2")]
+    partial class MessageAddColumns1_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,36 +128,6 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.HasIndex("RideId1");
 
                     b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Chat", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .UseIdentityColumn();
-
-                    b.Property<long>("AppUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("RideId")
-                        .HasColumnType("bigint");
-
-                    b.Property<byte[]>("TimeStamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("RideId");
-
-                    b.ToTable("Chat");
                 });
 
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.File", b =>
@@ -332,9 +304,6 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ChatId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -343,6 +312,12 @@ namespace BlaBlaCarAz.DAL.Migrations
 
                     b.Property<bool>("IsSeen")
                         .HasColumnType("bit");
+
+                    b.Property<long?>("RideId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("TimeStamp")
                         .IsConcurrencyToken()
@@ -354,9 +329,9 @@ namespace BlaBlaCarAz.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChatId");
-
                     b.HasIndex("FromUserId");
+
+                    b.HasIndex("RideId");
 
                     b.HasIndex("ToUserId");
 
@@ -438,25 +413,6 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Navigation("Ride");
                 });
 
-            modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Chat", b =>
-                {
-                    b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.AppUser", "AppUser")
-                        .WithMany("Chats")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.Ride", "Ride")
-                        .WithMany()
-                        .HasForeignKey("RideId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-
-                    b.Navigation("Ride");
-                });
-
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.File", b =>
                 {
                     b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.AppUser", "AppUser")
@@ -521,17 +477,15 @@ namespace BlaBlaCarAz.DAL.Migrations
 
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Message", b =>
                 {
-                    b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.Chat", "Chat")
-                        .WithMany("Messages")
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.AppUser", "FromUser")
-                        .WithMany()
+                        .WithMany("Messages")
                         .HasForeignKey("FromUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.Ride", "Ride")
+                        .WithMany()
+                        .HasForeignKey("RideId");
 
                     b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.AppUser", "ToUser")
                         .WithMany()
@@ -539,9 +493,9 @@ namespace BlaBlaCarAz.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Chat");
-
                     b.Navigation("FromUser");
+
+                    b.Navigation("Ride");
 
                     b.Navigation("ToUser");
                 });
@@ -559,16 +513,11 @@ namespace BlaBlaCarAz.DAL.Migrations
 
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.AppUser", b =>
                 {
-                    b.Navigation("Chats");
-
                     b.Navigation("Files");
 
-                    b.Navigation("Rides");
-                });
-
-            modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Chat", b =>
-                {
                     b.Navigation("Messages");
+
+                    b.Navigation("Rides");
                 });
 
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Ride", b =>

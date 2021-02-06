@@ -13,57 +13,90 @@ namespace BlaBlaCarAz.UI.Controllers
     {
         private readonly IService<Message> _service;
         private readonly IService<Ride> _rideService;
-        public MessageController(IService<Message> service, IService<Ride> rideService)
+        private readonly IService<Chat> _chatService;
+
+        public MessageController(IService<Message> service, IService<Ride> rideService, IService<Chat> chatService)
         {
             _service = service;
             _rideService = rideService;
+            _chatService = chatService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var appUser = await GetAppUser();
-            var messages = await _service.GetAllAsync(x => x.AppUsers.Any(u => u.Id == appUser.Id));
-            var rides = messages.GroupBy(x => x.Ride).Select(x => x.Key);
-            return View(rides);
+            var chats = await _chatService.GetAllAsync(x => x.Messages.Any(m => m.ToUserId == appUser.Id || m.FromUserId == appUser.Id));
+            ViewBag.AppUserId = appUser.Id;
+            return View(chats);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Create(int rideId)
         {
+            var fromUser = await GetAppUser();
             var ride = await _rideService.FindAsync(rideId);
-            if (ride == null)
+            if (ride == null || ride.AppUserId == fromUser.Id)
                 return RedirectToAction("Index", "Home");
-            var messages = new List<Message>();
-            messages.Add(new Message { Ride = ride });
-            return View(messages);
+
+            return View(new Chat { Ride = ride });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Message model)
+        public async Task<IActionResult> Create(Chat model)
         {
-            var ride = await _rideService.FindAsync(model.RideId);
-            if (ride == null)
+            var fromUser = await GetAppUser();
+            var ride = await _rideService.FindAsync(model.Ride.Id);
+            if (ride == null || ride.Date < DateTime.Now)
                 return RedirectToAction("Index", "Home");
 
-            var fromUser = await GetAppUser();
-            var toUser = await GetAppUserById(ride.AppUserId);
-            model.IsSeen = false;
-            model.AppUsers.Add(fromUser);
-            model.AppUsers.Add(toUser);
-            model.CreatedOn = DateTime.Now;
-            await _service.AddAsync(model);
-            return RedirectToAction(nameof(Show), new { rideId = model.RideId });
+
+            var chat = await _chatService.FindAsync(model.Id);
+            if (chat == null)
+            {
+                chat = new Chat { Ride = ride, CreatedOn = DateTime.Now, AppUser = fromUser };
+            }
+            if (chat.Id > 0 && !chat.Messages.Any(x => x.FromUserId == fromUser.Id || x.ToUserId == fromUser.Id) || chat.RideId != ride.Id)
+                return RedirectToAction("Index", "Home");
+
+            long toUserId = chat.Id > 0 && ride.AppUserId == fromUser.Id ? chat.AppUserId : ride.AppUserId;
+            var toUser = await GetAppUserById(toUserId);
+            var message = new Message();
+            message.IsSeen = false;
+            message.FromUser = fromUser;
+            message.ToUser = toUser;
+            message.CreatedOn = DateTime.Now;
+            message.Body = model.Messages[0].Body;
+            if (chat.Id == 0)
+            {
+                chat.Messages.Add(message);
+                await _chatService.AddAsync(chat);
+            }
+            else
+            {
+                message.Chat = chat;
+                await _service.AddAsync(message);
+            }
+            return RedirectToAction(nameof(Show), new { id = chat.Id });
         }
 
         [HttpGet]
-        public async Task<IActionResult> Show(int rideId)
+        public async Task<IActionResult> Show(long id)
         {
-            var ride = await _rideService.FindAsync(rideId);
-            if (ride == null)
+            var chat = await _chatService.FindAsync(id);
+            if (chat == null)
                 return RedirectToAction("Index", "Home");
-
-            var messages = await _service.GetAllAsync(x => x.RideId == rideId);
-            return View(nameof(Create), messages);
+            var appUser = await GetAppUser();
+            var unreadMessages = chat.Messages.Where(x => x.ToUserId == appUser.Id && !x.IsSeen);
+            if (unreadMessages.Count() > 0)
+            {
+                foreach (var item in unreadMessages)
+                {
+                    item.IsSeen = true;
+                }
+                await _service.UpdateRangeAsync(unreadMessages);
+            }
+            return View(nameof(Create), chat);
         }
 
     }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlaBlaCarAz.UI.Models
 {
-    public class MessageViewModel
+    public class ChatViewModel
     {
-        public Message Message { get; set; }
-        public Ride Ride { get; set; }
+        public Chat Chat { get; set; }
+        public bool IsSeen { get; set; }
     }
 }

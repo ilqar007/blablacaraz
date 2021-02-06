@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace BlaBlaCarAz.BLL.DomainModel.Entities
@@ -9,7 +10,7 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
     {
         public virtual IList<Ride> Rides { get; set; }
         public virtual IList<File> Files { get; set; }
-        public virtual IList<Message> Messages { get; set; }
+        public virtual IList<Chat> Chats { get; set; }
 
     }
 }

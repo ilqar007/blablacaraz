@@ -4,14 +4,16 @@ using BlaBlaCarAz.DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlaBlaCarAz.DAL.Migrations
 {
     [DbContext(typeof(BlaBlaCarAzContext))]
-    partial class BlaBlaCarAzContextModelSnapshot : ModelSnapshot
+    [Migration("20210206143337_AddChatEntity")]
+    partial class AddChatEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,13 +137,16 @@ namespace BlaBlaCarAz.DAL.Migrations
                         .HasColumnType("bigint")
                         .UseIdentityColumn();
 
-                    b.Property<long>("AppUserId")
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("AppUserId1")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("RideId")
+                    b.Property<long?>("RideId")
                         .HasColumnType("bigint");
 
                     b.Property<byte[]>("TimeStamp")
@@ -151,7 +156,7 @@ namespace BlaBlaCarAz.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserId1");
 
                     b.HasIndex("RideId");
 
@@ -442,15 +447,11 @@ namespace BlaBlaCarAz.DAL.Migrations
                 {
                     b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.AppUser", "AppUser")
                         .WithMany("Chats")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AppUserId1");
 
                     b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.Ride", "Ride")
                         .WithMany()
-                        .HasForeignKey("RideId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RideId");
 
                     b.Navigation("AppUser");
 

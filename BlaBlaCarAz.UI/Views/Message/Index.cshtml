@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BlaBlaCarAz.BLL.DomainModel.Entities.Ride>
+﻿@model IEnumerable<BlaBlaCarAz.BLL.DomainModel.Entities.Chat>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,8 +22,8 @@
             <tr>
 
                 <td>
-                    <a href="@Url.Action("Show","Message",new { rideId=item.Id})">
-                        @Html.DisplayFor(modelItem => item.From)<span><i class="fa fa-arrow-right"></i></span>@Html.DisplayFor(modelItem => item.To)
+                    <a class="@(item.Messages.Any(x=>x.ToUserId == ViewBag.AppUserId && !x.IsSeen)?"alert-dark":"" )" href="@Url.Action("Show","Message",new { id=item.Id})">
+                        @Html.DisplayFor(modelItem => item.Ride.From)<span><i class="fa fa-arrow-right"></i></span>@Html.DisplayFor(modelItem => item.Ride.To)
                     </a>
                 </td>
             </tr>

@@ -1,25 +1,29 @@
-﻿@model IEnumerable<BlaBlaCarAz.BLL.DomainModel.Entities.Message>
+﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.Chat
 @{
     ViewData["Title"] = "Create";
 }
 
 <div class="row text-center">
-    <a type="button" href="@Url.Action("Details","Ride",new { id=ViewBag.RideId,loadLimits=0})">
+    <a type="button" href="@Url.Action("Details","Ride",new { id=Model.Ride.Id,loadLimits=0})">
         <span>
             <span class="text-left"><i class="fa fa-info"></i></span>
             <span>
-                <span class="text-left card-title">@(Model.FirstOrDefault().Ride.From)<i class="fa fa-arrow-right"></i></span><span class="text-left">@Model.FirstOrDefault().Ride.To</span><br>
-                <span class="text-right text-body">@Model.FirstOrDefault().Ride.Date.ToString("dddd, dd MMMM yyyy HH:mm:ss")</span>
+                <span class="text-left card-title">@(Model.Ride.From)<i class="fa fa-arrow-right"></i></span><span class="text-left">@Model.Ride.To</span><br>
+                <span class="text-right text-body">@Model.Ride.Date.ToString("dddd, dd MMMM yyyy HH:mm:ss")</span>
             </span>
         </span>
     </a>
 </div>
 <hr />
 
-@foreach (var item in Model)
+@foreach (var item in Model.Messages)
 {
 <div class="form-group">
-    @Html.DisplayFor(modelItem => item.Body)<span>@("\t\t\t\t")</span> <span><i class="fa fa fa-clock"></i></span> <span>@("\t\t\t\t")</span> @(item.CreatedOn.HasValue? item.CreatedOn.Value.ToString("dddd, dd MMMM yyyy HH:mm:ss"):"")
+    <a href="@Url.Action("Show","Profile",new { id=item.FromUser.Id})">
+        <span class="text-left">@item.FromUser.NormalizedUserName</span>
+        <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage","Profile",new { id=item.FromUser.Id})" /></span>
+    </a>
+     <span class="text-left"><img src="~/images/chat.svg" width="24" height="24" /></span><span class="ml-5"> </span>  @Html.DisplayFor(modelItem => item.Body)<span class="ml-5"></span><span class="ml-5"></span> <span><i class="fa fa fa-clock"></i></span>  @(item.CreatedOn.HasValue? item.CreatedOn.Value.ToString("dddd, dd MMMM yyyy HH:mm:ss"):"")
 </div>
 }
 
@@ -27,8 +31,9 @@
     <div class="form-group">
         <input type="text" id="InputBody" name="InputBody" class="form-control" />
     </div>
-    @Html.HiddenFor(x => x.FirstOrDefault().RideId)
-    @Html.HiddenFor(x => x.FirstOrDefault().Body)
+    @Html.HiddenFor(x => x.Ride.Id)
+    <input type="hidden" id="Messages_0__Body" name="Messages[0].Body" />
+    @Html.HiddenFor(x=>x.Id)
     <div class="form-group">
         <input type="submit" value="Send" class="btn btn-primary" onclick="Send()" />
     </div>
@@ -39,7 +44,7 @@
 
     <script type="text/javascript">
         function Send() {
-            $('#Body').val($('#InputBody').val());
+            $('#Messages_0__Body').val($('#InputBody').val());
         }
     </script>
 }
