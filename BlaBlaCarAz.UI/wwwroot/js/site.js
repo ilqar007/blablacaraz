@@ -43,3 +43,27 @@ function SetFieldAutocompletePlacesApi(element, submit) {
         }
     }).autocomplete("widget").addClass("CitiesAutocomplete");
 }
+
+
+    function RefreshMessageCount() {
+            var url = '/Message/GetNewMessageCount';
+            $.ajax({
+        url: url,
+                dataType: "json",
+                type: "GET",
+                success: function (data) {
+                    if (data > 0) {
+                        $('#unreadMessagesCountTitle').html('<span class="text-right"><i class="fa fa-bell"></i>'+data+'</span>');
+                        $('#unreadMessagesCountMessage').html('<span class="text-right"><i class="fa fa-bell"></i>'+data+'</span>');
+                    }
+                },
+                error: function (x, y, z) {
+                }
+            });
+        }
+
+        setInterval(function () {
+            if ($('#isLoggedIn').val()=="1") {
+                RefreshMessageCount();
+            }
+        }, 5000);

@@ -99,5 +99,15 @@ namespace BlaBlaCarAz.UI.Controllers
             return View(nameof(Create), chat);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> GetNewMessageCount()
+        {
+            var fromUser = await GetAppUser();
+            var unreadMessages = await _service.GetAllAsync(x => x.ToUserId == fromUser.Id && !x.IsSeen);
+
+            return new ObjectResult (unreadMessages.Count);
+        }
+
     }
 }
