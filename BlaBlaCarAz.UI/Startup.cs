@@ -5,6 +5,8 @@ using BlaBlaCarAz.BLL.ServiceLayer.Services;
 using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
 using BlaBlaCarAz.DAL.DataContext;
 using BlaBlaCarAz.DAL.Repositories;
+using BlaBlaCarAz.Localization;
+using BlaBlaCarAz.Localization.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -59,9 +61,13 @@ namespace BlaBlaCarAz.UI
             services.Configure<EmailSettings>(Configuration.GetSection(EmailSettings.EmailSetting));
             services.Configure<GooglePlacesSettings>(Configuration.GetSection(GooglePlacesSettings.GooglePlacesSetting));
 
+            services.AddSingleton<LocService>();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddControllersWithViews().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+                .AddDataAnnotationsLocalization().AddDataAnnotationsLocalization(options => {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                        factory.Create(typeof(SharedResource));
+                });
             services.AddRazorPages();
             services.Configure<RequestLocalizationOptions>(options =>
             {

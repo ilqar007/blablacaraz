@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BlaBlaCarAz.BLL\BlaBlaCarAz.BLL.csproj" />
     <ProjectReference Include="..\BlaBlaCarAz.DAL\BlaBlaCarAz.DAL.csproj" />
+    <ProjectReference Include="..\BlaBlaCarAz.Localization\BlaBlaCarAz.Localization.csproj" />
   </ItemGroup>
 
 </Project>

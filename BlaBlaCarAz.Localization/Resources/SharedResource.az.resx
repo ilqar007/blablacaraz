@@ -117,19 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Going to..." xml:space="preserve">
-    <value>Hara...</value>
+  <data name="Bag" xml:space="preserve">
+    <value>Çanta</value>
   </data>
-  <data name="Home Page" xml:space="preserve">
-    <value>Ana səhifə</value>
-  </data>
-  <data name="Leaving from..." xml:space="preserve">
-    <value>Hardan...</value>
+  <data name="Document" xml:space="preserve">
+    <value>Sənəd</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Axtar</value>
-  </data>
-  <data name="Your ride. Your choice." xml:space="preserve">
-    <value>Sənin gəzinti. Sənin seçimin.</value>
   </data>
 </root>
