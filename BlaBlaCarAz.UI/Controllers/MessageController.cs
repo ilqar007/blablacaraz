@@ -83,10 +83,11 @@ namespace BlaBlaCarAz.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Show(long id)
         {
-            var chat = await _chatService.FindAsync(id);
-            if (chat == null)
-                return RedirectToAction("Index", "Home");
             var appUser = await GetAppUser();
+            var chat = await _chatService.FindAsync(id);
+            if (chat == null || !chat.Messages.Any(x => x.FromUserId == appUser.Id || x.ToUserId == appUser.Id))
+                return RedirectToAction("Index", "Home");
+
             var unreadMessages = chat.Messages.Where(x => x.ToUserId == appUser.Id && !x.IsSeen);
             if (unreadMessages.Count() > 0)
             {
@@ -106,7 +107,7 @@ namespace BlaBlaCarAz.UI.Controllers
             var fromUser = await GetAppUser();
             var unreadMessages = await _service.GetAllAsync(x => x.ToUserId == fromUser.Id && !x.IsSeen);
 
-            return new ObjectResult (unreadMessages.Count);
+            return new ObjectResult(unreadMessages.Count);
         }
 
     }
