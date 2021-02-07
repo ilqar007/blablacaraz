@@ -67,3 +67,6 @@ function SetFieldAutocompletePlacesApi(element, submit) {
                 RefreshMessageCount();
             }
         }, 5000);
+$("#selectLanguage select").change(function () {
+    $(this).parent().submit();
+});

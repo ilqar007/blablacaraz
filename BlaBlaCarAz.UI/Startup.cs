@@ -9,10 +9,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using System.Globalization;
 using static BlaBlaCarAz.BLL.DomainModel.Entities.IdentityModels;
 
 namespace BlaBlaCarAz.UI
@@ -54,8 +58,30 @@ namespace BlaBlaCarAz.UI
             });
             services.Configure<EmailSettings>(Configuration.GetSection(EmailSettings.EmailSetting));
             services.Configure<GooglePlacesSettings>(Configuration.GetSection(GooglePlacesSettings.GooglePlacesSetting));
-            services.AddControllersWithViews();
+
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddControllersWithViews().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
             services.AddRazorPages();
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                new CultureInfo("en"),
+                new CultureInfo("az")
+            };
+
+                // State what the default culture for your application is. This will be used if no specific culture
+                // can be determined for a given request.
+                options.DefaultRequestCulture = new RequestCulture(culture: "en", uiCulture: "en");
+
+                // You must explicitly state which cultures your application supports.
+                // These are the cultures the app supports for formatting numbers, dates, etc.
+                options.SupportedCultures = supportedCultures;
+
+                // These are the cultures the app supports for UI strings, i.e. we have localized resources for.
+                options.SupportedUICultures = supportedCultures;
+            });
 
             services.AddScoped(typeof(IRepo<>), typeof(RepoBase<>));
             services.AddScoped(typeof(IService<>), typeof(ServiceBase<>));
@@ -65,6 +91,9 @@ namespace BlaBlaCarAz.UI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -75,6 +104,8 @@ namespace BlaBlaCarAz.UI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
