@@ -1,18 +1,16 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.Extensions.Localization
-@using BlaBlaCarAz.Localization
-@inject IViewLocalizer Localizer
-@inject IStringLocalizer<BlaBlaCarAz.Localization.Resources.SharedResource> _sharedLocalizer
+﻿@using BlaBlaCarAz.Localization
+@using BlaBlaCarAz.Localization.Resources
+
 @inject LocService SharedLocalizer
-    
+
 @{
-    ViewData["Title"] = Localizer["Home Page"];
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.HomePage));
 }
 @model RideSearchViewModel
 <div class="row" style="background-image: url(/images/carpool_blablabus_large.svg)">
     <div></div>
     <div class="text-center">
-        <h1 class="display-4">@Localizer["Your ride. Your choice."]</h1>
+        <h1 class="display-4">@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.YourRide))</h1>
 
     </div>
     <div class="row">
@@ -24,10 +22,10 @@
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-search"></i></span>
-                        </div><input asp-for="From" class="form-control" placeholder="@Localizer["Leaving from..."]" />
+                        </div><input asp-for="From" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.From))" />
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-search"></i></span>
-                        </div><input asp-for="To" class="form-control" placeholder="@Localizer["Going to..."]" />
+                        </div><input asp-for="To" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.To))" />
                         <div id="sandbox-container">
                             <div class="input-group date">
                                 <div class="input-group-prepend">
@@ -37,13 +35,17 @@
                         </div>
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-truck-loading"></i></span>
-                        </div>@Html.DropDownListFor(m => m.LoadType, Html.GetEnumSelectList<BlaBlaCarAz.BLL.DomainModel.Enums.LoadType>())
+                        </div>
+                        <select data-val="true" data-val-required="The LoadType field is required." id="LoadType" name="LoadType">
+                            <option value="0">@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Document))</option>
+                            <option value="1">@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Bag))</option>
+                        </select>
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-weight-hanging"></i></span>
-                        </div><input asp-for="LoadLimits" class="form-control" />
+                            <span class="input-group-text"><i class=""></i></span>
+                        </div><input asp-for="LoadLimits" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Limits))" />
 
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit" id="button-addon2" onclick="SetSearchDate()">@SharedLocalizer.GetLocalizedHtmlString("Search")</button>
+                            <button class="btn btn-primary" type="submit" id="button-addon2" onclick="SetSearchDate()">@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Search))</button>
                         </div>
                     </div>
 
