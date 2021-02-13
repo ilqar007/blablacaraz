@@ -56,7 +56,7 @@ namespace BlaBlaCarAz.UI.Controllers
             {
                 chat = new Chat { Ride = ride, CreatedOn = DateTime.Now, AppUser = fromUser };
             }
-            if (chat.Id > 0 && !chat.Messages.Any(x => x.FromUserId == fromUser.Id || x.ToUserId == fromUser.Id) || chat.RideId != ride.Id)
+            if ((chat.Id > 0 && !chat.Messages.Any(x => x.FromUserId == fromUser.Id || x.ToUserId == fromUser.Id) )|| chat.Ride.Id != ride.Id)
                 return RedirectToAction("Index", "Home");
 
             long toUserId = chat.Id > 0 && ride.AppUserId == fromUser.Id ? chat.AppUserId : ride.AppUserId;

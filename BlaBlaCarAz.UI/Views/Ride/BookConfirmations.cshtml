@@ -43,9 +43,9 @@
                             @foreach (var bookItem in item.Books.Where(x => !x.IsConfirmed))
                             {
                             <li>
-                                <a href="@Url.Action("Show","Profile",new { id=item.AppUserId})">
-                                    <span class="text-left">@item.AppUser.NormalizedUserName</span>
-                                    <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage","Profile",new { id=item.AppUserId})" /></span>
+                                <a href="@Url.Action("Show","Profile",new { id=bookItem.AppUserId})">
+                                    <span class="text-left">@bookItem.AppUser.NormalizedUserName</span>
+                                    <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage","Profile",new { id=bookItem.AppUserId})" /></span>
                                 </a>
                                 @Html.ActionLink("Confirm", "Confirm","Book", new { bookId = bookItem.Id,rideId=item.Id })
                             </li>

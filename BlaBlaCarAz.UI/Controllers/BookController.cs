@@ -31,7 +31,7 @@ namespace BlaBlaCarAz.UI.Controllers
         public async Task<IActionResult> Create(int rideId, int loadLimits)
         {
             var appUser = await GetAppUser();
-            var ride = await _rideService.GetSingleAsync(x => x.Id == rideId && x.AppUserId == appUser.Id);
+            var ride = await _rideService.GetSingleAsync(x => x.Id == rideId);
             if (ride == null)
                 return RedirectToAction("Index", "Home");
 

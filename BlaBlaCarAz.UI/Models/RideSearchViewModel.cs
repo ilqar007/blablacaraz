@@ -8,7 +8,7 @@ namespace BlaBlaCarAz.UI.Models
 {
     public class RideSearchViewModel
     {
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public string From { get; set; }
         public string To { get; set; }
         public LoadType LoadType { get; set; }
