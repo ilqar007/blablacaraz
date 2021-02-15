@@ -14,12 +14,14 @@ namespace BlaBlaCarAz.UI.Controllers
         private readonly IService<Message> _service;
         private readonly IService<Ride> _rideService;
         private readonly IService<Chat> _chatService;
+        private readonly IService<Book> _bookService;
 
-        public MessageController(IService<Message> service, IService<Ride> rideService, IService<Chat> chatService)
+        public MessageController(IService<Message> service, IService<Ride> rideService, IService<Chat> chatService, IService<Book> bookService)
         {
             _service = service;
             _rideService = rideService;
             _chatService = chatService;
+            _bookService = bookService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -47,7 +49,7 @@ namespace BlaBlaCarAz.UI.Controllers
         {
             var fromUser = await GetAppUser();
             var ride = await _rideService.FindAsync(model.Ride.Id);
-            if (ride == null || ride.Date < DateTime.Now)
+            if (ride == null)
                 return RedirectToAction("Index", "Home");
 
 
@@ -56,7 +58,7 @@ namespace BlaBlaCarAz.UI.Controllers
             {
                 chat = new Chat { Ride = ride, CreatedOn = DateTime.Now, AppUser = fromUser };
             }
-            if ((chat.Id > 0 && !chat.Messages.Any(x => x.FromUserId == fromUser.Id || x.ToUserId == fromUser.Id) )|| chat.Ride.Id != ride.Id)
+            if ((chat.Id > 0 && !chat.Messages.Any(x => x.FromUserId == fromUser.Id || x.ToUserId == fromUser.Id)) || chat.Ride.Id != ride.Id)
                 return RedirectToAction("Index", "Home");
 
             long toUserId = chat.Id > 0 && ride.AppUserId == fromUser.Id ? chat.AppUserId : ride.AppUserId;
@@ -106,8 +108,9 @@ namespace BlaBlaCarAz.UI.Controllers
         {
             var fromUser = await GetAppUser();
             var unreadMessages = await _service.GetAllAsync(x => x.ToUserId == fromUser.Id && !x.IsSeen);
-
-            return new ObjectResult(unreadMessages.Count);
+            var unconfirmedrides = await _rideService.GetAllAsync(x => x.AppUserId == fromUser.Id && x.Books.Any(x => !x.IsConfirmed));
+            var unconfirmedBooksCount = unconfirmedrides.Sum(x => x.Books.Where(x => !x.IsConfirmed).Count());
+            return new ObjectResult(new { MessageCount = unreadMessages.Count, BookRequestCount = unconfirmedBooksCount });
         }
 
     }

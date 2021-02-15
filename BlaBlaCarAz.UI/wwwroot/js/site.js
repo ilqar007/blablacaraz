@@ -52,9 +52,14 @@ function SetFieldAutocompletePlacesApi(element, submit) {
                 dataType: "json",
                 type: "GET",
                 success: function (data) {
-                    if (data > 0) {
-                        $('#unreadMessagesCountTitle').html('<span class="text-right"><i class="fa fa-bell"></i>'+data+'</span>');
-                        $('#unreadMessagesCountMessage').html('<span class="text-right"><i class="fa fa-bell"></i>'+data+'</span>');
+                    if (data.messageCount > 0) {
+                        $('#unreadMessagesCountMessage').html('<span class="text-right"><i class="fa fa-bell"></i>' + data.messageCount+'</span>');
+                    }
+                    if (data.bookRequestCount > 0) {
+                        $('#unconfirmedBooksCount').html('<span class="text-right"><i class="fa fa-bell"></i>' + data.bookRequestCount + '</span>');
+                    }
+                    if ((data.messageCount + data.bookRequestCount) > 0) {
+                        $('#notificationsCountTitle').html('<span class="text-right"><i class="fa fa-bell"></i>' + (data.messageCount + data.bookRequestCount) + '</span>');
                     }
                 },
                 error: function (x, y, z) {
