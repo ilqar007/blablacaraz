@@ -43,21 +43,23 @@ namespace BlaBlaCarAz.UI.Controllers
 
         public async Task<IActionResult> RideSearch(RideSearchViewModel model)
         {
-            var rides = await _rideService.GetAllAsync(x => x.From == model.From && x.To == model.To && x.Date.Date >= DateTime.Now.Date && x.Date.Date == DateTime.ParseExact(model.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) && x.LoadType == model.LoadType && ((x.LoadLimits - x.Books.Where(x=>x.IsConfirmed).DefaultIfEmpty().Sum(b => b.LoadLimits)) >= 1));
-            var resultModel = new RideSearchResultViewModel { searchModel=model, Rides=rides};
+            var rides = await _rideService.GetAllAsync(x => x.From == model.From && x.To == model.To && x.Date.Date >= DateTime.Now.Date && x.Date.Date == DateTime.ParseExact(model.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) && x.LoadType == model.LoadType && ((x.LoadLimits - x.Books.Where(x => x.IsConfirmed).DefaultIfEmpty().Sum(b => b.LoadLimits)) >= 1));
+            var resultModel = new RideSearchResultViewModel { searchModel = model, Rides = rides };
             return View(resultModel);
         }
 
         [HttpPost]
-        public IActionResult SetLanguage(string culture, string returnUrl)
+        public IActionResult SetLanguage(string culture, string returnUrl, string method)
         {
             Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1),IsEssential=true, }
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1), IsEssential = true, }
             );
-
-            return LocalRedirect(returnUrl);
+            if (method == HttpMethods.Post)
+                return RedirectToAction(nameof(Index));
+            else
+                return LocalRedirect(returnUrl);
         }
     }
 }
