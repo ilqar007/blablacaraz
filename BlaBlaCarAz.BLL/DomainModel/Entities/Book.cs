@@ -11,7 +11,6 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
     {
         public long AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
-        public DateTime Date { get; set; }
         public virtual Ride Ride { get; set; }
         public int RideId { get; set; }
         public int LoadLimits { get; set; }

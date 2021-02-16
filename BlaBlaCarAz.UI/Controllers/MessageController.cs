@@ -108,8 +108,7 @@ namespace BlaBlaCarAz.UI.Controllers
         {
             var fromUser = await GetAppUser();
             var unreadMessages = await _service.GetAllAsync(x => x.ToUserId == fromUser.Id && !x.IsSeen);
-            var unconfirmedrides = await _rideService.GetAllAsync(x => x.AppUserId == fromUser.Id && x.Books.Any(x => !x.IsConfirmed));
-            var unconfirmedBooksCount = unconfirmedrides.Sum(x => x.Books.Where(x => !x.IsConfirmed).Count());
+            var unconfirmedBooksCount = await _bookService.CountAsync(x => x.Ride.AppUserId == fromUser.Id && !x.IsConfirmed);
             return new ObjectResult(new { MessageCount = unreadMessages.Count, BookRequestCount = unconfirmedBooksCount });
         }
 

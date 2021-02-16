@@ -189,7 +189,7 @@ namespace BlaBlaCarAz.UI.Controllers
         public async Task<IActionResult> BookConfirmations()
         {
             var appUser = await GetAppUser();
-            var rides = await _rideService.GetAllAsync(x => x.AppUserId == appUser.Id && x.Books.Any(x => !x.IsConfirmed));
+            var rides = await _rideService.GetAllAsync(x => x.AppUserId == appUser.Id);
             return View(rides);
         }
     }

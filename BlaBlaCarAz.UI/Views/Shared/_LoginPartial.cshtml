@@ -23,7 +23,7 @@
     {
         long userId = long.Parse(UserManager.GetUserId(User));
         var unreadMessages = await _messageService.GetAllAsync(x => x.ToUserId == userId && !x.IsSeen);
-        var unconfirmedBooks = await _bookService.GetAllAsync(x => x.AppUserId == userId && !x.IsConfirmed);
+        var unconfirmedBooksCount = await _bookService.CountAsync(x => x.Ride.AppUserId == userId && !x.IsConfirmed);
         @Html.Hidden("isLoggedIn", 1);
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,9 +34,9 @@
                     <img src="@Url.Action("GetImage","Profile")" alt="user-image" class="rounded-circle" width="46" height="46" />
                 </span>
                 <span id="notificationsCountTitle">
-                    @if (unreadMessages.Count > 0 || unconfirmedBooks.Count > 0)
+                    @if (unreadMessages.Count > 0 || unconfirmedBooksCount > 0)
                     {
-                        <span class="text-right"><i class="fa fa-bell"></i>@(unreadMessages.Count+ unconfirmedBooks.Count)</span>
+                        <span class="text-right"><i class="fa fa-bell"></i>@(unreadMessages.Count+ unconfirmedBooksCount)</span>
                     }
                 </span>
             </a>
@@ -47,7 +47,7 @@
                 </form>
                 <a class="nav-link text-dark" asp-controller="Ride" asp-action="Index" title="Books">Your rides</a>
                 <a class="nav-link text-dark" asp-controller="Book" asp-action="Index" title="Books">Payments</a>
-                <a class="nav-link text-dark" asp-controller="Ride" asp-action="BookConfirmations" title="Books">Book requests <span id="unconfirmedBooksCount"> @Html.Raw(unconfirmedBooks.Count > 0 ? ("<span class=\"text-right\"><i class=\"fa fa-bell\"></i>" + unconfirmedBooks.Count + "</span>") : "")</span></a>
+                <a class="nav-link text-dark" asp-controller="Ride" asp-action="BookConfirmations" title="Books">Book requests <span id="unconfirmedBooksCount"> @Html.Raw(unconfirmedBooksCount > 0 ? ("<span class=\"text-right\"><i class=\"fa fa-bell\"></i>" + unconfirmedBooksCount + "</span>") : "")</span></a>
                 <a class="nav-link text-dark" asp-controller="Message" asp-action="Index" title="Books">Messages <span id="unreadMessagesCountMessage"> @Html.Raw(unreadMessages.Count > 0 ? ("<span class=\"text-right\"><i class=\"fa fa-bell\"></i>" + unreadMessages.Count + "</span>") : "")</span> </a>
             </div>
         </li>

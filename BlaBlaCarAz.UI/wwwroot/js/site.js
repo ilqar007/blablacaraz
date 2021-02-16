@@ -53,13 +53,22 @@ function SetFieldAutocompletePlacesApi(element, submit) {
                 type: "GET",
                 success: function (data) {
                     if (data.messageCount > 0) {
-                        $('#unreadMessagesCountMessage').html('<span class="text-right"><i class="fa fa-bell"></i>' + data.messageCount+'</span>');
+                        $('#unreadMessagesCountMessage').html('<span class="text-right"><i class="fa fa-bell"></i>' + data.messageCount + '</span>');
+                    }
+                    else {
+                        $('#unreadMessagesCountMessage').html('');
                     }
                     if (data.bookRequestCount > 0) {
                         $('#unconfirmedBooksCount').html('<span class="text-right"><i class="fa fa-bell"></i>' + data.bookRequestCount + '</span>');
                     }
+                    else {
+                        $('#unconfirmedBooksCount').html('');
+                    }
                     if ((data.messageCount + data.bookRequestCount) > 0) {
                         $('#notificationsCountTitle').html('<span class="text-right"><i class="fa fa-bell"></i>' + (data.messageCount + data.bookRequestCount) + '</span>');
+                    }
+                    else {
+                        $('#notificationsCountTitle').html('');
                     }
                 },
                 error: function (x, y, z) {

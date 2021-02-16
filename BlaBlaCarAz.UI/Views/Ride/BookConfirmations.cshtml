@@ -27,6 +27,8 @@
     <tbody>
         @foreach (var item in Model)
         {
+            if (item.Books.Any(x => !x.IsConfirmed))
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
@@ -42,20 +44,79 @@
                         <ul>
                             @foreach (var bookItem in item.Books.Where(x => !x.IsConfirmed))
                             {
-                            <li>
-                                <a href="@Url.Action("Show","Profile",new { id=bookItem.AppUserId})">
-                                    <span class="text-left">@bookItem.AppUser.NormalizedUserName</span>
-                                    <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage","Profile",new { id=bookItem.AppUserId})" /></span>
-                                </a>
-                                @Html.ActionLink("Confirm", "Confirm","Book", new { bookId = bookItem.Id,rideId=item.Id })
-                            </li>
+                                <li>
+                                    <a href="@Url.Action("Show", "Profile", new { id = bookItem.AppUserId })">
+                                        <span class="text-left">@bookItem.AppUser.NormalizedUserName</span>
+                                        <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage", "Profile", new { id = bookItem.AppUserId })" /></span>
+                                    </a>
+                                    @Html.ActionLink("Confirm", "Confirm", "Book", new { bookId = bookItem.Id, rideId = item.Id })
+                                </li>
                             }
 
                         </ul>
                     </div>
-                    
+
                 </td>
             </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<h1>
+    Confirmed book requests will appear here.
+</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.From)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.To)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.Books.Any(x => x.IsConfirmed))
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td>
+                    <div class="ui-widget-content">
+                        <ul>
+                            @foreach (var bookItem in item.Books.Where(x => x.IsConfirmed))
+                            {
+                                <li>
+                                    <a href="@Url.Action("Show", "Profile", new { id = bookItem.AppUserId })">
+                                        <span class="text-left">@bookItem.AppUser.NormalizedUserName</span>
+                                        <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage", "Profile", new { id = bookItem.AppUserId })" /></span>
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+
+                </td>
+            </tr>
+            }
         }
     </tbody>
 </table>

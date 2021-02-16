@@ -1,6 +1,7 @@
 ﻿using BlaBlaCarAz.BLL.DomainModel.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace BlaBlaCarAz.BLL.DomainModel.IRepositories
         Task<IList<T>> GetAllAsync(System.Linq.Expressions.Expression<Func<T, bool>> whereCondition, int pageNumber, int pageSize, System.Linq.Expressions.Expression<Func<T, object>> orderByExpression);
         Task<IList<T>> GetAllAsync(System.Linq.Expressions.Expression<Func<T, bool>> whereCondition, System.Linq.Expressions.Expression<Func<T, object>> orderByExpression);
 
-        Task<IList<T>> QueryAsync(System.Linq.Expressions.Expression<Func<T, bool>> whereCondition);
+        IQueryable<T> Query(System.Linq.Expressions.Expression<Func<T, bool>> whereCondition);
         Task<long> CountAsync(System.Linq.Expressions.Expression<Func<T, bool>> whereCondition);
         Task<int> CountAsync();
         bool HasChanges { get; }

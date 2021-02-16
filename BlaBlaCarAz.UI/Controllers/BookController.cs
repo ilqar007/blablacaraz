@@ -41,13 +41,14 @@ namespace BlaBlaCarAz.UI.Controllers
             var book = new Book
             {
                 AppUser = appUser,
-                Date = DateTime.Now,
+                CreatedOn = DateTime.Now,
                 LoadLimits = loadLimits,
                 IsConfirmed = ride.CanBookInstantly,
                 Ride = ride
             };
             ride.Books.Add(book);
             await _rideService.UpdateAsync(ride);
+            await SendEmail(ride.AppUser.Email, "Confirm Book Request", $"You have a book confirmation request \n {ride.From} \n {ride.To} \n {ride.Date.ToString("dddd, dd MMMM yyyy HH:mm:ss")}");
             return RedirectToAction(nameof(Index));
         }
 
@@ -60,7 +61,7 @@ namespace BlaBlaCarAz.UI.Controllers
                 return RedirectToAction("Index", "Home");
 
             var book = ride.Books.Where(x => x.Id == bookId).FirstOrDefault();
-            if (book == null)
+            if (book == null || book.IsConfirmed)
                 return RedirectToAction("Index", "Home");
 
             if (ride.LoadLimits - ride.Books.Where(x => x.IsConfirmed).Sum(x => x.LoadLimits) < book.LoadLimits)
@@ -68,6 +69,20 @@ namespace BlaBlaCarAz.UI.Controllers
 
             book.IsConfirmed = true;
             await _rideService.UpdateAsync(ride);
+            await SendEmail(book.AppUser.Email, "Payment confirmation for your booking", @$"BlaBlaCarAz<br><br><br><br><br> Here are the details of your payment<br> purchase {book.LoadLimits} {ride.LoadType} {book.CreatedOn.Value.ToString("dddd, dd MMMM yyyy HH:mm:ss")}
+<br><br><br>
+{ride.From}
+<br><br><br>
+{ride.To}
+<br><br><br>
+Total price {book.LoadLimits * ride.Price}<br><br><br>
+Participation in costs {book.LoadLimits * ride.Price}<br><br><br>
+Service fee € 0.00<br><br><br>
+Including VAT(18 %) € 0.00<br><br><br>
+Transaction data<br><br><br>
+{book.CreatedOn.Value.ToString("dd/MM/yy")}<br><br><br>
+Payment method<br><br><br>
+Cash");
             return RedirectToAction("BookConfirmations", "Ride");
         }
 
@@ -76,7 +91,7 @@ namespace BlaBlaCarAz.UI.Controllers
         {
             var appUser = await GetAppUser();
             var book = await _bookService.GetSingleAsync(x => x.Id == id && x.AppUserId == appUser.Id);
-            if (book != null && book.Date.AddDays(1) < book.Ride.Date)
+            if (book != null && !book.IsConfirmed && book.CreatedOn.Value.AddDays(1) < book.Ride.Date)
             {
                 await _bookService.DeleteAsync(book);
             }

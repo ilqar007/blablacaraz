@@ -3,6 +3,7 @@ using BlaBlaCarAz.BLL.DomainModel.IRepositories;
 using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -108,9 +109,9 @@ namespace BlaBlaCarAz.BLL.ServiceLayer.Services
             return await repo.GetAllAsync(whereCondition, orderByExpression);
         }
 
-        public async Task<IList<T>> QueryAsync(Expression<Func<T, bool>> whereCondition)
+        public  IQueryable<T> Query(Expression<Func<T, bool>> whereCondition)
         {
-            return await repo.QueryAsync(whereCondition);
+            return  repo.Query(whereCondition);
         }
 
         public async Task<long> CountAsync(Expression<Func<T, bool>> whereCondition)

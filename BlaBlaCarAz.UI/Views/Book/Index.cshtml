@@ -61,7 +61,7 @@
                 @Html.DisplayFor(modelItem => item.Ride.AppUser.NormalizedUserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @Html.DisplayFor(modelItem => item.CreatedOn.Value.ToString("dddd, dd MMMM yyyy HH:mm:ss"))
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsConfirmed)

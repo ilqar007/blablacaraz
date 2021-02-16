@@ -56,9 +56,9 @@ namespace BlaBlaCarAz.DAL.Repositories
             return await Table.ToListAsync();
         }
 
-        public async Task<IList<T>> QueryAsync(System.Linq.Expressions.Expression<Func<T, bool>> whereCondition)
+        public  IQueryable<T> Query(System.Linq.Expressions.Expression<Func<T, bool>> whereCondition)
         {
-            return await Table.Where(whereCondition).ToListAsync();
+            return  Table.Where(whereCondition);
         }
 
         public async Task<long> CountAsync(System.Linq.Expressions.Expression<Func<T, bool>> whereCondition)
