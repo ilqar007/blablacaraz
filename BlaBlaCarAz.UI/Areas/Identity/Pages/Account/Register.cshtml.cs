@@ -69,6 +69,7 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Required]
             public string NameLastName { get; set; }
             public string BirthDate { get; set; }
         }
