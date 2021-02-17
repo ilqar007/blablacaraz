@@ -21,14 +21,14 @@
     </li>
     @if (SignInManager.IsSignedIn(User))
     {
-        long userId = long.Parse(UserManager.GetUserId(User));
-        var unreadMessages = await _messageService.GetAllAsync(x => x.ToUserId == userId && !x.IsSeen);
-        var unconfirmedBooksCount = await _bookService.CountAsync(x => x.Ride.AppUserId == userId && !x.IsConfirmed);
+        var user = await UserManager.GetUserAsync(User);
+        var unreadMessages = await _messageService.GetAllAsync(x => x.ToUserId == user.Id && !x.IsSeen);
+        var unconfirmedBooksCount = await _bookService.CountAsync(x => x.Ride.AppUserId == user.Id && !x.IsConfirmed);
         @Html.Hidden("isLoggedIn", 1);
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span>
-                    <span class="account-user-name">@UserManager.GetUserName(User)</span>
+                    <span class="account-user-name">@user.NameLastName</span>
                 </span>
                 <span class="account-user-avatar">
                     <img src="@Url.Action("GetImage","Profile")" alt="user-image" class="rounded-circle" width="46" height="46" />

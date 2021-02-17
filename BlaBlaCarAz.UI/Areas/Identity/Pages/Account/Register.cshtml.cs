@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -55,7 +56,7 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
             [Phone]
             [Display(Name = "PhoneNumber")]
             public string PhoneNumber { get; set; }
-            
+
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -67,6 +68,9 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            public string NameLastName { get; set; }
+            public string BirthDate { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -81,7 +85,11 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = Input.Email, Email = Input.Email,PhoneNumber = Input.PhoneNumber };
+
+                var user = new AppUser { UserName = Input.Email, Email = Input.Email, PhoneNumber = Input.PhoneNumber, NameLastName = Input.NameLastName,RegistrationDate=DateTime.Now };
+                DateTime birthDate;
+                if (DateTime.TryParseExact(Input.BirthDate, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDate))
+                    user.Birthdate = birthDate;
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

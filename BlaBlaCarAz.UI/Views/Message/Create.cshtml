@@ -20,7 +20,7 @@
 {
 <div class="form-group">
     <a href="@Url.Action("Show","Profile",new { id=item.FromUser.Id})">
-        <span class="text-left">@item.FromUser.NormalizedUserName</span>
+        <span class="text-left">@item.FromUser.NameLastName</span>
         <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage","Profile",new { id=item.FromUser.Id})" /></span>
     </a>
      <span class="text-left"><img src="~/images/chat.svg" width="24" height="24" /></span><span class="ml-5"> </span>  @Html.DisplayFor(modelItem => item.Body)<span class="ml-5"></span><span class="ml-5"></span> <span><i class="fa fa fa-clock"></i></span>  @(item.CreatedOn.HasValue? item.CreatedOn.Value.ToString("dddd, dd MMMM yyyy HH:mm:ss"):"")

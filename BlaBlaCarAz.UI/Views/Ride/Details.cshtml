@@ -30,7 +30,7 @@
 <hr />
 <div class="row">
     <a href="@Url.Action("Show","Profile",new { id=Model.AppUserId})">
-        <span class="text-left">@Model.AppUser.NormalizedUserName</span>
+        <span class="text-left">@Model.AppUser.NameLastName</span>
         <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage","Profile",new { id=Model.AppUserId})" /></span>
     </a>
 </div>
@@ -41,7 +41,7 @@
 <div class="row">
     <a href="@Url.Action("Create","Message",new { rideId=Model.Id})">
         <span class="text-left"><img src="~/images/chat.svg" width="24" height="24" /></span>
-        <span class="text-left">Contact @Model.AppUser.NormalizedUserName</span>
+        <span class="text-left">Contact @Model.AppUser.NameLastName</span>
 
     </a>
 </div>
@@ -74,7 +74,7 @@
             {
                 <li>
                     <a href="@Url.Action("Show","Profile",new { id=item.AppUserId})">
-                        <span class="text-left">@item.AppUser.NormalizedUserName</span>
+                        <span class="text-left">@item.AppUser.NameLastName</span>
                         <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage","Profile",new { id=item.AppUserId})" /></span>
                     </a>
                 </li>

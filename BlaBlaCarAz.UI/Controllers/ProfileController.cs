@@ -1,6 +1,8 @@
-﻿using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
+﻿using BlaBlaCarAz.BLL.DomainModel.Entities;
+using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,12 +15,15 @@ namespace BlaBlaCarAz.UI.Controllers
     public class ProfileController : BaseController
     {
         private readonly IService<BlaBlaCarAz.BLL.DomainModel.Entities.File> _service;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ProfileController(IService<BlaBlaCarAz.BLL.DomainModel.Entities.File> service, IHostingEnvironment hostingEnvironment)
+
+        public ProfileController(IService<BlaBlaCarAz.BLL.DomainModel.Entities.File> service, IWebHostEnvironment hostingEnvironment, UserManager<AppUser> userManager)
         {
             _service = service;
             _hostingEnvironment = hostingEnvironment;
+            _userManager = userManager;
         }
         [HttpPost]
         public async Task<ActionResult> UploadFile(IFormFile thefile)
@@ -48,8 +53,8 @@ namespace BlaBlaCarAz.UI.Controllers
                         thefile.CopyTo(target);
                         objfiles.DataFiles = target.ToArray();
                     }
-                    var files = await _service.GetAllAsync(x=>x.AppUserId == objfiles.AppUser.Id);
-                    await _service.DeleteRangeAsync(files,false);
+                    var files = await _service.GetAllAsync(x => x.AppUserId == objfiles.AppUser.Id);
+                    await _service.DeleteRangeAsync(files, false);
                     await _service.AddAsync(objfiles);
                 }
             }
@@ -62,7 +67,7 @@ namespace BlaBlaCarAz.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetImage(long? userId)
         {
-            var user = !userId.HasValue? await GetAppUser():await GetAppUserById(userId.Value);
+            var user = !userId.HasValue ? await GetAppUser() : await GetAppUserById(userId.Value);
             var profileImages = await _service.GetAllAsync(x => x.AppUserId == user.Id);
             var image = profileImages.OrderByDescending(x => x.CreatedOn).FirstOrDefault();
             if (image != null)
@@ -73,12 +78,23 @@ namespace BlaBlaCarAz.UI.Controllers
             else
             {
                 string fileName = "passenger-m-02.svg";
-                string filePath =  Path.Combine(_hostingEnvironment.WebRootPath, "images", fileName);
+                string filePath = Path.Combine(_hostingEnvironment.WebRootPath, "images", fileName);
                 byte[] content = System.IO.File.ReadAllBytes(filePath);
                 return File(content, "image/svg+xml", fileName);
             }
 
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Show(long id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+                return RedirectToAction("Index", "Home");
+
+
+            return View(user);
         }
 
 

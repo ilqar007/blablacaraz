@@ -43,10 +43,13 @@ namespace BlaBlaCarAz.UI
             //services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<BlaBlaCarAzContext>();
 
-            services.AddIdentity<AppUser, Role>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<AppUser, Role>(options =>  options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<BlaBlaCarAzContext>().AddDefaultUI().AddDefaultTokenProviders();
 
-
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "BlaBlacaraz";
+            });
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];

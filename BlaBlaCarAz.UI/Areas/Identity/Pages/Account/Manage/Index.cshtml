@@ -20,11 +20,66 @@
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Input.NameLastname"></label>
+                <input asp-for="Input.NameLastname" class="form-control" />
+                <span asp-validation-for="Input.NameLastname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.BirthDate"></label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="Input_BirthDate" name="Input.BirthDate" value="@Model.Input.BirthDate" placeholder="dd.MM.yyyy">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+
+
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
+        <h4 class="text-center mt-4">Don't wear sunglasses, look straight ahead and make sure you're alone.</h4>
+        <div class="form-group">
+            <button id="file-input-button" type="button" class="btn btn-primary">Choose a picture</button>
+        </div>
+        <input id="file-input" type="file" class="form-control-file" hidden>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        $('#Input_BirthDate').datepicker({
+            format: 'dd.mm.yyyy',
+            autoclose: true,
+        });
+
+
+        $('#file-input-button').on('click', function () {
+            $('#file-input').trigger('click');
+        });
+
+
+        $("#file-input").change(function () {
+            var formData = new FormData();
+            formData.append('thefile', this.files[0]);
+            $.ajax(
+                {
+                    url: "/Profile/UploadFile",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    type: "POST",
+                    success: function (data) {
+                        window.location.href = window.location.href;
+                    }
+                }
+            );
+        });
+
+
+
+    </script>
 }

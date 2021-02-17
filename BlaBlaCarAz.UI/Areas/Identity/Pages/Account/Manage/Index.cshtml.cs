@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using BlaBlaCarAz.BLL.DomainModel.Entities;
@@ -36,6 +37,9 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            public string NameLastname { get; set; }
+            public string BirthDate { get; set; }
         }
 
         private async Task LoadAsync(AppUser user)
@@ -44,10 +48,11 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
-
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                NameLastname = user.NameLastName,
+                BirthDate = user.Birthdate?.ToString("dd.MM.yyyy")
             };
         }
 
@@ -86,6 +91,16 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account.Manage
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
+            }
+            user.NameLastName = Input.NameLastname;
+            DateTime birthDate;
+            if (DateTime.TryParseExact(Input.BirthDate, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDate))
+                user.Birthdate = birthDate;
+            var res = await _userManager.UpdateAsync(user);
+            if (!res.Succeeded)
+            {
+                StatusMessage = "Unexpected error when trying to update user info.";
+                return RedirectToPage();
             }
 
             await _signInManager.RefreshSignInAsync(user);
