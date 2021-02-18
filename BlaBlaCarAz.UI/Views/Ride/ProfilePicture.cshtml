@@ -9,7 +9,7 @@
 
 <form asp-action="Comment">
     <div class="form-group col-6 offset-3">
-        <button type="button" class="btn btn-primary">Choose a picture</button>
+        <button id="picture-button" type="button" class="btn btn-primary">Choose a picture</button>
     </div>
     <input id="file-input" type="file" class="form-control-file" hidden>
 
@@ -34,41 +34,4 @@
 @section Scripts {
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    <script type="text/javascript">
-        $('button').on('click', function () {
-            $('#file-input').trigger('click');
-        });
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#blah').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $("#file-input").change(function () {
-            //readURL(this);
-            var formData = new FormData();
-            formData.append('thefile', this.files[0]);
-            $.ajax(
-                {
-                    url: "/Profile/UploadFile",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    type: "POST",
-                    success: function (data) {
-                        $('form').submit();
-                    }
-                }
-            );
-        });
-
-    </script>
 }

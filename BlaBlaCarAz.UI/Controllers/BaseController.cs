@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BlaBlaCarAz.UI.Controllers
@@ -32,7 +33,11 @@ namespace BlaBlaCarAz.UI.Controllers
         protected async Task SendEmail(string email, string subject, string htmlMessage)
         {
             var _emailSender = (IEmailSender)Request.HttpContext.RequestServices.GetService(typeof(IEmailSender));
-            await _emailSender.SendEmailAsync(email, subject, htmlMessage);
+            ThreadPool.QueueUserWorkItem(
+  new WaitCallback(async delegate (object state)
+  {
+      await _emailSender.SendEmailAsync(email, subject, htmlMessage);
+  }), null);
         }
     }
 }

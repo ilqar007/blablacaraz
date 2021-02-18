@@ -84,3 +84,27 @@ function SetFieldAutocompletePlacesApi(element, submit) {
 $("#selectLanguage select").change(function () {
     $(this).parent().submit();
 });
+
+$('#picture-button').on('click', function () {
+        $('#file-input').trigger('click');
+        });
+
+        $("#file-input").change(function () {
+            //readURL(this);
+            var formData = new FormData();
+            formData.append('thefile', this.files[0]);
+            $.ajax(
+                {
+        url: "/Profile/UploadFile",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    type: "POST",
+                    success: function (data) {
+        $('form').submit();
+                    }
+                }
+            );
+        });
+
+    

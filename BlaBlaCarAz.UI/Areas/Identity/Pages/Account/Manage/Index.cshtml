@@ -40,7 +40,7 @@
         </form>
         <h4 class="text-center mt-4">Don't wear sunglasses, look straight ahead and make sure you're alone.</h4>
         <div class="form-group">
-            <button id="file-input-button" type="button" class="btn btn-primary">Choose a picture</button>
+            <button id="picture-button" type="button" class="btn btn-primary">Choose a picture</button>
         </div>
         <input id="file-input" type="file" class="form-control-file" hidden>
     </div>
@@ -55,31 +55,5 @@
             format: 'dd.mm.yyyy',
             autoclose: true,
         });
-
-
-        $('#file-input-button').on('click', function () {
-            $('#file-input').trigger('click');
-        });
-
-
-        $("#file-input").change(function () {
-            var formData = new FormData();
-            formData.append('thefile', this.files[0]);
-            $.ajax(
-                {
-                    url: "/Profile/UploadFile",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    type: "POST",
-                    success: function (data) {
-                        window.location.href = window.location.href;
-                    }
-                }
-            );
-        });
-
-
-
     </script>
 }
