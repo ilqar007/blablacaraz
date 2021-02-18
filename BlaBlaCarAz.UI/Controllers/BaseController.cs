@@ -33,11 +33,7 @@ namespace BlaBlaCarAz.UI.Controllers
         protected async Task SendEmail(string email, string subject, string htmlMessage)
         {
             var _emailSender = (IEmailSender)Request.HttpContext.RequestServices.GetService(typeof(IEmailSender));
-            ThreadPool.QueueUserWorkItem(
-  new WaitCallback(async delegate (object state)
-  {
-      await _emailSender.SendEmailAsync(email, subject, htmlMessage);
-  }), null);
+            await _emailSender.SendEmailAsync(email, subject, htmlMessage);
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BlaBlaCarAz.BLL.ServiceLayer.Services
@@ -29,16 +30,18 @@ namespace BlaBlaCarAz.BLL.ServiceLayer.Services
             //{
             //    message.Attachments.Add(new Attachment(model.Upload.InputStream, Path.GetFileName(model.Upload.FileName)));
             //}
-            using (var smtp = new SmtpClient(_emailSettings.Host)
+            var smtp = new SmtpClient(_emailSettings.Host)
             {
                 Port = _emailSettings.Port,
                 Credentials = new NetworkCredential(_emailSettings.Username, _emailSettings.Password),
                 EnableSsl = true,
-            })
-            {
+            };
+            
                 message.From = new MailAddress(_emailSettings.Username);
-                await smtp.SendMailAsync(message);
-            }
+                ThreadPool.QueueUserWorkItem(new WaitCallback(async delegate (object state) { await smtp.SendMailAsync(message);smtp.Dispose(); }), null);
+            
+
+
         }
     }
 }
