@@ -126,6 +126,9 @@
   <data name="Email" xml:space="preserve">
     <value>E-poçt</value>
   </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>E-poçt sahəsi tələb olunur.</value>
+  </data>
   <data name="FindRide" xml:space="preserve">
     <value>Gəzinti tapın </value>
   </data>
@@ -162,6 +165,9 @@
   <data name="Password" xml:space="preserve">
     <value>Şifrə</value>
   </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Şifrə sahəsi tələb olunur.</value>
+  </data>
   <data name="Privacy" xml:space="preserve">
     <value>Gizlilik</value>
   </data>
@@ -176,6 +182,9 @@
   </data>
   <data name="Search" xml:space="preserve">
     <value>Axtar</value>
+  </data>
+  <data name="The Email field is required." xml:space="preserve">
+    <value>E-poçt sahəsi tələb olunur.</value>
   </data>
   <data name="To" xml:space="preserve">
     <value>Hara...</value>

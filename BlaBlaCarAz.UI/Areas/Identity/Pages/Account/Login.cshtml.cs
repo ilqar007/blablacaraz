@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using BlaBlaCarAz.BLL.DomainModel.Entities;
+using BlaBlaCarAz.Localization;
+using BlaBlaCarAz.Localization.Resources;
+using BlaBlaCarAz.UI.Models;
 
 namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
 {
@@ -24,11 +27,14 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
 
         public LoginModel(SignInManager<AppUser> signInManager,
             ILogger<LoginModel> logger,
-            UserManager<AppUser> userManager)
+            UserManager<AppUser> userManager,
+            LocService sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            SharedResource.EmailRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.EmailRequired));
+            SharedResource.PasswordRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.PasswordRequired));
         }
 
         [BindProperty]
@@ -43,11 +49,11 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessageResourceName = "EmailRequired", ErrorMessageResourceType = typeof(SharedResource))]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessageResourceName = "PasswordRequired", ErrorMessageResourceType = typeof(SharedResource))]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Extensions.Localization;
+using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace BlaBlaCarAz.Localization.Resources
@@ -28,5 +30,7 @@ namespace BlaBlaCarAz.Localization.Resources
         public static string RegisterAsNewUser { get; set; }
         public static string LoginHeader2 { get; set; }
         public static string Privacy { get; set; }
+        public static string EmailRequired { get; set; }
+        public static string PasswordRequired { get; set; }
     }
 }
