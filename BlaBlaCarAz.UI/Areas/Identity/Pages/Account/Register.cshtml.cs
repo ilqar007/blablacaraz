@@ -7,6 +7,8 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using BlaBlaCarAz.BLL.DomainModel.Entities;
+using BlaBlaCarAz.Localization;
+using BlaBlaCarAz.Localization.Resources;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -25,17 +27,26 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
         private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender _emailSender;
+        private readonly LocService _sharedLocalizer;
 
         public RegisterModel(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
-            BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender emailSender)
+            BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender emailSender,
+            LocService sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _sharedLocalizer = sharedLocalizer;
+            SharedResource.EmailRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.EmailRequired));
+            SharedResource.PasswordRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.PasswordRequired));
+            SharedResource.PhoneNumberRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.PhoneNumberRequired));
+            SharedResource.PasswordLength = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.PasswordLength));
+            SharedResource.PasswordCompare = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.PasswordCompare));
+            SharedResource.NameLastNameRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.NameLastNameRequired));
         }
 
         [BindProperty]
@@ -47,29 +58,29 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessageResourceName =nameof(SharedResource.EmailRequired), ErrorMessageResourceType = typeof(SharedResource))]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessageResourceName = nameof(SharedResource.PhoneNumberRequired), ErrorMessageResourceType = typeof(SharedResource))]
             [Phone]
             [Display(Name = "PhoneNumber")]
             public string PhoneNumber { get; set; }
 
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessageResourceName = nameof(SharedResource.PasswordRequired), ErrorMessageResourceType = typeof(SharedResource))]
+            [StringLength(100, MinimumLength = 6,ErrorMessageResourceName = nameof(SharedResource.PasswordLength), ErrorMessageResourceType = typeof(SharedResource))]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password",  ErrorMessageResourceName = nameof(SharedResource.PasswordCompare), ErrorMessageResourceType = typeof(SharedResource))]
             public string ConfirmPassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessageResourceName = nameof(SharedResource.NameLastNameRequired), ErrorMessageResourceType = typeof(SharedResource))]
             public string NameLastName { get; set; }
             public string BirthDate { get; set; }
         }
@@ -104,8 +115,8 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _emailSender.SendEmailAsync(Input.Email, _sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.ConfirmEmail)),
+                        string.Format(_sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.ConfirmEmail)), HtmlEncoder.Default.Encode(callbackUrl)));
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

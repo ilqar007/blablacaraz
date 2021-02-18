@@ -43,8 +43,11 @@ namespace BlaBlaCarAz.UI
             //services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<BlaBlaCarAzContext>();
 
-            services.AddIdentity<AppUser, Role>(options =>  options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<BlaBlaCarAzContext>().AddDefaultUI().AddDefaultTokenProviders();
+            services.AddIdentity<AppUser, Role>(options => options.SignIn.RequireConfirmedAccount = true)
+                                .AddEntityFrameworkStores<BlaBlaCarAzContext>().
+                                AddDefaultUI().
+                                AddDefaultTokenProviders().
+                                AddErrorDescriber<MultilanguageIdentityErrorDescriber>();
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -67,7 +70,8 @@ namespace BlaBlaCarAz.UI
             services.AddSingleton<LocService>();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddControllersWithViews().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization().AddDataAnnotationsLocalization(options => {
+                .AddDataAnnotationsLocalization().AddDataAnnotationsLocalization(options =>
+                {
                     options.DataAnnotationLocalizerProvider = (type, factory) =>
                         factory.Create(typeof(SharedResource));
                 });

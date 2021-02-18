@@ -1,7 +1,12 @@
 ﻿@page
 @model RegisterModel
+
+@using BlaBlaCarAz.Localization
+@using BlaBlaCarAz.Localization.Resources
+
+@inject LocService SharedLocalizer
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Register));
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -9,28 +14,28 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
+            <h4>@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.CreateNewAccount))</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Input.Email"></label>
+                <label>@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Email))</label>
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
+                <label>@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.PhoneNumber))</label>
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Input.NameLastName"></label>
+                <label>@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.NameLastName))</label>
                 <input asp-for="Input.NameLastName" class="form-control" />
                 <span asp-validation-for="Input.NameLastName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Input.BirthDate"></label>
+                <label>@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.BirthDate))</label>
                 <div class="input-group">
                     <input type="text" class="form-control" id="Input_BirthDate" name="Input.BirthDate" placeholder="dd.MM.yyyy">
                     <div class="input-group-addon">
@@ -38,22 +43,22 @@
                     </div>
                 </div>
             </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.ConfirmPassword"></label>
-                    <input asp-for="Input.ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Register</button>
+            <div class="form-group">
+                <label>@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Password))</label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.ConfirmPassword))</label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Register))</button>
         </form>
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>Use another service to register.</h4>
+            <h4>@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.LoginHeader2))</h4>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)

@@ -32,5 +32,18 @@ namespace BlaBlaCarAz.Localization.Resources
         public static string Privacy { get; set; }
         public static string EmailRequired { get; set; }
         public static string PasswordRequired { get; set; }
+        public static string CreateNewAccount { get; set; }
+        public static string PhoneNumber { get; set; }
+        public static string NameLastName { get; set; }
+        public static string BirthDate { get; set; }
+        public static string ConfirmPassword { get; set; }
+        public static string PhoneNumberRequired { get; set; }
+        public static string PasswordLength { get; set; }
+        public static string PasswordCompare { get; set; }
+        public static string NameLastNameRequired { get; set; }
+        public static string RegisterConfirmation { get; set; }
+        public static string CheckEmailForAccountConfirm { get; set; }
+        public static string ConfirmEmail { get; set; }
+
     }
 }
