@@ -141,6 +141,9 @@
   <data name="Document" xml:space="preserve">
     <value>Sənəd</value>
   </data>
+  <data name="DuplicateUserName" xml:space="preserve">
+    <value>'{0}' hesab adı artıq istifadə olunur.</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>E-poçt</value>
   </data>
