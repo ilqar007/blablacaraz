@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlaBlaCarAz.Localization.Resources
+namespace BlaBlaCarAz.Localization
 {
-   public class IdentityErrors
+    public class IdentityErrors
     {
         /// <inheritdoc />
         public static string DefaultError { get; set; }

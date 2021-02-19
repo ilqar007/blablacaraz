@@ -1,4 +1,4 @@
-﻿using BlaBlaCarAz.Localization.Resources;
+﻿using BlaBlaCarAz.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

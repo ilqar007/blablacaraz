@@ -6,7 +6,6 @@ using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
 using BlaBlaCarAz.DAL.DataContext;
 using BlaBlaCarAz.DAL.Repositories;
 using BlaBlaCarAz.Localization;
-using BlaBlaCarAz.Localization.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

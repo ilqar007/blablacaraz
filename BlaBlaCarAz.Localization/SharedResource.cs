@@ -1,10 +1,8 @@
-﻿using Microsoft.Extensions.Localization;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 
-namespace BlaBlaCarAz.Localization.Resources
+namespace BlaBlaCarAz.Localization
 {
    public class SharedResource
     {
@@ -45,7 +43,5 @@ namespace BlaBlaCarAz.Localization.Resources
         public static string CheckEmailForAccountConfirm { get; set; }
         public static string ConfirmEmail { get; set; }
         public static string DuplicateUserName { get; set; }
-
-
     }
 }

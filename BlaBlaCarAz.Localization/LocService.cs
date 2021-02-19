@@ -1,5 +1,4 @@
-﻿using BlaBlaCarAz.Localization.Resources;
-using Microsoft.Extensions.Localization;
+﻿using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -9,13 +8,14 @@ namespace BlaBlaCarAz.Localization
 {
     public class LocService
     {
-        private readonly IStringLocalizer _localizer;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
-        public LocService(IStringLocalizerFactory factory)
+        public LocService(IStringLocalizer<SharedResource> localizer)
         {
-            var type = typeof(SharedResource);
-            var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
-            _localizer = factory.Create("SharedResource", assemblyName.Name);
+            //var type = typeof(SharedResource);
+            //var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
+            //_localizer = factory.Create("SharedResource", assemblyName.Name);
+            _localizer = localizer;
         }
 
         public LocalizedString GetLocalizedHtmlString(string key)

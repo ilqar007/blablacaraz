@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using BlaBlaCarAz.BLL.DomainModel.Entities;
 using BlaBlaCarAz.Localization;
-using BlaBlaCarAz.Localization.Resources;
 using BlaBlaCarAz.UI.Models;
 
 namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account

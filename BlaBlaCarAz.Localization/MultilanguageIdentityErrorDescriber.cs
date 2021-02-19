@@ -1,5 +1,4 @@
-﻿using BlaBlaCarAz.Localization.Resources;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
@@ -10,15 +9,11 @@ namespace BlaBlaCarAz.Localization
 {
     public class MultilanguageIdentityErrorDescriber : IdentityErrorDescriber
     {
-        private readonly IStringLocalizer _localizer;
-        private readonly IStringLocalizer<Resource1> _stringLocalizer;
+        private readonly IStringLocalizer<IdentityErrors> _localizer;
 
-        public MultilanguageIdentityErrorDescriber(IStringLocalizerFactory factory, IStringLocalizer<Resource1> stringLocalizer)
+        public MultilanguageIdentityErrorDescriber(IStringLocalizer<IdentityErrors> localizer)
         {
-            var type = typeof(IdentityErrors);
-            var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
-            _localizer = factory.Create("IdentityErrors", assemblyName.Name);
-            _stringLocalizer = stringLocalizer;
+            _localizer = localizer;
         }
 
 
