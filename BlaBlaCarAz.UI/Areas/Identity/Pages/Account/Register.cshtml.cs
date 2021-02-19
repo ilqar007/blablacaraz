@@ -116,7 +116,7 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, _localizer[nameof(SharedResource.ConfirmEmail)],
-                        string.Format(_localizer[nameof(SharedResource.ConfirmEmail)], HtmlEncoder.Default.Encode(callbackUrl)));
+                        string.Format(_localizer[nameof(SharedResource.ConfirmEmailBody)], HtmlEncoder.Default.Encode(callbackUrl)));
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

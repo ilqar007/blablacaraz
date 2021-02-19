@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -92,6 +93,12 @@ namespace BlaBlaCarAz.UI
 
                 // These are the cultures the app supports for UI strings, i.e. we have localized resources for.
                 options.SupportedUICultures = supportedCultures;
+            });
+
+            // The Tempdata provider cookie is not essential. Make it essential
+            // so Tempdata is functional when tracking is disabled.
+            services.Configure<CookieTempDataProviderOptions>(options => {
+                options.Cookie.IsEssential = true;
             });
 
             services.AddScoped(typeof(IRepo<>), typeof(RepoBase<>));

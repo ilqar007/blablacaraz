@@ -42,6 +42,6 @@ namespace BlaBlaCarAz.Localization
         public static string RegisterConfirmation { get; set; }
         public static string CheckEmailForAccountConfirm { get; set; }
         public static string ConfirmEmail { get; set; }
-        public static string DuplicateUserName { get; set; }
+        public static string ConfirmEmailBody { get; set; }
     }
 }
