@@ -1,6 +1,7 @@
 ﻿@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
-@inject LocService SharedLocalizer
+@inject IStringLocalizer<SharedResource> _localizer
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +40,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - BlaBlaCarAz.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Privacy))</a>
+            &copy; 2020 - BlaBlaCarAz.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">@_localizer[nameof(SharedResource.Privacy)]</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

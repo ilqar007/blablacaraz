@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using BlaBlaCarAz.BLL.DomainModel.Entities;
 using BlaBlaCarAz.Localization;
 using BlaBlaCarAz.UI.Models;
+using Microsoft.Extensions.Localization;
 
 namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
 {
@@ -27,13 +28,13 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
         public LoginModel(SignInManager<AppUser> signInManager,
             ILogger<LoginModel> logger,
             UserManager<AppUser> userManager,
-            LocService sharedLocalizer)
+            IStringLocalizer<SharedResource> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            SharedResource.EmailRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.EmailRequired));
-            SharedResource.PasswordRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.PasswordRequired));
+            SharedResource.EmailRequired = localizer[nameof(SharedResource.EmailRequired)];
+            SharedResource.PasswordRequired = localizer[nameof(SharedResource.PasswordRequired)];
         }
 
         [BindProperty]

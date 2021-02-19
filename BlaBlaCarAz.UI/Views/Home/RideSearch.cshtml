@@ -1,7 +1,8 @@
 ﻿@model RideSearchResultViewModel
 @using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
-@inject LocService SharedLocalizer
+@inject IStringLocalizer<SharedResource> _localizer
 @{
     ViewData["Title"] = "RideSearch";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -41,7 +42,7 @@
                 @Html.DisplayNameFor(model => model.Rides[0].Price)
             </th>
 
-            <th>@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Limits))</th>
+            <th>@_localizer[nameof(SharedResource.Limits)]</th>
             <th></th>
         </tr>
     </thead>
@@ -72,7 +73,7 @@
                     @(string.Format("{0:F}", item.Price))
                 </td>
                 <td>
-                    <input type="number" value="1" id="@(item.Id)LoadLimits" class="form-control" placeholder="@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Limits))">
+                    <input type="number" value="1" id="@(item.Id)LoadLimits" class="form-control" placeholder="@_localizer[nameof(SharedResource.Limits)]">
                 </td>
                 <td>
                     <button type="button" class="btn btn-link" onclick="Continue(@item.Id)">Continue</button>
@@ -84,7 +85,7 @@
 
 
 @section Scripts {
-    
+
     <script type="text/javascript">
 
         function Continue(itemId) {

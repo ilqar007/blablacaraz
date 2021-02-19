@@ -1,10 +1,11 @@
 ﻿@page
 @model RegisterConfirmationModel
 @using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
-@inject LocService SharedLocalizer
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.RegisterConfirmation));
+    ViewData["Title"] = _localizer[nameof(SharedResource.RegisterConfirmation)];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -18,8 +19,8 @@
             }
             else
             {*@
-<p>
-    @SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.CheckEmailForAccountConfirm))
-</p>
-    @*}*@
+    <p>
+        @_localizer[nameof(SharedResource.CheckEmailForAccountConfirm)]
+    </p>
+@*}*@
 }

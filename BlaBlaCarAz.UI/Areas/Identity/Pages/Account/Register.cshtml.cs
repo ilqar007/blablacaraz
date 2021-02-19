@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
 namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
@@ -26,26 +27,26 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
         private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender _emailSender;
-        private readonly LocService _sharedLocalizer;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
         public RegisterModel(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
             BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender emailSender,
-            LocService sharedLocalizer)
+            IStringLocalizer<SharedResource> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _sharedLocalizer = sharedLocalizer;
-            SharedResource.EmailRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.EmailRequired));
-            SharedResource.PasswordRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.PasswordRequired));
-            SharedResource.PhoneNumberRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.PhoneNumberRequired));
-            SharedResource.PasswordLength = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.PasswordLength));
-            SharedResource.PasswordCompare = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.PasswordCompare));
-            SharedResource.NameLastNameRequired = sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.NameLastNameRequired));
+            _localizer = localizer;
+            SharedResource.EmailRequired = localizer[nameof(SharedResource.EmailRequired)];
+            SharedResource.PasswordRequired = localizer[nameof(SharedResource.PasswordRequired)];
+            SharedResource.PhoneNumberRequired = localizer[nameof(SharedResource.PhoneNumberRequired)];
+            SharedResource.PasswordLength = localizer[nameof(SharedResource.PasswordLength)];
+            SharedResource.PasswordCompare = localizer[nameof(SharedResource.PasswordCompare)];
+            SharedResource.NameLastNameRequired = localizer[nameof(SharedResource.NameLastNameRequired)];
         }
 
         [BindProperty]
@@ -114,8 +115,8 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, _sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.ConfirmEmail)),
-                        string.Format(_sharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.ConfirmEmail)), HtmlEncoder.Default.Encode(callbackUrl)));
+                    await _emailSender.SendEmailAsync(Input.Email, _localizer[nameof(SharedResource.ConfirmEmail)],
+                        string.Format(_localizer[nameof(SharedResource.ConfirmEmail)], HtmlEncoder.Default.Encode(callbackUrl)));
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

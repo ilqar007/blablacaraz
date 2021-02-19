@@ -8,15 +8,16 @@
 @inject IService<Book> _bookService
 
 @using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
-@inject LocService SharedLocalizer
+@inject IStringLocalizer<SharedResource> _localizer
 
 <ul class="navbar-nav">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><span><i class="fa fa-search"></i></span>@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.FindRide))</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><span><i class="fa fa-search"></i></span>@_localizer[nameof(SharedResource.FindRide)]</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Ride" asp-action="Departure"> <span><i class="fa fa-plus-circle"></i></span>@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.OfferRide))</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Ride" asp-action="Departure"> <span><i class="fa fa-plus-circle"></i></span>@_localizer[nameof(SharedResource.OfferRide)]</a>
     </li>
     @if (SignInManager.IsSignedIn(User))
     {
@@ -55,10 +56,10 @@
     {
         @Html.Hidden("isLoggedIn", 0);
         <li class="nav-item">
-            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Register))</a>
+            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">@_localizer[nameof(SharedResource.Register)]</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">@SharedLocalizer.GetLocalizedHtmlString(nameof(SharedResource.Login))</a>
+            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">@_localizer[nameof(SharedResource.Login)]</a>
         </li>
     }
 </ul>

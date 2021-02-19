@@ -66,7 +66,6 @@ namespace BlaBlaCarAz.UI
             services.Configure<EmailSettings>(Configuration.GetSection(EmailSettings.EmailSetting));
             services.Configure<GooglePlacesSettings>(Configuration.GetSection(GooglePlacesSettings.GooglePlacesSetting));
 
-            services.AddSingleton<LocService>();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddControllersWithViews().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization().AddDataAnnotationsLocalization(options =>
