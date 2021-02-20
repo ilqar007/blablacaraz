@@ -1,17 +1,20 @@
 ﻿@model IEnumerable<BlaBlaCarAz.BLL.DomainModel.Entities.Chat>
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = _localizer[nameof(SharedResource.Messages)];
 }
 
-<h1>Index</h1>
+<h1>@_localizer[nameof(SharedResource.Messages)]</h1>
 
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayName("Subject")
+                @Html.DisplayName(_localizer[nameof(SharedResource.Subject)])
             </th>
             <th></th>
         </tr>

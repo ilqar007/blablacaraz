@@ -41,14 +41,14 @@
                 </span>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a>
+                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@_localizer[nameof(SharedResource.Profile)]</a>
+                <a class="nav-link text-dark" asp-controller="Ride" asp-action="Index" title="Books">@_localizer[nameof(SharedResource.YourRides)]</a>
+                <a class="nav-link text-dark" asp-controller="Book" asp-action="Index" title="Books">@_localizer[nameof(SharedResource.Payments)]</a>
+                <a class="nav-link text-dark" asp-controller="Ride" asp-action="BookConfirmations" title="Books">@_localizer[nameof(SharedResource.BookRequests)] <span id="unconfirmedBooksCount"> @Html.Raw(unconfirmedBooksCount > 0 ? ("<span class=\"text-right\"><i class=\"fa fa-bell\"></i>" + unconfirmedBooksCount + "</span>") : "")</span></a>
+                <a class="nav-link text-dark" asp-controller="Message" asp-action="Index" title="Books">@_localizer[nameof(SharedResource.Messages)] <span id="unreadMessagesCountMessage"> @Html.Raw(unreadMessages.Count > 0 ? ("<span class=\"text-right\"><i class=\"fa fa-bell\"></i>" + unreadMessages.Count + "</span>") : "")</span> </a>
                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">@_localizer[nameof(SharedResource.Logout)]</button>
                 </form>
-                <a class="nav-link text-dark" asp-controller="Ride" asp-action="Index" title="Books">Your rides</a>
-                <a class="nav-link text-dark" asp-controller="Book" asp-action="Index" title="Books">Payments</a>
-                <a class="nav-link text-dark" asp-controller="Ride" asp-action="BookConfirmations" title="Books">Book requests <span id="unconfirmedBooksCount"> @Html.Raw(unconfirmedBooksCount > 0 ? ("<span class=\"text-right\"><i class=\"fa fa-bell\"></i>" + unconfirmedBooksCount + "</span>") : "")</span></a>
-                <a class="nav-link text-dark" asp-controller="Message" asp-action="Index" title="Books">Messages <span id="unreadMessagesCountMessage"> @Html.Raw(unreadMessages.Count > 0 ? ("<span class=\"text-right\"><i class=\"fa fa-bell\"></i>" + unreadMessages.Count + "</span>") : "")</span> </a>
             </div>
         </li>
     }

@@ -1,7 +1,10 @@
 ﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.AppUser
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = Model.NameLastName + "'s public profile";
+    ViewData["Title"] = Model.NameLastName + _localizer[nameof(SharedResource.PublicProfileHeader)];
     // Save today's date.
     var today = DateTime.Today;
     // Calculate the age.
@@ -18,11 +21,11 @@
 
 <div class="text-center mb-xl mt-xl">
     <div class="account-user-avatar">
-        <img width="144" height="144" src="@Url.Action("GetImage","Profile",new { id=Model.Id})" alt="@Model.NameLastName's public profile picture" />
+        <img width="144" height="144" src="@Url.Action("GetImage","Profile",new { id=Model.Id})" alt="@Model.NameLastName@_localizer[nameof(SharedResource.PublicProfileHeader)]" />
     </div>
     <h1 class="card-title my-l">@Model.NameLastName</h1>
     <div class="" role="presentation">
-        <p class="text-body">@(age.HasValue ? (age+ "y/o"):"")</p>
+        <p class="text-body">@(age.HasValue ? (age+ _localizer[nameof(SharedResource.Age)]) :"")</p>
     </div>
 </div>
 
@@ -31,7 +34,7 @@
         <div class="carousel-item-left">
             <span class="carousel-item-left">
                 <span class="text-left">
-                    <span class="card-body text-body"> @Model.Rides.Count() rides published </span>
+                    <span class="card-body text-body"> @Model.Rides.Count() @_localizer[nameof(SharedResource.RidesPublished)] </span>
                 </span>
             </span>
         </div>
@@ -40,7 +43,7 @@
         <div class="">
             <span class="carousel-item-left">
                 <span class="text-left">
-                    <span class="card-body text-body"> Member since @Model.RegistrationDate.Value.ToString("MMMM yyyy")</span>
+                    <span class="card-body text-body"> @_localizer[nameof(SharedResource.MemberSince)] @Model.RegistrationDate.Value.ToString("MMMM yyyy")</span>
                 </span>
             </span>
         </div>

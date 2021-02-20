@@ -1,45 +1,48 @@
 ﻿@model IEnumerable<BlaBlaCarAz.BLL.DomainModel.Entities.Book>
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = _localizer[nameof(SharedResource.PaymentsAndRefunds)];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 >
-    Payments &amp; refunds
+<h1>
+    @_localizer[nameof(SharedResource.PaymentsAndRefunds)]
 </h1>
 
-<p >
-    Here are all your bookings, as well as pending and completed refunds, from the past 2 years.
+<p>
+    @_localizer[nameof(SharedResource.PaymentsAndRefundsHeader2)]
 </p>
 
 <p>
-    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><span><i class="fa fa-search"></i></span>Find a ride</a>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><span><i class="fa fa-search"></i></span>@_localizer[nameof(SharedResource.FindRide)]</a>
 </p>
 <table class="table">
     <thead>
         <tr>
 
             <th>
-                @Html.DisplayNameFor(model => model.Ride.From)
+                @Html.DisplayName(_localizer[nameof(SharedResource.From)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ride.To)
+                @Html.DisplayName(_localizer[nameof(SharedResource.To)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ride.Date)
+                @Html.DisplayName(_localizer[nameof(SharedResource.When)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ride.AppUser)
+                @Html.DisplayName(_localizer[nameof(SharedResource.AppUser)])
             </th>
             <th>
-                @Html.DisplayName("Book Date")
+                @Html.DisplayName(_localizer[nameof(SharedResource.BookingDate)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsConfirmed)
+                @Html.DisplayName(_localizer[nameof(SharedResource.ConfirmStatus)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LoadLimits)
+                @Html.DisplayName(_localizer[nameof(SharedResource.LoadLimits)])
             </th>
             <th></th>
         </tr>
@@ -47,32 +50,32 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ride.From)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ride.To)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ride.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ride.AppUser.NameLastName)
-            </td>
-            <td>
-                @( item.CreatedOn.Value.ToString("dddd, dd MMMM yyyy HH:mm:ss"))
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsConfirmed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoadLimits)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ride.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ride.To)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ride.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ride.AppUser.NameLastName)
+                </td>
+                <td>
+                    @( item.CreatedOn.Value.ToString("dddd, dd MMMM yyyy HH:mm:ss"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsConfirmed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoadLimits)
+                </td>
+                <td>
+                    @Html.ActionLink(_localizer[nameof(SharedResource.Delete)], "Delete", new { id = item.Id })
+                </td>
+            </tr>
         }
     </tbody>
 </table>

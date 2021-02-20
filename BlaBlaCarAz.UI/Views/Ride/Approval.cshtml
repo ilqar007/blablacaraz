@@ -1,12 +1,15 @@
 ﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "Approval";
+    ViewData["Title"] = _localizer[nameof(SharedResource.ApprovalTitle)];
 }
 
 
 
-<h1 class="text-center mt-4">Can passengers book instantly?</h1>
+<h1 class="text-center mt-4">@_localizer[nameof(SharedResource.ApprovalHeader)]</h1>
 
 
 <form asp-action="PriceRecommendation">
@@ -14,23 +17,23 @@
     <div class="row mb-4"></div>
 
     <div class="form-control col-6 offset-3">
-        <a onclick="SetApporavl(true)" href="#" class="">Yes, sure!</a>
+        <a onclick="SetApporavl(true)" href="#" class="">@_localizer[nameof(SharedResource.YesSure)]</a>
     </div>
-    <hr class="col-6 offset-3"/>
+    <hr class="col-6 offset-3" />
     <div class="form-control col-6 offset-3">
-        <a onclick="SetApporavl(false)" href="#">No, I’ll reply to each request myself</a>
+        <a onclick="SetApporavl(false)" href="#">@_localizer[nameof(SharedResource.NoIReplyEachMyself)]</a>
     </div>
 
-        @Html.HiddenFor(x => x.To)
-        @Html.HiddenFor(x => x.From)
-        @Html.HiddenFor(x => x.Price)
-        @Html.HiddenFor(x => x.Date)
-        @Html.HiddenFor(x => x.FlightNumber)
-        @Html.HiddenFor(x => x.LoadLimits)
-        @Html.HiddenFor(x => x.CanSeeProfilePicture)
-        @Html.HiddenFor(x => x.LoadType)
-        @Html.HiddenFor(x => x.Comment)
-        @Html.HiddenFor(x => x.CanBookInstantly)
+    @Html.HiddenFor(x => x.To)
+    @Html.HiddenFor(x => x.From)
+    @Html.HiddenFor(x => x.Price)
+    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.FlightNumber)
+    @Html.HiddenFor(x => x.LoadLimits)
+    @Html.HiddenFor(x => x.CanSeeProfilePicture)
+    @Html.HiddenFor(x => x.LoadType)
+    @Html.HiddenFor(x => x.Comment)
+    @Html.HiddenFor(x => x.CanBookInstantly)
 
 </form>
 

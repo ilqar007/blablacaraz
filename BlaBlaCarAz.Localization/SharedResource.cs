@@ -43,5 +43,39 @@ namespace BlaBlaCarAz.Localization
         public static string CheckEmailForAccountConfirm { get; set; }
         public static string ConfirmEmail { get; set; }
         public static string ConfirmEmailBody { get; set; }
+        public static string Profile { get; set; }
+        public static string YourRides { get; set; }
+        public static string Payments { get; set; }
+        public static string BookRequests { get; set; }
+        public static string Messages { get; set; }
+        public static string Logout { get; set; }
+        public static string PaymentsAndRefunds { get; set; }
+        public static string PaymentsAndRefundsHeader2 { get; set; }
+        public static string When { get; set; }
+        public static string AppUser { get; set; }
+        public static string BookingDate { get; set; }
+        public static string ConfirmStatus { get; set; }
+        public static string LoadLimits { get; set; }
+        public static string Delete { get; set; }
+        public static string WhereWantGo { get; set; }
+        public static string RidesAvailable { get; set; }
+        public static string RideAvailable { get; set; }
+        public static string NoRidesYet { get; set; }
+        public static string Price { get; set; }
+        public static string Continue { get; set; }
+        public static string Send { get; set; }
+        public static string Subject { get; set; }
+        public static string PublicProfileHeader { get; set; }
+        public static string PublicProfilePicture { get; set; }
+        public static string Age { get; set; }
+        public static string MemberSince { get; set; }
+        public static string RidesPublished { get; set; }
+        public static string ApprovalTitle { get; set; }
+        public static string ApprovalHeader { get; set; }
+        public static string YesSure { get; set; }
+        public static string NoIReplyEachMyself { get; set; }
+        public static string Arrival { get; set; }
+        public static string WhereAreYouHeading { get; set; }
+
     }
 }

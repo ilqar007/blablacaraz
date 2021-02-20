@@ -1,22 +1,24 @@
 ﻿@model RideSearchResultViewModel
 @using BlaBlaCarAz.Localization
 @using Microsoft.Extensions.Localization
+@using System.Globalization
 
 @inject IStringLocalizer<SharedResource> _localizer
 @{
     ViewData["Title"] = "RideSearch";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string searchDate = DateTime.ParseExact(Model.searchModel.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture).ToString("dddd, dd MMMM"); 
 }
 
-<h1>Where do you want to go?</h1>
+<h1>@_localizer[nameof(SharedResource.WhereWantGo)]</h1>
 <div class="card">
     <div class="card-body">
         <div>
             @Model.searchModel.From <span><i class="fa fa-arrow-right"></i></span> @Model.searchModel.To:
         </div>
         <div>
-            @Model.Rides.Count rides available
-        </div>
+                @(Model.Rides.Count) @(Model.Rides.Count>1?_localizer[nameof(SharedResource.RidesAvailable)]: Model.Rides.Count ==1? _localizer[nameof(SharedResource.RidesAvailable)]: string.Format(_localizer[nameof(SharedResource.NoRidesYet)],searchDate))
+            </div>
     </div>
 </div>
 
@@ -24,22 +26,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Rides[0].Date)
+                @Html.DisplayName(_localizer[nameof(SharedResource.When)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rides[0].From)
+                @Html.DisplayName(_localizer[nameof(SharedResource.From)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rides[0].To)
+                @Html.DisplayName(_localizer[nameof(SharedResource.To)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rides[0].LoadLimits)
+                @Html.DisplayName(_localizer[nameof(SharedResource.LoadLimits)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rides[0].AppUser)
+                @Html.DisplayName(_localizer[nameof(SharedResource.AppUser)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rides[0].Price)
+                @Html.DisplayName(_localizer[nameof(SharedResource.Price)])
             </th>
 
             <th>@_localizer[nameof(SharedResource.Limits)]</th>
@@ -76,7 +78,7 @@
                     <input type="number" value="1" id="@(item.Id)LoadLimits" class="form-control" placeholder="@_localizer[nameof(SharedResource.Limits)]">
                 </td>
                 <td>
-                    <button type="button" class="btn btn-link" onclick="Continue(@item.Id)">Continue</button>
+                    <button type="button" class="btn btn-link" onclick="Continue(@item.Id)">@_localizer[nameof(SharedResource.Continue)]</button>
                 </td>
             </tr>
         }
