@@ -1,15 +1,18 @@
 ﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "ProfilePicture";
+    ViewData["Title"] = _localizer[nameof(SharedResource.ProfilePictureTitle)];
 }
 
-<h1 class="text-center mt-4">Don't wear sunglasses, look straight ahead and make sure you're alone.</h1>
+<h1 class="text-center mt-4">@_localizer[nameof(SharedResource.ProfilePictureHeader)]</h1>
 
 
 <form asp-action="Comment">
     <div class="form-group col-6 offset-3">
-        <button id="picture-button" type="button" class="btn btn-primary">Choose a picture</button>
+        <button id="picture-button" type="button" class="btn btn-primary">@_localizer[nameof(SharedResource.ChoosePicture)]</button>
     </div>
     <input id="file-input" type="file" class="form-control-file" hidden>
 

@@ -1,10 +1,13 @@
 ﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "LoadLimits";
+    ViewData["Title"] = _localizer[nameof(SharedResource.LoadLimits)];
 }
 
-<h1 class="text-center mt-4">LoadLimits</h1>
+<h1 class="text-center mt-4">@_localizer[nameof(SharedResource.LoadLimits)]</h1>
 
 
 <form asp-action="Approval">
@@ -41,9 +44,9 @@
     @Html.HiddenFor(x => x.Comment)
     @Html.HiddenFor(x => x.LoadLimits)
 
-    
+
     <div class="form-group col-6 offset-3">
-        <input type="submit" value="Continue" onclick="Continue()" class="btn btn-primary" />
+        <input type="submit" value="@_localizer[nameof(SharedResource.Continue)]" onclick="Continue()" class="btn btn-primary" />
     </div>
 </form>
 
@@ -65,7 +68,7 @@
         }
 
         function Continue() {
-            $('#LoadLimits').val(parseInt($("#LoadLimitsDiv").text())); 
+            $('#LoadLimits').val(parseInt($("#LoadLimitsDiv").text()));
         }
     </script>
 

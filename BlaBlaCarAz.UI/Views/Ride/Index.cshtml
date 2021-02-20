@@ -1,45 +1,49 @@
 ﻿@model IEnumerable<BlaBlaCarAz.BLL.DomainModel.Entities.Ride>
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = _localizer[nameof(SharedResource.YourRides)];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>
-    Your future travel plans will appear here.
+    @_localizer[nameof(SharedResource.RidesHeader)]
 </h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                @Html.DisplayName(_localizer[nameof(SharedResource.When)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.From)
+                @Html.DisplayName(_localizer[nameof(SharedResource.From)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.To)
+                @Html.DisplayName(_localizer[nameof(SharedResource.To)])
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.From)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.To)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.To)
+                </td>
+                <td>
+                    @Html.ActionLink(_localizer[nameof(SharedResource.Delete)], "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -1,37 +1,40 @@
 ﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "PriceRecommendation";
+    ViewData["Title"] = _localizer[nameof(SharedResource.PriceRecommendation)];
 }
 
-<h1 class="text-center mt-4">This is our recommended price per seat. OK for you?</h1>
+<h1 class="text-center mt-4">@_localizer[nameof(SharedResource.PriceRecommendationHeader)]</h1>
 
 
-        <form asp-action="PriceSetting">
-            <div class="row mb-4"></div>
-                        <label class="form-control-lg col-6 offset-3">15 manat</label>
-            <div class="form-control col-9 offset-3">
-                <a onclick="SetApporavl(true)" href="#" class="">Yes, perfect</a>
-            </div>
-            <hr class="col-6 offset-3" />
-            <div class="form-control col-9 offset-3">
-                <a onclick="SetApporavl(false)" href="#">No, I need to edit this amount</a>
-            </div>
+<form asp-action="PriceSetting">
+    <div class="row mb-4"></div>
+    <label class="form-control-lg col-6 offset-3">15 manat</label>
+    <div class="form-control col-9 offset-3">
+        <a onclick="SetApporavl(true)" href="#" class="">@_localizer[nameof(SharedResource.YesPerfect)]</a>
+    </div>
+    <hr class="col-6 offset-3" />
+    <div class="form-control col-9 offset-3">
+        <a onclick="SetApporavl(false)" href="#">@_localizer[nameof(SharedResource.NoINeedEditAmount)]</a>
+    </div>
 
 
-            @Html.HiddenFor(x => x.To)
-            @Html.HiddenFor(x => x.From)
-            @Html.HiddenFor(x => x.CanBookInstantly)
-            @Html.HiddenFor(x => x.Date)
-            @Html.HiddenFor(x => x.FlightNumber)
-            @Html.HiddenFor(x => x.LoadLimits)
-            @Html.HiddenFor(x => x.CanSeeProfilePicture)
-            @Html.HiddenFor(x => x.LoadType)
-            @Html.HiddenFor(x => x.Comment)
-            @Html.HiddenFor(x => x.Price)
-            @Html.HiddenFor(x => x.IsRecommendedPriceOk)
+    @Html.HiddenFor(x => x.To)
+    @Html.HiddenFor(x => x.From)
+    @Html.HiddenFor(x => x.CanBookInstantly)
+    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.FlightNumber)
+    @Html.HiddenFor(x => x.LoadLimits)
+    @Html.HiddenFor(x => x.CanSeeProfilePicture)
+    @Html.HiddenFor(x => x.LoadType)
+    @Html.HiddenFor(x => x.Comment)
+    @Html.HiddenFor(x => x.Price)
+    @Html.HiddenFor(x => x.IsRecommendedPriceOk)
 
-        </form>
+</form>
 
 
 

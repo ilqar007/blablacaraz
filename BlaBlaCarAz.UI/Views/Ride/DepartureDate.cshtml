@@ -1,10 +1,13 @@
 ﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "DepartureDate";
+    ViewData["Title"] = _localizer[nameof(SharedResource.DepartureDate)];
 }
 
-<h1 class="text-center mt-4">When are you going?</h1>
+<h1 class="text-center mt-4">@_localizer[nameof(SharedResource.DepartureDateHeader)]</h1>
 
 
 <form asp-action="DepartureTime">
@@ -42,7 +45,7 @@
             $('#sandbox-container div').datepicker()
                 .on('changeDate', function (e) {
                     // `e` here contains the extra attributes
-                    $('#Date').val(new Date(e.date.getTime() - (e.date.getTimezoneOffset() * 60000)).toISOString());                    
+                    $('#Date').val(new Date(e.date.getTime() - (e.date.getTimezoneOffset() * 60000)).toISOString());
                     $('form').submit();
                 });
 

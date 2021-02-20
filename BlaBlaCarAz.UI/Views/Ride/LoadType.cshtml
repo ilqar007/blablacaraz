@@ -1,33 +1,39 @@
 ﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "LoadType";
+    ViewData["Title"] = _localizer[nameof(SharedResource.LoadType)];
 }
-<h1 class="text-center mt-4">LoadType</h1>
+<h1 class="text-center mt-4">@_localizer[nameof(SharedResource.LoadType)]</h1>
 
-        <form asp-action="LoadLimits">
+<form asp-action="LoadLimits">
 
-            <div class="row mb-4"></div>
-            <div class="input-group mb-3 col-6 offset-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fa fa-truck-loading"></i></span>
-                </div>
-                @Html.DropDownListFor(m => m.LoadType, Html.GetEnumSelectList<BlaBlaCarAz.BLL.DomainModel.Enums.LoadType>())
-            </div>
+    <div class="row mb-4"></div>
+    <div class="input-group mb-3 col-6 offset-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-truck-loading"></i></span>
+        </div>
+        <select  id="LoadType" name="LoadType">
+            <option value="0">@_localizer[nameof(SharedResource.Document)]</option>
+            <option value="1">@_localizer[nameof(SharedResource.Bag)]</option>
+        </select>
+    </div>
 
-            @Html.HiddenFor(x => x.To)
-            @Html.HiddenFor(x => x.From)
-            @Html.HiddenFor(x => x.Price)
-            @Html.HiddenFor(x => x.Date)
-            @Html.HiddenFor(x => x.FlightNumber)
-            @Html.HiddenFor(x => x.CanBookInstantly)
-            @Html.HiddenFor(x => x.CanSeeProfilePicture)
-            @Html.HiddenFor(x => x.Comment)
-            @Html.HiddenFor(x => x.LoadLimits)
-            <div class="form-group col-6 offset-3">
-                <input type="submit" value="Continue" class="btn btn-primary" />
-            </div>
-        </form>
+    @Html.HiddenFor(x => x.To)
+    @Html.HiddenFor(x => x.From)
+    @Html.HiddenFor(x => x.Price)
+    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.FlightNumber)
+    @Html.HiddenFor(x => x.CanBookInstantly)
+    @Html.HiddenFor(x => x.CanSeeProfilePicture)
+    @Html.HiddenFor(x => x.Comment)
+    @Html.HiddenFor(x => x.LoadLimits)
+    <div class="form-group col-6 offset-3">
+        <input type="submit" value="@_localizer[nameof(SharedResource.Continue)]" class="btn btn-primary" />
+    </div>
+</form>
 
 
 @section Scripts {

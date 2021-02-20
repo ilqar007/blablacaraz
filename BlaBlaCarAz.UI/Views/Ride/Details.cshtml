@@ -1,8 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Http
 @model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
 @inject IHttpContextAccessor _httpContextAccessor
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = Model.From + " - " + Model.To;
     int loadLimits = int.Parse(_httpContextAccessor.HttpContext.Request.Query["loadLimits"].ToString());
 }
 
@@ -20,7 +24,7 @@
 <div>
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayName($"Total price for {loadLimits} passenger")
+            @Html.DisplayName(string.Format(_localizer[nameof(SharedResource.TotalPrice)],loadLimits))
         </dt>
         <dd class="col-sm-6">
             @(string.Format("{0:F}", Model.Price* loadLimits))
@@ -41,7 +45,7 @@
 <div class="row">
     <a href="@Url.Action("Create","Message",new { rideId=Model.Id})">
         <span class="text-left"><img src="~/images/chat.svg" width="24" height="24" /></span>
-        <span class="text-left">Contact @Model.AppUser.NameLastName</span>
+        <span class="text-left">@_localizer[nameof(SharedResource.Contact)] @Model.AppUser.NameLastName</span>
 
     </a>
 </div>
@@ -64,7 +68,7 @@
 </div>
 <div role="presentation">
     <div class="ui-widget-content">
-        <div class="font-weight-bold">Passengers</div>
+        <div class="font-weight-bold">@_localizer[nameof(SharedResource.Passengers)]</div>
     </div>
 </div>
 <div role="presentation">
@@ -85,5 +89,5 @@
 </div>
 
 <div class="form-group mb-3 col-6 offset-3">
-    <a class="btn btn-primary" href="@Url.Action("Create","Book",new { rideId=Model.Id,loadLimits})" role="button">Book</a>
+    <a class="btn btn-primary" href="@Url.Action("Create","Book",new { rideId=Model.Id,loadLimits})" role="button">@_localizer[nameof(SharedResource.Book)]</a>
 </div>

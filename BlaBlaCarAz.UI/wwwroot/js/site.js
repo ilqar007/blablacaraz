@@ -82,6 +82,7 @@ function SetFieldAutocompletePlacesApi(element, submit) {
             }
         }, 5000);
 $("#selectLanguage select").change(function () {
+    $(this).parent().validate().settings.ignore = "*";
     $(this).parent().submit();
 });
 

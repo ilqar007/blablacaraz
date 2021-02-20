@@ -138,6 +138,15 @@
   <data name="BirthDate" xml:space="preserve">
     <value>Doğum tarixi</value>
   </data>
+  <data name="Book" xml:space="preserve">
+    <value>Rezervasiya et</value>
+  </data>
+  <data name="BookConfirmationsHeader1" xml:space="preserve">
+    <value>Gözlənilən rezervasiya sorğuları təsdiqləri burada görünəcək.</value>
+  </data>
+  <data name="BookConfirmationsHeader2" xml:space="preserve">
+    <value>Təsdiqlənmiş rezervasiya sorğuları burada görünəcəkdir.</value>
+  </data>
   <data name="BookingDate" xml:space="preserve">
     <value>Sifariş tarixi</value>
   </data>
@@ -146,6 +155,21 @@
   </data>
   <data name="CheckEmailForAccountConfirm" xml:space="preserve">
     <value>Hesabınızı təsdiqləmək üçün zəhmət olmasa elektron poçtunuzu yoxlayın.</value>
+  </data>
+  <data name="ChoosePicture" xml:space="preserve">
+    <value>Bir şəkil seçin</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Şərh</value>
+  </data>
+  <data name="CommentHeader" xml:space="preserve">
+    <value>Gəzintinizə əlavə edəcək bir şey var?</value>
+  </data>
+  <data name="CommentPlaceholder" xml:space="preserve">
+    <value>Salam! Ailəmi ziyarətə gedirəm. Bir pişiklə səyahət edirəm və çəkmədə çox yerim var!</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Təsdiqləyin</value>
   </data>
   <data name="ConfirmEmail" xml:space="preserve">
     <value>E-poçtunuzu təsdiqləyin</value>
@@ -159,6 +183,9 @@
   <data name="ConfirmStatus" xml:space="preserve">
     <value>Təsdiq edilmə statusu</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Əlaqə</value>
+  </data>
   <data name="Continue" xml:space="preserve">
     <value>Davam edin</value>
   </data>
@@ -167,6 +194,30 @@
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Sil</value>
+  </data>
+  <data name="Departure" xml:space="preserve">
+    <value>Gediş</value>
+  </data>
+  <data name="DepartureDate" xml:space="preserve">
+    <value>Gediş tarixi</value>
+  </data>
+  <data name="DepartureDateHeader" xml:space="preserve">
+    <value>Nə vaxt gedirsən?</value>
+  </data>
+  <data name="DepartureFlightNumber" xml:space="preserve">
+    <value>Gediş uçuş nömrəsi</value>
+  </data>
+  <data name="DepartureFlightNumberHeader" xml:space="preserve">
+    <value>Uçuş nömrəniz nədir?</value>
+  </data>
+  <data name="DepartureHeader" xml:space="preserve">
+    <value>Haradan gedirsən?</value>
+  </data>
+  <data name="DepartureTime" xml:space="preserve">
+    <value>Gediş vaxtı</value>
+  </data>
+  <data name="DepartureTimeHeader" xml:space="preserve">
+    <value>Nə vaxt sərnişinləri götürəcəksiniz?</value>
   </data>
   <data name="Document" xml:space="preserve">
     <value>Sənəd</value>
@@ -201,6 +252,9 @@
   <data name="LoadLimits" xml:space="preserve">
     <value>Yük limitləri</value>
   </data>
+  <data name="LoadType" xml:space="preserve">
+    <value>Yük növü</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Daxil ol</value>
   </data>
@@ -228,14 +282,23 @@
   <data name="NameLastNameRequired" xml:space="preserve">
     <value>Ad Soyadı sahəsi tələb olunur.</value>
   </data>
+  <data name="NoINeedEditAmount" xml:space="preserve">
+    <value>Xeyr, bu məbləği düzəltməliyəm</value>
+  </data>
   <data name="NoIReplyEachMyself" xml:space="preserve">
     <value>Xeyr, hər sorğuya özüm cavab verəcəyəm</value>
   </data>
   <data name="NoRidesYet" xml:space="preserve">
     <value>Bu şəhərlər arasında {0} günü üçün heç bir gəzinti yoxdur</value>
   </data>
+  <data name="NoThanks" xml:space="preserve">
+    <value>Xeyr, təşəkkürlər</value>
+  </data>
   <data name="OfferRide" xml:space="preserve">
     <value>Gəzinti təklif edin</value>
+  </data>
+  <data name="Passengers" xml:space="preserve">
+    <value>Sərnişinlər</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Şifrə</value>
@@ -267,17 +330,44 @@
   <data name="Price" xml:space="preserve">
     <value>Qiymət</value>
   </data>
+  <data name="PriceRecommendation" xml:space="preserve">
+    <value>Qiymət tövsiyəsi</value>
+  </data>
+  <data name="PriceRecommendationHeader" xml:space="preserve">
+    <value>Bu, oturacaq başına təklif olunan qiymətdir. Sənin üçün yaxşıdır?</value>
+  </data>
+  <data name="PriceSettingHeader" xml:space="preserve">
+    <value>Oturacaq üçün tövsiyə olunan qiymətimizi düzəldin</value>
+  </data>
+  <data name="PriceSettingTitle" xml:space="preserve">
+    <value>Qiymət düzəlişi</value>
+  </data>
   <data name="Privacy" xml:space="preserve">
     <value>Gizlilik</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profil</value>
   </data>
+  <data name="ProfilePictureChoiceHeader" xml:space="preserve">
+    <value>Profil şəklinizi əlavə edin. Sərnişinlər kim olduğunuzu görmək istəyəcəklər.</value>
+  </data>
+  <data name="ProfilePictureChoiceTitle" xml:space="preserve">
+    <value>Profil şəkili</value>
+  </data>
+  <data name="ProfilePictureHeader" xml:space="preserve">
+    <value>Gün eynəyi taxmayın, düz baxın və tək olduğunuzdan əmin olun.</value>
+  </data>
+  <data name="ProfilePictureTitle" xml:space="preserve">
+    <value>Gəzinti təklif edin və səyahət xərclərinizi ödəyin</value>
+  </data>
   <data name="PublicProfileHeader" xml:space="preserve">
     <value> adlı istifadəçinin ictimai profili</value>
   </data>
   <data name="PublicProfilePicture" xml:space="preserve">
     <value>adlı istifadəçinin ictimai profil şəkli</value>
+  </data>
+  <data name="PublishRide" xml:space="preserve">
+    <value>Gəzinti yayınla</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Qeydiyyatdan keçin</value>
@@ -297,6 +387,9 @@
   <data name="RidesAvailable" xml:space="preserve">
     <value>sürüşlər mövcuddur</value>
   </data>
+  <data name="RidesHeader" xml:space="preserve">
+    <value>Gələcək səyahət planlarınız burada görünəcək.</value>
+  </data>
   <data name="RidesPublished" xml:space="preserve">
     <value>sürüşlər  yayımlandı</value>
   </data>
@@ -315,14 +408,23 @@
   <data name="To" xml:space="preserve">
     <value>Hara...</value>
   </data>
+  <data name="TotalPrice" xml:space="preserve">
+    <value>{0} sərnişin üçün ümumi qiymət</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>İstifadəçi adı</value>
+  </data>
   <data name="When" xml:space="preserve">
     <value>Nə vaxt</value>
   </data>
   <data name="WhereAreYouHeading" xml:space="preserve">
-    <value />
+    <value>Hara gedirsən?</value>
   </data>
   <data name="WhereWantGo" xml:space="preserve">
     <value>Hara getmək istəyirsən?</value>
+  </data>
+  <data name="YesPerfect" xml:space="preserve">
+    <value>Bəli, mükəmməl</value>
   </data>
   <data name="YesSure" xml:space="preserve">
     <value>Bəli əlbətddə!</value>

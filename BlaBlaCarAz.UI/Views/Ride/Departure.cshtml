@@ -1,10 +1,13 @@
 ﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "Departure";
+    ViewData["Title"] = _localizer[nameof(SharedResource.Departure)];
 }
 
-<h1 class="text-center mt-4">Where are you leaving from?</h1>
+<h1 class="text-center mt-4">@_localizer[nameof(SharedResource.DepartureHeader)]</h1>
 
 
 
@@ -34,11 +37,12 @@
 
     <script src="~/lib/jqueryui/jquery-ui.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
     <link href="~/lib/jqueryui/jquery-ui.css" rel="stylesheet" />
     <script type="text/javascript">
 
-    $(function () {
-        SetFieldAutocompletePlacesApi($('#From'),true);
-    });
+        $(function () {
+            SetFieldAutocompletePlacesApi($('#From'), true);
+        });
     </script>
 }

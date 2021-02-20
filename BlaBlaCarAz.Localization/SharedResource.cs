@@ -76,6 +76,41 @@ namespace BlaBlaCarAz.Localization
         public static string NoIReplyEachMyself { get; set; }
         public static string Arrival { get; set; }
         public static string WhereAreYouHeading { get; set; }
+        public static string BookConfirmations { get; set; }
+        public static string BookConfirmationsHeader1 { get; set; }
+        public static string BookConfirmationsHeader2 { get; set; }
+        public static string Confirm { get; set; }
+        public static string CommentHeader { get; set; }
+        public static string Comment { get; set; }
+        public static string CommentPlaceholder { get; set; }
+        public static string Departure { get; set; }
+        public static string DepartureHeader { get; set; }
+        public static string DepartureDate { get; set; }
+        public static string DepartureDateHeader { get; set; }
+        public static string DepartureFlightNumber { get; set; }
+        public static string DepartureFlightNumberHeader { get; set; }
+        public static string DepartureTime { get; set; }
+        public static string DepartureTimeHeader { get; set; }
+        public static string LoadType { get; set; }
+        public static string PriceRecommendation { get; set; }
+        public static string PriceRecommendationHeader { get; set; }
+        public static string YesPerfect { get; set; }
+        public static string NoINeedEditAmount { get; set; }
+        public static string PriceSettingTitle { get; set; }
+        public static string PriceSettingHeader { get; set; }
+        public static string ProfilePictureTitle { get; set; }
+        public static string ProfilePictureHeader { get; set; }
+        public static string ChoosePicture { get; set; }
+        public static string ProfilePictureChoiceTitle { get; set; }
+        public static string ProfilePictureChoiceHeader { get; set; }
+        public static string NoThanks { get; set; }
+        public static string PublishRide { get; set; }
+        public static string RidesHeader { get; set; }
+        public static string TotalPrice { get; set; }
+        public static string Contact { get; set; }
+        public static string Passengers { get; set; }
+        public static string Book { get; set; }
+        public static string Username { get; set; }
 
     }
 }

@@ -1,31 +1,34 @@
 ﻿@model BlaBlaCarAz.BLL.DomainModel.Entities.Ride
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "Comment";
+    ViewData["Title"] = _localizer[nameof(SharedResource.Comment)];
 }
 
 
-<h1 class="text-center mt-4">Anything to add about your ride?</h1>
+<h1 class="text-center mt-4">@_localizer[nameof(SharedResource.CommentHeader)]</h1>
 
 <form asp-action="Create">
     <div class="row mb-4"></div>
-        <div class="form-group col-6 offset-3">
-            <textarea class="form-control" id="Comment" rows="3" name="Comment" placeholder="Hello! I'm going to visit my family. I travel with a cat and I have a lot of space in the boot!"></textarea>
-        </div>
+    <div class="form-group col-6 offset-3">
+        <textarea class="form-control" id="Comment" rows="3" name="Comment" placeholder="@_localizer[nameof(SharedResource.CommentPlaceholder)]"></textarea>
+    </div>
 
-        @Html.HiddenFor(x => x.To)
-        @Html.HiddenFor(x => x.From)
-        @Html.HiddenFor(x => x.CanBookInstantly)
-        @Html.HiddenFor(x => x.Date)
-        @Html.HiddenFor(x => x.FlightNumber)
-        @Html.HiddenFor(x => x.LoadLimits)
-        @Html.HiddenFor(x => x.Price)
-        @Html.HiddenFor(x => x.LoadType)
-        @Html.HiddenFor(x => x.CanSeeProfilePicture)
-        @Html.HiddenFor(x => x.IsRecommendedPriceOk)
-        <div class="form-group col-6 offset-3">
-            <input type="submit" value="Publish ride" class="btn btn-primary" />
-        </div>
+    @Html.HiddenFor(x => x.To)
+    @Html.HiddenFor(x => x.From)
+    @Html.HiddenFor(x => x.CanBookInstantly)
+    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.FlightNumber)
+    @Html.HiddenFor(x => x.LoadLimits)
+    @Html.HiddenFor(x => x.Price)
+    @Html.HiddenFor(x => x.LoadType)
+    @Html.HiddenFor(x => x.CanSeeProfilePicture)
+    @Html.HiddenFor(x => x.IsRecommendedPriceOk)
+    <div class="form-group col-6 offset-3">
+        <input type="submit" value="@_localizer[nameof(SharedResource.PublishRide)]" class="btn btn-primary" />
+    </div>
 </form>
 
 

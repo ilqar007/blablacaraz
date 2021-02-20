@@ -1,24 +1,28 @@
 ﻿@model IEnumerable<BlaBlaCarAz.BLL.DomainModel.Entities.Ride>
+@using BlaBlaCarAz.Localization
+@using Microsoft.Extensions.Localization
 
+@inject IStringLocalizer<SharedResource> _localizer
 @{
-    ViewData["Title"] = "BookConfirmations"; Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = _localizer[nameof(SharedResource.BookConfirmations)];
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>
-    Pending book confirmations will appear here.
+    @_localizer[nameof(SharedResource.BookConfirmationsHeader1)]
 </h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                @Html.DisplayName(_localizer[nameof(SharedResource.When)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.From)
+                @Html.DisplayName(_localizer[nameof(SharedResource.From)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.To)
+                @Html.DisplayName(_localizer[nameof(SharedResource.To)])
             </th>
 
             <th></th>
@@ -29,55 +33,56 @@
         {
             if (item.Books.Any(x => !x.IsConfirmed))
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.From)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.To)
-                </td>
-                <td>
-                    <div class="ui-widget-content">
-                        <ul>
-                            @foreach (var bookItem in item.Books.Where(x => !x.IsConfirmed))
-                            {
-                                <li>
-                                    <a href="@Url.Action("Show", "Profile", new { id = bookItem.AppUserId })">
-                                        <span class="text-left">@bookItem.AppUser.NameLastName</span>
-                                        <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage", "Profile", new { id = bookItem.AppUserId })" /></span>
-                                    </a>
-                                    @Html.ActionLink("Confirm", "Confirm", "Book", new { bookId = bookItem.Id, rideId = item.Id })
-                                </li>
-                            }
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.From)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.To)
+                    </td>
+                    <td>
+                        <div class="ui-widget-content">
+                            <ul>
+                                @foreach (var bookItem in item.Books.Where(x => !x.IsConfirmed))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Show", "Profile", new { id = bookItem.AppUserId })">
+                                            <span class="text-left">@bookItem.AppUser.NameLastName</span>
+                                            <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage", "Profile", new { id = bookItem.AppUserId })" /></span>
+                                        </a>
+                                        @Html.ActionLink(_localizer[nameof(SharedResource.Confirm)], "Confirm", "Book", new { bookId = bookItem.Id, rideId = item.Id })
+                                    </li>
+                                }
 
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
 
-                </td>
-            </tr>
+                    </td>
+                </tr>
             }
         }
     </tbody>
 </table>
 
 <h1>
-    Confirmed book requests will appear here.
+        @_localizer[nameof(SharedResource.BookConfirmationsHeader2)]
+
 </h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                @Html.DisplayName(_localizer[nameof(SharedResource.When)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.From)
+                @Html.DisplayName(_localizer[nameof(SharedResource.From)])
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.To)
+                @Html.DisplayName(_localizer[nameof(SharedResource.To)])
             </th>
 
             <th></th>
@@ -88,34 +93,34 @@
         {
             if (item.Books.Any(x => x.IsConfirmed))
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.From)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.To)
-                </td>
-                <td>
-                    <div class="ui-widget-content">
-                        <ul>
-                            @foreach (var bookItem in item.Books.Where(x => x.IsConfirmed))
-                            {
-                                <li>
-                                    <a href="@Url.Action("Show", "Profile", new { id = bookItem.AppUserId })">
-                                        <span class="text-left">@bookItem.AppUser.NameLastName</span>
-                                        <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage", "Profile", new { id = bookItem.AppUserId })" /></span>
-                                    </a>
-                                </li>
-                            }
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.From)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.To)
+                    </td>
+                    <td>
+                        <div class="ui-widget-content">
+                            <ul>
+                                @foreach (var bookItem in item.Books.Where(x => x.IsConfirmed))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Show", "Profile", new { id = bookItem.AppUserId })">
+                                            <span class="text-left">@bookItem.AppUser.NameLastName</span>
+                                            <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage", "Profile", new { id = bookItem.AppUserId })" /></span>
+                                        </a>
+                                    </li>
+                                }
 
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
 
-                </td>
-            </tr>
+                    </td>
+                </tr>
             }
         }
     </tbody>
