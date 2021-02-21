@@ -10,37 +10,43 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlaBlaCarAz.DAL.Migrations
 {
     [DbContext(typeof(BlaBlaCarAzContext))]
-    [Migration("20210206055500_MessageAddColumns1_1")]
-    partial class MessageAddColumns1_1
+    [Migration("20210221175956_init3.1")]
+    partial class init31
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
+                .HasAnnotation("ProductVersion", "3.1.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.AppUser", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("Birthdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastLoginTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -48,13 +54,16 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("NameLastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -65,6 +74,9 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -72,17 +84,17 @@ namespace BlaBlaCarAz.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
+                        .HasName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
+                        .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
@@ -93,15 +105,12 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("AppUserId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsConfirmed")
@@ -110,10 +119,7 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<int>("LoadLimits")
                         .HasColumnType("int");
 
-                    b.Property<int>("RideId")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("RideId1")
+                    b.Property<long>("RideId")
                         .HasColumnType("bigint");
 
                     b.Property<byte[]>("TimeStamp")
@@ -125,9 +131,39 @@ namespace BlaBlaCarAz.DAL.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("RideId1");
+                    b.HasIndex("RideId");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Chat", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("AppUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("RideId")
+                        .HasColumnType("bigint");
+
+                    b.Property<byte[]>("TimeStamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("RideId");
+
+                    b.ToTable("Chat");
                 });
 
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.File", b =>
@@ -135,7 +171,7 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("AppUserId")
                         .HasColumnType("bigint");
@@ -169,25 +205,25 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
+                        .HasName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -198,7 +234,7 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -221,7 +257,7 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -299,28 +335,22 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long>("ChatId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<long>("CreatedUserId")
-                        .HasColumnType("bigint");
 
                     b.Property<long>("FromUserId")
                         .HasColumnType("bigint");
 
                     b.Property<bool>("IsSeen")
                         .HasColumnType("bit");
-
-                    b.Property<long?>("RideId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Subject")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("TimeStamp")
                         .IsConcurrencyToken()
@@ -332,11 +362,9 @@ namespace BlaBlaCarAz.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedUserId");
+                    b.HasIndex("ChatId");
 
                     b.HasIndex("FromUserId");
-
-                    b.HasIndex("RideId");
 
                     b.HasIndex("ToUserId");
 
@@ -348,7 +376,7 @@ namespace BlaBlaCarAz.DAL.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("AppUserId")
                         .HasColumnType("bigint");
@@ -411,11 +439,24 @@ namespace BlaBlaCarAz.DAL.Migrations
 
                     b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.Ride", "Ride")
                         .WithMany("Books")
-                        .HasForeignKey("RideId1");
+                        .HasForeignKey("RideId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.Navigation("AppUser");
+            modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Chat", b =>
+                {
+                    b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.AppUser", "AppUser")
+                        .WithMany("Chats")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Ride");
+                    b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.Ride", "Ride")
+                        .WithMany()
+                        .HasForeignKey("RideId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.File", b =>
@@ -425,8 +466,6 @@ namespace BlaBlaCarAz.DAL.Migrations
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.IdentityModels+RoleClaim", b =>
@@ -482,9 +521,9 @@ namespace BlaBlaCarAz.DAL.Migrations
 
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Message", b =>
                 {
-                    b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.AppUser", "CreatedUser")
+                    b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.Chat", "Chat")
                         .WithMany("Messages")
-                        .HasForeignKey("CreatedUserId")
+                        .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -494,23 +533,11 @@ namespace BlaBlaCarAz.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.Ride", "Ride")
-                        .WithMany()
-                        .HasForeignKey("RideId");
-
                     b.HasOne("BlaBlaCarAz.BLL.DomainModel.Entities.AppUser", "ToUser")
                         .WithMany()
                         .HasForeignKey("ToUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CreatedUser");
-
-                    b.Navigation("FromUser");
-
-                    b.Navigation("Ride");
-
-                    b.Navigation("ToUser");
                 });
 
             modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Ride", b =>
@@ -520,22 +547,6 @@ namespace BlaBlaCarAz.DAL.Migrations
                         .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.AppUser", b =>
-                {
-                    b.Navigation("Files");
-
-                    b.Navigation("Messages");
-
-                    b.Navigation("Rides");
-                });
-
-            modelBuilder.Entity("BlaBlaCarAz.BLL.DomainModel.Entities.Ride", b =>
-                {
-                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

@@ -39,7 +39,7 @@ namespace BlaBlaCarAz.UI
             services.AddDbContext<BlaBlaCarAzContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
+           // services.AddDatabaseDeveloperPageExceptionFilter();
             //services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<BlaBlaCarAzContext>();
 
