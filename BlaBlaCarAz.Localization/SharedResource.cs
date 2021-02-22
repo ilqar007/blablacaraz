@@ -111,6 +111,8 @@ namespace BlaBlaCarAz.Localization
         public static string Passengers { get; set; }
         public static string Book { get; set; }
         public static string Username { get; set; }
+        public static string RidePublished { get; set; }
+        public static string NoRidesPublishedYet { get; set; }
 
     }
 }

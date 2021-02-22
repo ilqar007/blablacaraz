@@ -240,6 +240,9 @@
   <data name="NoIReplyEachMyself" xml:space="preserve">
     <value>No, I’ll reply to each request myself</value>
   </data>
+  <data name="NoRidesPublishedYet" xml:space="preserve">
+    <value>No ride published yet</value>
+  </data>
   <data name="NoRidesYet" xml:space="preserve">
     <value>There are no rides yet for {0} between these cities</value>
   </data>
@@ -311,6 +314,9 @@
   </data>
   <data name="RideAvailable" xml:space="preserve">
     <value>ride available</value>
+  </data>
+  <data name="RidePublished" xml:space="preserve">
+    <value>ride published</value>
   </data>
   <data name="RidesAvailable" xml:space="preserve">
     <value>rides available</value>

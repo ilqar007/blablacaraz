@@ -25,7 +25,7 @@
     </div>
     <h1 class="card-title my-l">@Model.NameLastName</h1>
     <div class="" role="presentation">
-        <p class="text-body">@(age.HasValue ? (age+ _localizer[nameof(SharedResource.Age)]) :"")</p>
+        <p class="text-body">@(age.HasValue ? (age+" "+ _localizer[nameof(SharedResource.Age)]) :"")</p>
     </div>
 </div>
 
@@ -34,7 +34,7 @@
         <div class="carousel-item-left">
             <span class="carousel-item-left">
                 <span class="text-left">
-                    <span class="card-body text-body"> @Model.Rides.Count() @_localizer[nameof(SharedResource.RidesPublished)] </span>
+                    <span class="card-body text-body"> @(Model.Rides.Count()>1? Model.Rides.Count()+" "+ _localizer[nameof(SharedResource.RidesPublished)]: Model.Rides.Count() == 1? Model.Rides.Count() + " " + _localizer[nameof(SharedResource.RidePublished)]: _localizer[nameof(SharedResource.NoRidesPublishedYet)]) </span>
                 </span>
             </span>
         </div>

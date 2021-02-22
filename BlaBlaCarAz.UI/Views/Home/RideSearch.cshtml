@@ -17,7 +17,7 @@
             @Model.searchModel.From <span><i class="fa fa-arrow-right"></i></span> @Model.searchModel.To:
         </div>
         <div>
-                @(Model.Rides.Count) @(Model.Rides.Count>1?_localizer[nameof(SharedResource.RidesAvailable)]: Model.Rides.Count ==1? _localizer[nameof(SharedResource.RidesAvailable)]: string.Format(_localizer[nameof(SharedResource.NoRidesYet)],searchDate))
+                @(Model.Rides.Count>0? Model.Rides.Count.ToString():"") @(Model.Rides.Count>1?_localizer[nameof(SharedResource.RidesAvailable)]: Model.Rides.Count ==1? _localizer[nameof(SharedResource.RideAvailable)]: string.Format(_localizer[nameof(SharedResource.NoRidesYet)],searchDate))
             </div>
     </div>
 </div>
@@ -29,10 +29,10 @@
                 @Html.DisplayName(_localizer[nameof(SharedResource.When)])
             </th>
             <th>
-                @Html.DisplayName(_localizer[nameof(SharedResource.From)])
+                @(_localizer[nameof(SharedResource.From)])
             </th>
             <th>
-                @Html.DisplayName(_localizer[nameof(SharedResource.To)])
+                @(_localizer[nameof(SharedResource.To)])
             </th>
             <th>
                 @Html.DisplayName(_localizer[nameof(SharedResource.LoadLimits)])
@@ -65,7 +65,7 @@
                     @((item.LoadLimits - item.Books.Where(x => x.IsConfirmed).Sum(b => b.LoadLimits)))
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AppUser.UserName)
+                    @Html.DisplayFor(modelItem => item.AppUser.NameLastName)
                     @if (item.CanSeeProfilePicture)
                     {
                         <img src="@Url.Action("GetImage", "Profile", new { id = item.AppUserId })" width="46" height="46" />

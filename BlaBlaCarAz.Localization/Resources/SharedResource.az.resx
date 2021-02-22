@@ -288,6 +288,9 @@
   <data name="NoIReplyEachMyself" xml:space="preserve">
     <value>Xeyr, hər sorğuya özüm cavab verəcəyəm</value>
   </data>
+  <data name="NoRidesPublishedYet" xml:space="preserve">
+    <value>Hələ heç bir sürüş yayımlanmayıb</value>
+  </data>
   <data name="NoRidesYet" xml:space="preserve">
     <value>Bu şəhərlər arasında {0} günü üçün heç bir gəzinti yoxdur</value>
   </data>
@@ -383,6 +386,9 @@
   </data>
   <data name="RideAvailable" xml:space="preserve">
     <value>sürüş mövcuddur</value>
+  </data>
+  <data name="RidePublished" xml:space="preserve">
+    <value>sürüş  yayımlandı</value>
   </data>
   <data name="RidesAvailable" xml:space="preserve">
     <value>sürüşlər mövcuddur</value>
