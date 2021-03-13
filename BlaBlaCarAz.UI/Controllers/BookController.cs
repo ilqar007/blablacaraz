@@ -65,18 +65,19 @@ namespace BlaBlaCarAz.UI.Controllers
 
         private async Task SendBookConfirmEmail(Book book)
         {
-            await SendEmail(book.AppUser.Email, _localizer[SharedResource.PaymentConfirmationEmailSubject], string.Format(_localizer[SharedResource.PaymentConfirmationEmailBody], book.LoadLimits,
+            await SendEmail(book.AppUser.Email, _localizer[nameof(SharedResource.PaymentConfirmationEmailSubject)], string.Format(_localizer[nameof(SharedResource.PaymentConfirmationEmailBody)], book.LoadLimits,
              book.Ride.LoadType,
              book.CreatedOn.Value.ToString("dddd, dd MMMM yyyy HH:mm:ss"),
              book.Ride.From,
              book.Ride.To,
+             book.LoadLimits * book.Ride.Price,
              book.LoadLimits * book.Ride.Price,
              book.CreatedOn.Value.ToString("dd/MM/yy")
              )); 
         }
         private async Task SendBookRequestEmail(Ride ride)
         {
-            await SendEmail(ride.AppUser.Email, _localizer[SharedResource.ConfirmBookRequestEmailSubject], $"{_localizer[SharedResource.ConfirmBookRequestEmailBody]} \n {ride.From} \n {ride.To} \n {ride.Date.ToString("dddd, dd MMMM yyyy HH:mm:ss")}");
+            await SendEmail(ride.AppUser.Email, _localizer[nameof(SharedResource.ConfirmBookRequestEmailSubject)], $"{_localizer[nameof(SharedResource.ConfirmBookRequestEmailBody)]} \n {ride.From} \n {ride.To} \n {ride.Date.ToString("dddd, dd MMMM yyyy HH:mm:ss")}");
 
         }
         [HttpGet]

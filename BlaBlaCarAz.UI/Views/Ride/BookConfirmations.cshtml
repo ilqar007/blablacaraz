@@ -27,7 +27,6 @@
             <th>
                 @(_localizer[nameof(SharedResource.LoadLimits)])
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -46,20 +45,18 @@
                 @Html.DisplayFor(modelItem => item.To)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LoadLimits)
-            </td>
-            <td>
                 <div class="ui-widget-content">
                     <ul>
                         @foreach (var bookItem in item.Books.Where(x => !x.IsConfirmed))
                         {
-                            <li>
-                                <a href="@Url.Action("Show", "Profile", new { id = bookItem.AppUserId })">
-                                    <span class="text-left">@bookItem.AppUser.NameLastName</span>
-                                    <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage", "Profile", new { id = bookItem.AppUserId })" /></span>
-                                </a>
-                                @Html.ActionLink(_localizer[nameof(SharedResource.Confirm)], "Confirm", "Book", new { bookId = bookItem.Id, rideId = item.Id })
-                            </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="badge badge-primary badge-pill">@(bookItem.LoadLimits)</span>
+                            <a href="@Url.Action("Show", "Profile", new { id = bookItem.AppUserId })">
+                                <span class="text-left">@bookItem.AppUser.NameLastName</span>
+                                <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage", "Profile", new { id = bookItem.AppUserId })" /></span>
+                            </a>
+                            @Html.ActionLink(_localizer[nameof(SharedResource.Confirm)], "Confirm", "Book", new { bookId = bookItem.Id, rideId = item.Id })
+                        </li>
                         }
 
                     </ul>
@@ -93,7 +90,6 @@
                 @(_localizer[nameof(SharedResource.LoadLimits)])
             </th>
 
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -111,20 +107,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.To)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoadLimits)
-            </td>
+
             <td>
                 <div class="ui-widget-content">
                     <ul>
                         @foreach (var bookItem in item.Books.Where(x => x.IsConfirmed))
                         {
-                            <li>
-                                <a href="@Url.Action("Show", "Profile", new { id = bookItem.AppUserId })">
-                                    <span class="text-left">@bookItem.AppUser.NameLastName</span>
-                                    <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage", "Profile", new { id = bookItem.AppUserId })" /></span>
-                                </a>
-                            </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="badge badge-primary badge-pill">@(bookItem.LoadLimits)</span>
+                            <a href="@Url.Action("Show", "Profile", new { id = bookItem.AppUserId })">
+                                <span class="text-left">@bookItem.AppUser.NameLastName</span>
+                                <span class="text-right"><img width="46" height="46" src="@Url.Action("GetImage", "Profile", new { id = bookItem.AppUserId })" /></span>
+                            </a>
+                        </li>
                         }
 
                     </ul>
