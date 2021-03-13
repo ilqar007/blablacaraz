@@ -2,14 +2,13 @@
 using BlaBlaCarAz.BLL.HelperClasses;
 using BlaBlaCarAz.BLL.ServiceLayer.DtoAndMessages.GooglePlacesApi;
 using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
-using BlaBlaCarAz.UI.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -47,7 +46,7 @@ namespace BlaBlaCarAz.UI.Controllers
         {
             if (model.Id > 0)
                 return RedirectToAction("Index", "Home");
-
+            model.Date = DateTime.ParseExact(model.DateString+" "+ model.TimeString, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             model.AppUser = await GetAppUser();
             await _rideService.AddAsync(model);
             return RedirectToAction("Index");

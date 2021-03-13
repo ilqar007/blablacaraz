@@ -171,6 +171,12 @@
   <data name="Confirm" xml:space="preserve">
     <value>Təsdiqləyin</value>
   </data>
+  <data name="ConfirmBookRequestEmailBody" xml:space="preserve">
+    <value>Rezervasiya sorğusunu təsdiqləmə tələbiniz var</value>
+  </data>
+  <data name="ConfirmBookRequestEmailSubject" xml:space="preserve">
+    <value>Rezervasiya sorğusunu təsdiq edin</value>
+  </data>
   <data name="ConfirmEmail" xml:space="preserve">
     <value>E-poçtunuzu təsdiqləyin</value>
   </data>
@@ -314,6 +320,25 @@
   </data>
   <data name="PasswordRequired" xml:space="preserve">
     <value>Şifrə sahəsi tələb olunur.</value>
+  </data>
+  <data name="PaymentConfirmationEmailBody" xml:space="preserve">
+    <value>BlaBlaCarAz - &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; Ödənişinizin &lt;br&gt; satın alma detalları bunlardır {0} {1} {2}
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+{3}
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+{4}
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+Ümumi qiymət {5} &lt;br&gt; &lt;br&gt; &lt;br&gt;
+Maliyyətlərdə iştirak {6} &lt;br&gt; &lt;br&gt; &lt;br&gt;
+Xidmət haqqı 0.00 AZN - &lt;br&gt; &lt;br&gt;
+ƏDV daxil olmaqla (% 18) 0,00 AZN &lt;br&gt; &lt;br&gt; &lt;br&gt;
+Əməliyyat məlumatları &lt;br&gt; &lt;br&gt;
+{7} &lt;br&gt; &lt;br&gt; &lt;br&gt;
+Ödəniş metodu &lt;br&gt; &lt;br&gt;
+Nağd pul</value>
+  </data>
+  <data name="PaymentConfirmationEmailSubject" xml:space="preserve">
+    <value>Rezervasiya sorğunuz üçün ödəniş təsdiqi</value>
   </data>
   <data name="Payments" xml:space="preserve">
     <value>Ödənişlər</value>

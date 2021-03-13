@@ -216,6 +216,9 @@
   <data name="LoadType" xml:space="preserve">
     <value>Load type</value>
   </data>
+  <data name="Departure" xml:space="preserve">
+    <value>Go</value>
+  </data>
   <data name="Login1" xml:space="preserve">
     <value>Log in</value>
   </data>
@@ -350,5 +353,30 @@
   </data>
   <data name="YourRides" xml:space="preserve">
     <value>Your rides</value>
+  </data>
+  <data name="ConfirmBookRequestEmailBody" xml:space="preserve">
+    <value>You have a book confirmation request</value>
+  </data>
+  <data name="ConfirmBookRequestEmailSubject" xml:space="preserve">
+    <value>Confirm Book Request</value>
+  </data>
+  <data name="PaymentConfirmationEmailBody" xml:space="preserve">
+    <value>BlaBlaCarAz&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt; Here are the details of your payment&lt;br&gt; purchase {0} {1} {2}
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+{3}
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+{4}
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Total price {5}&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Participation in costs {6}&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Service fee  0.00 AZN &lt;br&gt;&lt;br&gt;&lt;br&gt;
+Including VAT(18 %) 0.00 AZN&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Transaction data&lt;br&gt;&lt;br&gt;&lt;br&gt;
+{7}&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Payment method&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Cash</value>
+  </data>
+  <data name="PaymentConfirmationEmailSubject" xml:space="preserve">
+    <value>Payment confirmation for your booking</value>
   </data>
 </root>

@@ -25,7 +25,8 @@
     @Html.HiddenFor(x => x.CanSeeProfilePicture)
     @Html.HiddenFor(x => x.Comment)
     @Html.HiddenFor(x => x.LoadLimits)
-    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.DateString)
+    @Html.HiddenFor(x => x.TimeString)
 
 
 </form>
@@ -46,7 +47,7 @@
             $('#sandbox-container div').datepicker({ language: getLangFromCookie()})
                 .on('changeDate', function (e) {
                     // `e` here contains the extra attributes
-                    $('#Date').val(new Date(e.date.getTime() - (e.date.getTimezoneOffset() * 60000)).toISOString());
+                    $('#DateString').val(new Date(e.date.getTime() - (e.date.getTimezoneOffset() * 60000)).toISOString().substring(0, 10));
                     $('form').submit();
                 });
 

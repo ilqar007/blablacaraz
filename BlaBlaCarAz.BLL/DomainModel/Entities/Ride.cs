@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,5 +32,9 @@ namespace BlaBlaCarAz.BLL.DomainModel.Entities
         public bool CanSeeProfilePicture { get; set; }
         public string Comment { get; set; }
         public bool IsRecommendedPriceOk { get; set; }
+        [NotMapped]
+        public string DateString { get; set; }
+        [NotMapped]
+        public string TimeString { get; set; }
     }
 }

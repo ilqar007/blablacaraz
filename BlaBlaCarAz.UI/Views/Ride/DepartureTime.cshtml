@@ -34,7 +34,8 @@
     @Html.HiddenFor(x => x.CanSeeProfilePicture)
     @Html.HiddenFor(x => x.Comment)
     @Html.HiddenFor(x => x.LoadLimits)
-    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.DateString)
+    @Html.HiddenFor(x => x.TimeString)
 
     <div class="form-group mb-3 col-6 offset-3">
         <input type="submit" value="@_localizer[nameof(SharedResource.Continue)]" class="btn btn-primary" onclick="SetPickupTime()" />
@@ -48,12 +49,7 @@
 
         function SetPickupTime() {
             var pickuptime = $('#PickupTime').val();
-            var date = $('#Date').val();
-            var idx = date.indexOf("T");
-
-            date = date.slice(0, idx);
-            date = date + "T" + pickuptime + ":00.000Z";
-            $('#Date').val(date);
+            $('#TimeString').val(pickuptime);
         }
     </script>
 }

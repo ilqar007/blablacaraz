@@ -20,7 +20,7 @@
             <i class="fa fa-minus-circle" onclick="Down()"></i>
         </div>
         <div class="col-1">
-            <div id="PriceDiv">15</div><span> manat</span>
+            <div id="PriceDiv">15</div><span> AZN</span>
         </div>
         <div class="col-1">
             <i class="fa fa-plus-circle" onclick="Up()"></i>
@@ -31,7 +31,8 @@
     @Html.HiddenFor(x => x.To)
     @Html.HiddenFor(x => x.From)
     @Html.HiddenFor(x => x.CanBookInstantly)
-    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.DateString)
+    @Html.HiddenFor(x => x.TimeString)
     @Html.HiddenFor(x => x.FlightNumber)
     @Html.HiddenFor(x => x.LoadLimits)
     @Html.HiddenFor(x => x.CanSeeProfilePicture)

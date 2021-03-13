@@ -113,6 +113,10 @@ namespace BlaBlaCarAz.Localization
         public static string Username { get; set; }
         public static string RidePublished { get; set; }
         public static string NoRidesPublishedYet { get; set; }
+        public static string ConfirmBookRequestEmailSubject { get; set; }
+        public static string ConfirmBookRequestEmailBody { get; set; }
+        public static string PaymentConfirmationEmailSubject { get; set; }
+        public static string PaymentConfirmationEmailBody { get; set; }
 
     }
 }

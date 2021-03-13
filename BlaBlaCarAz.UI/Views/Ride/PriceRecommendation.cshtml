@@ -12,7 +12,7 @@
 
 <form asp-action="PriceSetting">
     <div class="row mb-4"></div>
-    <label class="form-control-lg col-6 offset-3">15 manat</label>
+    <label class="form-control-lg col-6 offset-3">15 AZN</label>
     <div class="form-control col-9 offset-3">
         <a onclick="SetApporavl(true)" href="#" class="">@_localizer[nameof(SharedResource.YesPerfect)]</a>
     </div>
@@ -25,7 +25,8 @@
     @Html.HiddenFor(x => x.To)
     @Html.HiddenFor(x => x.From)
     @Html.HiddenFor(x => x.CanBookInstantly)
-    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.DateString)
+    @Html.HiddenFor(x => x.TimeString)
     @Html.HiddenFor(x => x.FlightNumber)
     @Html.HiddenFor(x => x.LoadLimits)
     @Html.HiddenFor(x => x.CanSeeProfilePicture)

@@ -1,6 +1,8 @@
 ﻿using BlaBlaCarAz.BLL.DomainModel.Entities;
 using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
+using BlaBlaCarAz.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +15,13 @@ namespace BlaBlaCarAz.UI.Controllers
     {
         private readonly IService<Book> _bookService;
         private readonly IService<Ride> _rideService;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
-
-        public BookController(IService<Book> bookService, IService<Ride> rideService)
+        public BookController(IService<Book> bookService, IService<Ride> rideService, IStringLocalizer<SharedResource> localizer)
         {
             _bookService = bookService;
             _rideService = rideService;
+            _localizer = localizer;
         }
 
         public async Task<IActionResult> Index()
@@ -62,24 +65,18 @@ namespace BlaBlaCarAz.UI.Controllers
 
         private async Task SendBookConfirmEmail(Book book)
         {
-            await SendEmail(book.AppUser.Email, "Payment confirmation for your booking", @$"BlaBlaCarAz<br><br><br><br><br> Here are the details of your payment<br> purchase {book.LoadLimits} {book.Ride.LoadType} {book.CreatedOn.Value.ToString("dddd, dd MMMM yyyy HH:mm:ss")}
-<br><br><br>
-{book.Ride.From}
-<br><br><br>
-{book.Ride.To}
-<br><br><br>
-Total price {book.LoadLimits * book.Ride.Price}<br><br><br>
-Participation in costs {book.LoadLimits * book.Ride.Price}<br><br><br>
-Service fee € 0.00<br><br><br>
-Including VAT(18 %) € 0.00<br><br><br>
-Transaction data<br><br><br>
-{book.CreatedOn.Value.ToString("dd/MM/yy")}<br><br><br>
-Payment method<br><br><br>
-Cash");
+            await SendEmail(book.AppUser.Email, _localizer[SharedResource.PaymentConfirmationEmailSubject], string.Format(_localizer[SharedResource.PaymentConfirmationEmailBody], book.LoadLimits,
+             book.Ride.LoadType,
+             book.CreatedOn.Value.ToString("dddd, dd MMMM yyyy HH:mm:ss"),
+             book.Ride.From,
+             book.Ride.To,
+             book.LoadLimits * book.Ride.Price,
+             book.CreatedOn.Value.ToString("dd/MM/yy")
+             )); 
         }
         private async Task SendBookRequestEmail(Ride ride)
         {
-            await SendEmail(ride.AppUser.Email, "Confirm Book Request", $"You have a book confirmation request \n {ride.From} \n {ride.To} \n {ride.Date.ToString("dddd, dd MMMM yyyy HH:mm:ss")}");
+            await SendEmail(ride.AppUser.Email, _localizer[SharedResource.ConfirmBookRequestEmailSubject], $"{_localizer[SharedResource.ConfirmBookRequestEmailBody]} \n {ride.From} \n {ride.To} \n {ride.Date.ToString("dddd, dd MMMM yyyy HH:mm:ss")}");
 
         }
         [HttpGet]

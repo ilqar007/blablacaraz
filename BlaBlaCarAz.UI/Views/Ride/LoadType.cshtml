@@ -15,7 +15,7 @@
         <div class="input-group-prepend">
             <span class="input-group-text"><i class="fa fa-truck-loading"></i></span>
         </div>
-        <select  id="LoadType" name="LoadType">
+        <select id="LoadType" name="LoadType">
             <option value="0">@_localizer[nameof(SharedResource.Document)]</option>
             <option value="1">@_localizer[nameof(SharedResource.Bag)]</option>
         </select>
@@ -24,7 +24,8 @@
     @Html.HiddenFor(x => x.To)
     @Html.HiddenFor(x => x.From)
     @Html.HiddenFor(x => x.Price)
-    @Html.HiddenFor(x => x.Date)
+    @Html.HiddenFor(x => x.DateString)
+    @Html.HiddenFor(x => x.TimeString)
     @Html.HiddenFor(x => x.FlightNumber)
     @Html.HiddenFor(x => x.CanBookInstantly)
     @Html.HiddenFor(x => x.CanSeeProfilePicture)
