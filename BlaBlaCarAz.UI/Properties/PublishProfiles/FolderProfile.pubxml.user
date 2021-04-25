@@ -5,5 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\ilqar\source\repos\blablacaraz\BlaBlaCarAz.UI\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2021-04-24T19:48:16.6145669Z;True|2021-04-24T23:33:53.9900199+04:00;True|2021-04-24T23:25:42.5589695+04:00;True|2021-04-24T23:22:55.7826442+04:00;True|2021-04-24T23:14:51.6096852+04:00;True|2021-04-24T23:09:22.6977503+04:00;True|2021-04-24T23:01:32.7533829+04:00;True|2021-04-24T22:46:04.1891686+04:00;True|2021-04-24T22:42:45.7754197+04:00;True|2021-04-24T22:34:08.4878631+04:00;True|2021-04-24T22:28:39.0320924+04:00;True|2021-04-24T22:10:57.1357103+04:00;True|2021-04-24T22:10:16.2217756+04:00;True|2021-04-24T21:18:55.8295604+04:00;</History>
   </PropertyGroup>
 </Project>

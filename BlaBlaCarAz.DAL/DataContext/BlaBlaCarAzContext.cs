@@ -26,6 +26,8 @@ namespace BlaBlaCarAz.DAL.DataContext
         }
         public virtual DbSet<Ride> Rides { get; set; }
         public virtual DbSet<Book> Books { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
         
+
     }
 }

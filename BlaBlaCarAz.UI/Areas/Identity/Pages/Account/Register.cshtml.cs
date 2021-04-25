@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using BlaBlaCarAz.BLL.DomainModel.Entities;
+using BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces;
 using BlaBlaCarAz.Localization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -28,13 +29,14 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender _emailSender;
         private readonly IStringLocalizer<SharedResource> _localizer;
+        private readonly IService<Log> _messageService;
 
         public RegisterModel(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
             BlaBlaCarAz.BLL.ServiceLayer.Services.Interfaces.IEmailSender emailSender,
-            IStringLocalizer<SharedResource> localizer)
+            IStringLocalizer<SharedResource> localizer, IService<Log> messageService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -47,6 +49,7 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
             SharedResource.PasswordLength = localizer[nameof(SharedResource.PasswordLength)];
             SharedResource.PasswordCompare = localizer[nameof(SharedResource.PasswordCompare)];
             SharedResource.NameLastNameRequired = localizer[nameof(SharedResource.NameLastNameRequired)];
+            _messageService = messageService;
         }
 
         [BindProperty]
@@ -109,14 +112,24 @@ namespace BlaBlaCarAz.UI.Areas.Identity.Pages.Account
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+                    //var callbackUrl = Url.Action(
+                    //    "/Account/ConfirmEmail",
+                    //    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                    //    protocol: Request.Scheme, Request.Host.ToString()+":"+Request.Host.Port);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code, returnUrl = returnUrl }, Request.Scheme);
+                    try
+                    {callbackUrl = callbackUrl.Substring(0, 7) + Request.Host.ToString()+ ":82/Identity" + callbackUrl.Substring(20);
+                    
+                        await _emailSender.SendEmailAsync(Input.Email, _localizer[nameof(SharedResource.ConfirmEmail)],
+    string.Format(_localizer[nameof(SharedResource.ConfirmEmailBody)], HtmlEncoder.Default.Encode(callbackUrl)));
+                    }
+                    catch (Exception exc)
+                    {
+                        Log msg = new Log();
+                        msg.LogText = exc.ToString();
+                      await  _messageService.AddAsync(msg);
+                    }
 
-                    await _emailSender.SendEmailAsync(Input.Email, _localizer[nameof(SharedResource.ConfirmEmail)],
-                        string.Format(_localizer[nameof(SharedResource.ConfirmEmailBody)], HtmlEncoder.Default.Encode(callbackUrl)));
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
